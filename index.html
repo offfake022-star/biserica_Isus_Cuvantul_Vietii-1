@@ -3,57 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO ADĂUGAT -->
+  <meta name="description" content="Biserica Penticostală Isus Cuvântul Vieții din Lozova. Programul slujbelor, predici, evenimente și contact.">
+
   <title>Isus Cuvântul Vieții</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
+
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
   <style>
     body { font-family: 'Nunito', sans-serif; }
     html { scroll-behavior: smooth; }
-    .pulse-animation {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-    /* Micșorează titlul doar pe telefoane */
-    @media (max-width: 640px) {
-  header h1 {
-    font-size: 1.1rem !important;   /* un pic mai mare decât 1rem */
-    line-height: 1.20 !important;
-    white-space: nowrap;  /* ca să stea pe o singură linie */
-  }
-}
-#menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.3);
-  display: none;
-  z-index: 9;
-  pointer-events: none;
-}
-  /* Când meniul este deschis, overlay-ul poate primi click */
-.menu-open #menu-overlay {
-  pointer-events: auto;
-}
-
-    /* Elimină scroll-ul orizontal provocat de elemente care depășesc ecranul */
-  body, html { overscroll-behavior: auto; }
-
-    /* Forțează toate elementele să nu depășească ecranul */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  /* Fix pentru imagini și iframe-uri */
-  img, iframe {
-    max-width: 100%;
-  }
+    .pulse-animation { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
   </style>
 </head>
 <body class="bg-white text-[#1f2937]">
@@ -65,7 +32,7 @@
     <div class="flex items-center space-x-2">
       <img src="images/logo.png" alt="Logo Biserica" class="h-10 w-auto" />
       <div class="leading-tight">
-        <h1 class="text-[#41678f] text-xl md:text-2xl font-[Cinzel] uppercase tracking-wider drop-shadow-sm" data-i18n-html="site_name">
+        <h1 style="font-family: 'Cinzel', serif;" class="text-[#41678f] text-xl md:text-2xl uppercase tracking-wider drop-shadow-sm" data-i18n-html="site_name">
           Isus <span class="text-[#1f2937] font-light"> - Cuvântul Vieții </span>
         </h1>
         <p class="italic text-xs text-[#3d5e78] hidden sm:block" data-i18n="verse">„Cuvântul Tău este o candelă pentru picioarele mele.”</p>
@@ -77,7 +44,7 @@
       <ul class="flex flex-wrap justify-center gap-6 text-sm md:text-base font-semibold text-gray-800">
         <li><a href="#acasa" class="hover:text-[#41678f]" data-i18n="home">Acasă</a></li>
         <li><a href="#despre" class="hover:text-[#41678f]" data-i18n="about">Despre</a></li>
-        <li><a href="#program" class="hover:text-[#41678f]" data-i18n="program">Program</a></li>
+        <li><a href="#program" class="hover:text-[#41678f]" data-i18n-html="program_heading">Program</a></li>
         <li><a href="#predici" class="hover:text-[#41678f]" data-i18n="sermons">Predici</a></li>
         <li><a href="#noutati" class="hover:text-[#41678f]" data-i18n="news">Noutăți</a></li>
         <li><a href="#contact" class="hover:text-[#41678f]" data-i18n="contact">Contact</a></li>
@@ -93,8 +60,8 @@
 
     <!-- Hamburger mobil -->
     <div class="md:hidden flex items-center">
-      <button id="menu-btn" class="focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" aria-label="Meniu">
-        <svg class="w-6 h-6 text-[#41678f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <button id="menu-btn" class="focus:outline-none">
+        <svg class="w-6 h-6 text-[#41678f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
@@ -102,11 +69,11 @@
   </div>
 
   <!-- Meniu mobil -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md fixed top-0 left-0 right-0">
+  <div id="mobile-menu" class="hidden md:hidden bg-white w-full shadow-md">
     <ul class="flex flex-col gap-4 p-4 text-center">
       <li><a href="#acasa" class="hover:text-[#41678f]" data-i18n="home">Acasă</a></li>
       <li><a href="#despre" class="hover:text-[#41678f]" data-i18n="about">Despre</a></li>
-      <li><a href="#program" class="hover:text-[#41678f]" data-i18n="program">Program</a></li>
+      <li><a href="#program" class="hover:text-[#41678f]" data-i18n-html="program_heading">Program</a></li>
       <li><a href="#predici" class="hover:text-[#41678f]" data-i18n="sermons">Predici</a></li>
       <li><a href="#noutati" class="hover:text-[#41678f]" data-i18n="news">Noutăți</a></li>
       <li><a href="#contact" class="hover:text-[#41678f]" data-i18n="contact">Contact</a></li>
@@ -119,14 +86,9 @@
   </div>
 </header>
 
-<div id="menu-overlay"></div>
-
 <!-- Hero / Verset -->
 <section id="acasa" class="relative w-full h-[80vh] flex items-center justify-center overflow-hidden">
-<img src="images/img1.jpg"
-     alt="Interior biserică - verset"
-     class="absolute inset-0 w-full h-full object-cover block"
-     loading="eager" />
+  <img src="images/img1.jpg" alt="Imagine verset" class="absolute inset-0 w-full h-full object-cover" />
   <div class="absolute inset-0 bg-black/40"></div>
   <div class="relative z-10 text-center pulse-animation px-4">
     <p class="text-white text-2xl md:text-4xl font-bold leading-snug" data-i18n="welcome_verse">
@@ -147,11 +109,11 @@
 <!-- Program -->
 <section id="program" class="scroll-mt-24 bg-[#41678f] text-white py-16 px-6" data-aos="zoom-in">
   <div class="max-w-3xl mx-auto text-center">
-    <h2 class="text-3xl font-bold mb-6" data-i18n="program_heading">Programul Slujbelor</h2>
+    <h2 class="text-3xl font-bold mb-6" data-i18n-html="program_heading">Programul Slujbelor</h2>
     <ul class="text-lg space-y-3">
-      <li data-i18n="program1"><strong>Duminică:</strong> Adunare Lozova - 10:00 & Adunare Vorniceni - 17:00</li>
-      <li data-i18n="program2"><strong>Miercuri:</strong> Seara de rugăciune - 19:00</li>
-      <li data-i18n="program3"><strong>Sâmbătă:</strong> Clubul copiilor - 14:00</li>
+      <li data-i18n-html="program1"><strong>Duminică:</strong> Adunare Lozova - 10:00 & Adunare Vorniceni - 17:00</li>
+      <li data-i18n-html="program2"><strong>Miercuri:</strong> Seara de rugăciune - 19:00</li>
+      <li data-i18n-html="program3"><strong>Sâmbătă:</strong> Clubul copiilor - 14:00</li>
     </ul>
   </div>
 </section>
@@ -199,21 +161,12 @@
     <!-- Formular de contact -->
     <div>
       <h2 class="text-3xl font-bold mb-6 text-left" data-i18n="contact_heading">Contactează-ne</h2>
-<form action="https://formspree.io/f/xovwqown" method="POST" class="space-y-4" aria-label="Formular contact">
-  <div>
-    <label for="contact-name" class="sr-only">Nume</label>
-    <input id="contact-name" type="text" name="name" placeholder="Nume" required class="w-full p-3 border rounded" data-i18n-placeholder="name">
-  </div>
-  <div>
-    <label for="contact-email" class="sr-only">Email</label>
-    <input id="contact-email" type="email" name="email" placeholder="Email" required class="w-full p-3 border rounded" data-i18n-placeholder="email">
-  </div>
-  <div>
-    <label for="contact-message" class="sr-only">Mesaj</label>
-    <textarea id="contact-message" name="message" rows="5" placeholder="Mesaj" required class="w-full p-3 border rounded" data-i18n-placeholder="message"></textarea>
-  </div>
-  <button type="submit" class="bg-[#5D8CA7] text-white px-6 py-3 rounded hover:bg-[#4a708b] transition" data-i18n="submit">Trimite</button>
-</form>
+      <form action="https://formspree.io/f/xovwqown" method="POST" class="space-y-4">
+        <input type="text" name="name" placeholder="Nume" required class="w-full p-3 border rounded" data-i18n-placeholder="name">
+        <input type="email" name="email" placeholder="Email" required class="w-full p-3 border rounded" data-i18n-placeholder="email">
+        <textarea name="message" rows="5" placeholder="Mesaj" required class="w-full p-3 border rounded" data-i18n-placeholder="message"></textarea>
+        <button type="submit" class="bg-[#5D8CA7] text-white px-6 py-3 rounded hover:bg-[#4a708b] transition" data-i18n="submit">Trimite</button>
+      </form>
     </div>
 
     <!-- Info contact + Harta -->
@@ -237,7 +190,7 @@
 <!-- Footer -->
 <footer class="bg-[#41678f] text-white text-center py-6">
   <p>&copy; 2025 <span data-i18n="title">Isus Cuvântul Vieții</span>, Lozova | <span data-i18n="follow_us">Urmărește-ne pe pagina noastră de</span> 
-    <a href="https://www.instagram.com/biserica_isus_cuvantul_vietii/" target="_blank" class="underline">Instagram</a>
+    <a href="https://www.instagram.com/biserica_isus_cuvantul_vietii/" target="_blank" rel="noopener noreferrer" class="underline">Instagram</a>
   </p>
 </footer>
 
@@ -253,21 +206,17 @@ const translations = {
     verse_ref: 'Ioan 3:16',
     home: 'Acasă',
     about: 'Despre',
-    program: 'Program',
-    sermons: 'Predici',
-    news: 'Noutăți',
-    contact: 'Contact',
-    about_heading: 'Despre Biserică',
-    about_text: 'Biserica "Isus Cuvântul Vieții" din Lozova a fost fondată cu dorința sinceră de a transmite Evanghelia fiecărui suflet. Sub conducerea pastorului Spiridon Cozaru, comunitatea crește în credință, dragoste și unitate. Viziunea noastră este să fim o lumină în satul nostru și dincolo de el.',
     program_heading: 'Programul Slujbelor',
-    program1: 'Duminică: Adunare Lozova - 10:00 & Adunare Vorniceni - 17:00',
-    program2: 'Miercuri: Seara de rugăciune - 19:00',
-    program3: 'Sâmbătă: Clubul copiilor - 14:00',
+    program1: '<strong>Duminică:</strong> Adunare Lozova - 10:00 & Adunare Vorniceni - 17:00',
+    program2: '<strong>Miercuri:</strong> Seara de rugăciune - 19:00',
+    program3: '<strong>Sâmbătă:</strong> Clubul copiilor - 14:00',
+    sermons: 'Predici',
     sermons1: 'Predici Recente',
     sermon1: 'Credința care mută munții',
     preacher1: 'Pastor Spiridon Cozaru',
     sermon2: 'Puterea Cuvântului',
     preacher2: 'Invitat special',
+    news: 'Noutăți',
     news1: 'Noutăți & Evenimente',
     post_date_1: 'Post și rugăciune – 15 iunie',
     post_descr_1: 'Vino alături de noi într-o zi specială de post și rugăciune pentru satul Lozova.',
@@ -275,109 +224,105 @@ const translations = {
     post_descr_2: 'Înscrie-te la tabăra de vară cu activități, laudă și închinare.',
     post_date_3: 'Concert de închinare – 30 august',
     post_descr_3: 'Eveniment deschis pentru toți – o seară de muzică și mărturii.',
+    contact: 'Contact',
     contact_heading: 'Contactează-ne',
-    name: 'Nume',
-    email: 'Email',
-    message: 'Mesaj',
-    submit: 'Trimite',
     contact_label: 'Date de contact',
     address_label: 'Adresă:',
     address: 'Str. Principală 10, Lozova, Moldova',
     phone_label: 'Telefon:',
     phone: '+373 60 123 456',
     email_label: 'Email:',
-    title: 'Isus Cuvântul Vieții',
-    follow_us: 'Urmărește-ne pe pagina noastră de'
+    email: 'contact@isuscuvantulvietii.md',
+    name: 'Nume',
+    message: 'Mesaj',
+    submit: 'Trimite',
+    follow_us: 'Urmărește-ne pe pagina noastră de',
+    title: 'Isus Cuvântul Vieții'
   },
   en: {
     site_name: 'Jesus <span class="text-[#1f2937] font-light"> - Word of Life</span>',
     verse: '“Your word is a lamp to my feet.”',
-    welcome_verse: '“For God so loved the world that He gave His only Son, that whoever believes in Him should not perish but have eternal life.”',
+    welcome_verse: '“For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.”',
     verse_ref: 'John 3:16',
     home: 'Home',
     about: 'About',
-    program: 'Program',
-    sermons: 'Sermons',
-    news: 'News',
-    contact: 'Contact',
-    about_heading: 'About the Church',
-    about_text: 'The "Jesus Word of Life" Church in Lozova was founded with the sincere desire to spread the Gospel to every soul. Under the leadership of Pastor Spiridon Cozaru, the community grows in faith, love, and unity. Our vision is to be a light in our village and beyond.',
     program_heading: 'Service Schedule',
-    program1: 'Sunday: Lozova Gathering - 10:00 & Vorniceni Gathering - 17:00',
-    program2: 'Wednesday: Prayer Evening - 19:00',
-    program3: 'Saturday: Children\'s Club - 14:00',
+    program1: '<strong>Sunday:</strong> Lozova Gathering - 10:00 & Vorniceni Gathering - 17:00',
+    program2: '<strong>Wednesday:</strong> Prayer Evening - 19:00',
+    program3: '<strong>Saturday:</strong> Children Club - 14:00',
+    sermons: 'Sermons',
     sermons1: 'Recent Sermons',
-    sermon1: 'Faith that moves mountains',
+    sermon1: 'Faith that Moves Mountains',
     preacher1: 'Pastor Spiridon Cozaru',
-    sermon2: 'Power of the Word',
-    preacher2: 'Special Guest',
+    sermon2: 'The Power of the Word',
+    preacher2: 'Guest Speaker',
+    news: 'News',
     news1: 'News & Events',
-    post_date_1: 'Fasting and Prayer – June 15',
-    post_descr_1: 'Join us for a special day of fasting and prayer for Lozova village.',
+    post_date_1: 'Fasting & Prayer – June 15',
+    post_descr_1: 'Join us for a special day of fasting and prayer for the village of Lozova.',
     post_date_2: 'Youth Camp – July 2025',
     post_descr_2: 'Sign up for the summer camp with activities, praise, and worship.',
     post_date_3: 'Worship Concert – August 30',
     post_descr_3: 'Open event for everyone – an evening of music and testimonies.',
+    contact: 'Contact',
     contact_heading: 'Contact Us',
-    name: 'Name',
-    email: 'Email',
-    message: 'Message',
-    submit: 'Send',
     contact_label: 'Contact Details',
     address_label: 'Address:',
     address: 'Str. Principală 10, Lozova, Moldova',
     phone_label: 'Phone:',
     phone: '+373 60 123 456',
     email_label: 'Email:',
-    title: 'Jesus Word of Life',
-    follow_us: 'Follow us on'
+    email: 'contact@isuscuvantulvietii.md',
+    name: 'Name',
+    message: 'Message',
+    submit: 'Send',
+    follow_us: 'Follow us on',
+    title: 'Jesus Word of Life'
   },
   ru: {
     site_name: 'Иисус <span class="text-[#1f2937] font-light"> - Слово Жизни</span>',
-    verse: '«Слово Твое — светильник ногам моим»',
-    welcome_verse: '«Ибо так возлюбил Бог мир, что отдал Сына Своего Единородного, дабы всякий верующий в Него не погиб, но имел жизнь вечную.»',
+    verse: '«Слово Твое — светильник ноге моей.»',
+    welcome_verse: '«Ибо так возлюбил Бог мир, что отдал Сына Своего Единородного, чтобы всякий верующий в Него не погиб, но имел жизнь вечную.»',
     verse_ref: 'Иоанн 3:16',
     home: 'Главная',
     about: 'О нас',
-    program: 'Программа',
-    sermons: 'Проповеди',
-    news: 'Новости',
-    contact: 'Контакт',
-    about_heading: 'О церкви',
-    about_text: 'Церковь "Иисус Слово Жизни" в Лозове была основана с искренним желанием донести Евангелие до каждой души. Под руководством пастора Спиридона Козарю, сообщество растет в вере, любви и единстве. Наша цель — быть светом в нашей деревне и за ее пределами.',
     program_heading: 'Расписание служб',
-    program1: 'Воскресенье: Служба в Лозове - 10:00 & Служба в Ворницени - 17:00',
-    program2: 'Среда: Вечер молитвы - 19:00',
-    program3: 'Суббота: Детский клуб - 14:00',
+    program1: '<strong>Воскресенье:</strong> Сбор Лозова - 10:00 & Сбор Ворницены - 17:00',
+    program2: '<strong>Среда:</strong> Вечер молитвы - 19:00',
+    program3: '<strong>Суббота:</strong> Детский клуб - 14:00',
+    sermons: 'Проповеди',
     sermons1: 'Последние проповеди',
     sermon1: 'Вера, которая двигает горы',
     preacher1: 'Пастор Спиридон Козарю',
     sermon2: 'Сила Слова',
-    preacher2: 'Приглашенный',
+    preacher2: 'Приглашенный спикер',
+    news: 'Новости',
     news1: 'Новости и события',
     post_date_1: 'Пост и молитва – 15 июня',
     post_descr_1: 'Присоединяйтесь к нам в особый день поста и молитвы за деревню Лозова.',
     post_date_2: 'Летний лагерь для молодежи – июль 2025',
-    post_descr_2: 'Запишитесь в летний лагерь с активностями, хвалой и поклонением.',
+    post_descr_2: 'Запишитесь на летний лагерь с активностями, хвалой и поклонением.',
     post_date_3: 'Концерт поклонения – 30 августа',
     post_descr_3: 'Открытое мероприятие для всех – вечер музыки и свидетельств.',
+    contact: 'Контакт',
     contact_heading: 'Свяжитесь с нами',
-    name: 'Имя',
-    email: 'Email',
-    message: 'Сообщение',
-    submit: 'Отправить',
     contact_label: 'Контактная информация',
     address_label: 'Адрес:',
     address: 'Str. Principală 10, Lozova, Moldova',
     phone_label: 'Телефон:',
     phone: '+373 60 123 456',
-    email_label: 'Email:',
-    title: 'Иисус Слово Жизни',
-    follow_us: 'Следите за нами на'
+    email_label: 'Эл. почта:',
+    email: 'contact@isuscuvantulvietii.md',
+    name: 'Имя',
+    message: 'Сообщение',
+    submit: 'Отправить',
+    follow_us: 'Следите за нами на',
+    title: 'Иисус Слово Жизни'
   }
 };
 
 function setLang(lang) {
+  localStorage.setItem("lang", lang);
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     if (translations[lang][key]) el.textContent = translations[lang][key];
@@ -391,103 +336,18 @@ function setLang(lang) {
     if (translations[lang][key]) el.setAttribute("placeholder", translations[lang][key]);
   });
 }
-</script>
-<script>
-/* SCRIPT CONSOLIDAT:
-   - gestionează setarea limbii (localStorage)
-   - inițializează AOS (dacă nu e inițializat deja)
-   - gestionează meniul mobil + overlay + ARIA + ESC + focus
-   - previne scroll orizontal
-   - scroll la hash la load
-*/
 
-document.addEventListener('DOMContentLoaded', () => {
-  // --- Prevent horizontal overflow (quick fix) ---
-  document.body.style.overflowX = 'hidden';
-
-  // --- Language (i18n) persist & init ---
-  const savedLang = localStorage.getItem('site-lang') || 'ro';
+window.addEventListener("load", () => {
+  const savedLang = localStorage.getItem("lang") || "ro";
   setLang(savedLang);
-
-  // Attach click handlers for language buttons (if they use onclick attr)
-  document.querySelectorAll("button[onclick^=\"setLang\"]").forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      // extract lang from onclick attr: setLang('ro')
-      const onclickVal = btn.getAttribute('onclick');
-      const m = onclickVal && onclickVal.match(/setLang\('(.+)'\)/);
-      const lang = m ? m[1] : null;
-      if (lang) {
-        setLang(lang);
-        localStorage.setItem('site-lang', lang);
-      }
-    });
-  });
-
-  // --- AOS init (ensure AOS exists) ---
-  if (window.AOS && typeof window.AOS.init === 'function') {
-    AOS.init();
-  }
-
-  // --- Mobile menu logic (accessible) ---
-  const btn = document.getElementById('menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  const menuOverlay = document.getElementById('menu-overlay');
-
-  if (btn && menu && menuOverlay) {
-    // ensure ARIA attributes present
-    btn.setAttribute('aria-controls', 'mobile-menu');
-    btn.setAttribute('aria-expanded', btn.getAttribute('aria-expanded') || 'false');
-    menu.setAttribute('aria-hidden', menu.classList.contains('hidden') ? 'true' : 'false');
-
-    // helper open/close
-    function openMenu() {
-      menu.classList.remove('hidden');
-      document.body.classList.add('menu-open', 'overflow-hidden'); // Tailwind class available
-      menuOverlay.style.display = 'block';
-      btn.setAttribute('aria-expanded', 'true');
-      menu.setAttribute('aria-hidden', 'false');
-      // focus first focusable element in menu
-      const first = menu.querySelector('a, button');
-      if (first) first.focus();
-    }
-
-    function closeMenu() {
-      menu.classList.add('hidden');
-      document.body.classList.remove('menu-open', 'overflow-hidden');
-      menuOverlay.style.display = 'none';
-      btn.setAttribute('aria-expanded', 'false');
-      menu.setAttribute('aria-hidden', 'true');
-      btn.focus();
-    }
-
-    // toggle on click
-    btn.addEventListener('click', (e) => {
-      if (menu.classList.contains('hidden')) openMenu();
-      else closeMenu();
-    });
-
-    // close on overlay click
-    menuOverlay.addEventListener('click', closeMenu);
-
-    // close on ESC
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        if (!menu.classList.contains('hidden')) closeMenu();
-      }
-    });
-  }
-
-  // --- Smooth scroll to anchor on load if hash present ---
-  if (window.location.hash) {
-    const target = document.querySelector(window.location.hash);
-    if (target) {
-      // small timeout to allow layout to settle
-      setTimeout(() => {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
-    }
-  }
 });
+
+// Meniu mobil
+const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('mobile-menu');
+btn.addEventListener('click', () => { menu.classList.toggle('hidden'); });
+document.querySelectorAll('#mobile-menu a').forEach(link => { link.addEventListener('click', () => { menu.classList.add('hidden'); }); });
 </script>
+
 </body>
 </html>
