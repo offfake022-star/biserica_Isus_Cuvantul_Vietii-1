@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrare site</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 p-6">
+  <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow p-6">
+    <h1 class="text-3xl font-bold mb-6">Administrare site</h1>
+
+    <div class="grid gap-6">
+
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Despre Biserică</h2>
+        <label class="block font-medium mb-1">RO</label>
+        <textarea id="about_ro" class="w-full border rounded p-3 mb-3" rows="4"></textarea>
+        <label class="block font-medium mb-1">EN</label>
+        <textarea id="about_en" class="w-full border rounded p-3 mb-3" rows="4"></textarea>
+        <label class="block font-medium mb-1">RU</label>
+        <textarea id="about_ru" class="w-full border rounded p-3" rows="4"></textarea>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Program</h2>
+
+        <label class="block font-medium mt-2">Program 1 - RO</label>
+        <input id="program1_ro" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Program 1 - EN</label>
+        <input id="program1_en" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Program 1 - RU</label>
+        <input id="program1_ru" class="w-full border rounded p-3 mb-4">
+
+        <label class="block font-medium">Program 2 - RO</label>
+        <input id="program2_ro" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Program 2 - EN</label>
+        <input id="program2_en" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Program 2 - RU</label>
+        <input id="program2_ru" class="w-full border rounded p-3 mb-4">
+
+        <label class="block font-medium">Program 3 - RO</label>
+        <input id="program3_ro" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Program 3 - EN</label>
+        <input id="program3_en" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Program 3 - RU</label>
+        <input id="program3_ru" class="w-full border rounded p-3">
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Predici</h2>
+
+        <label class="block font-medium">Predica 1 - RO</label>
+        <input id="sermon1_ro" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Predica 1 - EN</label>
+        <input id="sermon1_en" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Predica 1 - RU</label>
+        <input id="sermon1_ru" class="w-full border rounded p-3 mb-4">
+
+        <label class="block font-medium">Subtitlu 1 - RO</label>
+        <input id="preacher1_ro" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Subtitlu 1 - EN</label>
+        <input id="preacher1_en" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Subtitlu 1 - RU</label>
+        <input id="preacher1_ru" class="w-full border rounded p-3 mb-4">
+
+        <label class="block font-medium">Predica 2 - RO</label>
+        <input id="sermon2_ro" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Predica 2 - EN</label>
+        <input id="sermon2_en" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Predica 2 - RU</label>
+        <input id="sermon2_ru" class="w-full border rounded p-3 mb-4">
+
+        <label class="block font-medium">Subtitlu 2 - RO</label>
+        <input id="preacher2_ro" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Subtitlu 2 - EN</label>
+        <input id="preacher2_en" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Subtitlu 2 - RU</label>
+        <input id="preacher2_ru" class="w-full border rounded p-3">
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Noutăți</h2>
+
+        <label class="block font-medium">Titlu noutate 1 - RO</label>
+        <input id="post_date_1_ro" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Titlu noutate 1 - EN</label>
+        <input id="post_date_1_en" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Titlu noutate 1 - RU</label>
+        <input id="post_date_1_ru" class="w-full border rounded p-3 mb-4">
+
+        <label class="block font-medium">Descriere noutate 1 - RO</label>
+        <textarea id="post_descr_1_ro" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
+        <label class="block font-medium">Descriere noutate 1 - EN</label>
+        <textarea id="post_descr_1_en" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
+        <label class="block font-medium">Descriere noutate 1 - RU</label>
+        <textarea id="post_descr_1_ru" class="w-full border rounded p-3 mb-4" rows="3"></textarea>
+
+        <label class="block font-medium">Titlu noutate 2 - RO</label>
+        <input id="post_date_2_ro" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Titlu noutate 2 - EN</label>
+        <input id="post_date_2_en" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Titlu noutate 2 - RU</label>
+        <input id="post_date_2_ru" class="w-full border rounded p-3 mb-4">
+
+        <label class="block font-medium">Descriere noutate 2 - RO</label>
+        <textarea id="post_descr_2_ro" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
+        <label class="block font-medium">Descriere noutate 2 - EN</label>
+        <textarea id="post_descr_2_en" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
+        <label class="block font-medium">Descriere noutate 2 - RU</label>
+        <textarea id="post_descr_2_ru" class="w-full border rounded p-3 mb-4" rows="3"></textarea>
+
+        <label class="block font-medium">Titlu noutate 3 - RO</label>
+        <input id="post_date_3_ro" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Titlu noutate 3 - EN</label>
+        <input id="post_date_3_en" class="w-full border rounded p-3 mb-2">
+        <label class="block font-medium">Titlu noutate 3 - RU</label>
+        <input id="post_date_3_ru" class="w-full border rounded p-3 mb-4">
+
+        <label class="block font-medium">Descriere noutate 3 - RO</label>
+        <textarea id="post_descr_3_ro" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
+        <label class="block font-medium">Descriere noutate 3 - EN</label>
+        <textarea id="post_descr_3_en" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
+        <label class="block font-medium">Descriere noutate 3 - RU</label>
+        <textarea id="post_descr_3_ru" class="w-full border rounded p-3" rows="3"></textarea>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Contact și social media</h2>
+        <label class="block font-medium">Telefon</label>
+        <input id="phone" class="w-full border rounded p-3 mb-3">
+
+        <label class="block font-medium">Email</label>
+        <input id="email" class="w-full border rounded p-3 mb-3">
+
+        <label class="block font-medium">Instagram link</label>
+        <input id="instagram" class="w-full border rounded p-3 mb-3">
+
+        <label class="block font-medium">Facebook link</label>
+        <input id="facebook" class="w-full border rounded p-3">
+      </div>
+
+      <div class="pt-4">
+        <button id="saveBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl">
+          Salvează modificările
+        </button>
+        <p id="status" class="mt-3 text-sm"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "PUNE_AICI",
+      authDomain: "PUNE_AICI",
+      projectId: "PUNE_AICI",
+      storageBucket: "PUNE_AICI",
+      messagingSenderId: "PUNE_AICI",
+      appId: "PUNE_AICI"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const ref = doc(db, "siteContent", "main");
+
+    async function loadData() {
+      const snap = await getDoc(ref);
+      if (!snap.exists()) return;
+
+      const d = snap.data();
+
+      const setVal = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.value = value || "";
+      };
+
+      setVal("about_ro", d.about_text?.ro);
+      setVal("about_en", d.about_text?.en);
+      setVal("about_ru", d.about_text?.ru);
+
+      setVal("program1_ro", d.program1?.ro);
+      setVal("program1_en", d.program1?.en);
+      setVal("program1_ru", d.program1?.ru);
+
+      setVal("program2_ro", d.program2?.ro);
+      setVal("program2_en", d.program2?.en);
+      setVal("program2_ru", d.program2?.ru);
+
+      setVal("program3_ro", d.program3?.ro);
+      setVal("program3_en", d.program3?.en);
+      setVal("program3_ru", d.program3?.ru);
+
+      setVal("sermon1_ro", d.sermon1?.ro);
+      setVal("sermon1_en", d.sermon1?.en);
+      setVal("sermon1_ru", d.sermon1?.ru);
+
+      setVal("preacher1_ro", d.preacher1?.ro);
+      setVal("preacher1_en", d.preacher1?.en);
+      setVal("preacher1_ru", d.preacher1?.ru);
+
+      setVal("sermon2_ro", d.sermon2?.ro);
+      setVal("sermon2_en", d.sermon2?.en);
+      setVal("sermon2_ru", d.sermon2?.ru);
+
+      setVal("preacher2_ro", d.preacher2?.ro);
+      setVal("preacher2_en", d.preacher2?.en);
+      setVal("preacher2_ru", d.preacher2?.ru);
+
+      setVal("post_date_1_ro", d.post_date_1?.ro);
+      setVal("post_date_1_en", d.post_date_1?.en);
+      setVal("post_date_1_ru", d.post_date_1?.ru);
+
+      setVal("post_descr_1_ro", d.post_descr_1?.ro);
+      setVal("post_descr_1_en", d.post_descr_1?.en);
+      setVal("post_descr_1_ru", d.post_descr_1?.ru);
+
+      setVal("post_date_2_ro", d.post_date_2?.ro);
+      setVal("post_date_2_en", d.post_date_2?.en);
+      setVal("post_date_2_ru", d.post_date_2?.ru);
+
+      setVal("post_descr_2_ro", d.post_descr_2?.ro);
+      setVal("post_descr_2_en", d.post_descr_2?.en);
+      setVal("post_descr_2_ru", d.post_descr_2?.ru);
+
+      setVal("post_date_3_ro", d.post_date_3?.ro);
+      setVal("post_date_3_en", d.post_date_3?.en);
+      setVal("post_date_3_ru", d.post_date_3?.ru);
+
+      setVal("post_descr_3_ro", d.post_descr_3?.ro);
+      setVal("post_descr_3_en", d.post_descr_3?.en);
+      setVal("post_descr_3_ru", d.post_descr_3?.ru);
+
+      setVal("phone", d.phone);
+      setVal("email", d.email);
+      setVal("instagram", d.instagram);
+      setVal("facebook", d.facebook);
+    }
+
+    document.getElementById("saveBtn").addEventListener("click", async () => {
+      const getVal = (id) => document.getElementById(id).value;
+
+      const payload = {
+        about_text: {
+          ro: getVal("about_ro"),
+          en: getVal("about_en"),
+          ru: getVal("about_ru")
+        },
+        program1: {
+          ro: getVal("program1_ro"),
+          en: getVal("program1_en"),
+          ru: getVal("program1_ru")
+        },
+        program2: {
+          ro: getVal("program2_ro"),
+          en: getVal("program2_en"),
+          ru: getVal("program2_ru")
+        },
+        program3: {
+          ro: getVal("program3_ro"),
+          en: getVal("program3_en"),
+          ru: getVal("program3_ru")
+        },
+        sermon1: {
+          ro: getVal("sermon1_ro"),
+          en: getVal("sermon1_en"),
+          ru: getVal("sermon1_ru")
+        },
+        preacher1: {
+          ro: getVal("preacher1_ro"),
+          en: getVal("preacher1_en"),
+          ru: getVal("preacher1_ru")
+        },
+        sermon2: {
+          ro: getVal("sermon2_ro"),
+          en: getVal("sermon2_en"),
+          ru: getVal("sermon2_ru")
+        },
+        preacher2: {
+          ro: getVal("preacher2_ro"),
+          en: getVal("preacher2_en"),
+          ru: getVal("preacher2_ru")
+        },
+        post_date_1: {
+          ro: getVal("post_date_1_ro"),
+          en: getVal("post_date_1_en"),
+          ru: getVal("post_date_1_ru")
+        },
+        post_descr_1: {
+          ro: getVal("post_descr_1_ro"),
+          en: getVal("post_descr_1_en"),
+          ru: getVal("post_descr_1_ru")
+        },
+        post_date_2: {
+          ro: getVal("post_date_2_ro"),
+          en: getVal("post_date_2_en"),
+          ru: getVal("post_date_2_ru")
+        },
+        post_descr_2: {
+          ro: getVal("post_descr_2_ro"),
+          en: getVal("post_descr_2_en"),
+          ru: getVal("post_descr_2_ru")
+        },
+        post_date_3: {
+          ro: getVal("post_date_3_ro"),
+          en: getVal("post_date_3_en"),
+          ru: getVal("post_date_3_ru")
+        },
+        post_descr_3: {
+          ro: getVal("post_descr_3_ro"),
+          en: getVal("post_descr_3_en"),
+          ru: getVal("post_descr_3_ru")
+        },
+        phone: getVal("phone"),
+        email: getVal("email"),
+        instagram: getVal("instagram"),
+        facebook: getVal("facebook")
+      };
+
+      try {
+        await setDoc(ref, payload);
+        document.getElementById("status").textContent = "Modificările au fost salvate cu succes.";
+        document.getElementById("status").className = "mt-3 text-sm text-green-600";
+      } catch (e) {
+        document.getElementById("status").textContent = "A apărut o eroare la salvare.";
+        document.getElementById("status").className = "mt-3 text-sm text-red-600";
+      }
+    });
+
+    loadData();
+  </script>
+</body>
+</html>
