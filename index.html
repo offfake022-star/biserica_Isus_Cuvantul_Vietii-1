@@ -17,23 +17,23 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
   <style>
-    html {
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-      font-family: 'Nunito', sans-serif;
-      overflow-x: hidden;
-      overflow-y: auto;
-      width: 100%;
-      max-width: 100%;
-      margin: 0;
-      padding: 0;
-    }
+body {
+  font-family: 'Nunito', sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
     * {
       box-sizing: border-box;
@@ -60,17 +60,16 @@
   </style>
 </head>
 <body class="bg-white text-[#1f2937] overflow-x-hidden">
-
-<!-- Header -->
+  <!-- Header -->
 <header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow z-50">
   <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-2">
     <!-- Logo + Titlu -->
     <div class="flex items-center space-x-2 min-w-0">
       <img src="images/logo.png" alt="Logo Biserica" class="h-10 w-auto shrink-0" />
-      <div class="leading-tight">
-        <h1 style="font-family: 'Cinzel', serif;"
-          class="text-[#41678f] text-sm sm:text-lg md:text-2xl uppercase tracking-wide drop-shadow-sm leading-tight max-w-[200px] sm:max-w-none"
-          data-i18n-html="site_name">
+<div class="leading-tight">
+<h1 style="font-family: 'Cinzel', serif;"
+class="text-[#41678f] text-sm sm:text-lg md:text-2xl uppercase tracking-wide drop-shadow-sm leading-tight max-w-[200px] sm:max-w-none"
+data-i18n-html="site_name">
           Isus <span class="text-[#1f2937] font-light"> - Cuvântul Vieții </span>
         </h1>
         <p class="italic text-xs text-[#3d5e78] hidden sm:block" data-i18n="verse">
@@ -127,10 +126,14 @@
 </header>
 
 <!-- Hero / Verset -->
-<section id="acasa" class="relative w-full h-[55vh] md:h-[60vh] flex items-center justify-center overflow-hidden mt-14">
+<section id="acasa" class="relative w-full h-[55vh] md:h-[60vh] flex items-center justify-center overflow-hidden mt-14">      
+  <!-- Imagine background -->
   <img src="images/img1.jpg" alt="Imagine principală" class="absolute inset-0 w-full h-full object-cover object-center" />
+
+  <!-- Overlay întunecat -->
   <div class="absolute inset-0 bg-black/40"></div>
 
+  <!-- Text verset -->
   <div class="relative z-10 text-center pulse-animation px-4 max-w-7xl mx-auto">
     <p class="text-white text-2xl md:text-4xl font-bold leading-snug" data-i18n="welcome_verse">
       „Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu, pentru ca oricine crede în El să nu piară, ci să aibă viață veșnică.”
@@ -140,11 +143,9 @@
 </section>
 
 <!-- Despre Biserica -->
-<section id="despre" class="scroll-mt-24 py-10 px-6 max-w-4xl mx-auto bg-white text-[#1f2937]" data-aos="fade-up">
-  <h2 class="text-3xl font-bold text-center mb-6" data-i18n="about_heading">Despre Biserică</h2>
+<section id="despre" class="scroll-mt-24 py-10 px-6 max-w-4xl mx-auto bg-white text-[#1f2937]" data-aos="fade-up">  <h2 class="text-3xl font-bold text-center mb-6" data-i18n="about_heading">Despre Biserică</h2>
   <p class="text-lg leading-relaxed text-justify" data-i18n="about_text">
-    Scopul Bisericii "Isus Cuvântul Vieții" din Lozova este de a vesti Evanghelia Domnului Isus Hristos și de a îndruma oamenii spre o relație vie cu Dumnezeu. Dorința noastră este ca fiecare suflet să cunoască dragostea lui Dumnezeu, să trăiască după Cuvântul Său și să crească în credință, dragoste și unitate. Viziunea noastră este să fim o lumină în satul nostru și dincolo de el.
-  </p>
+Biserica "Isus Cuvântul Vieții" din Lozova a fost fondată cu dorința sinceră de a transmite Evanghelia fiecărui suflet. Comunitatea crește în credință, dragoste și unitate, căutând să Îl urmeze pe Domnul Isus Hristos și să trăiască după Cuvântul lui Dumnezeu. Viziunea noastră este să fim o lumină în satul nostru și dincolo de el.  </p>
 </section>
 
 <!-- Program -->
@@ -199,43 +200,39 @@
 <section id="contact" class="scroll-mt-24 bg-white text-[#1f2937] py-16 px-6" data-aos="fade-up">
   <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
 
-    <!-- Formular de contact -->
-    <div>
-      <h2 class="text-3xl font-bold mb-6 text-left" data-i18n="contact_heading">Contactează-ne</h2>
+<!-- Formular de contact -->
+<div>
+  <h2 class="text-3xl font-bold mb-6 text-left" data-i18n="contact_heading">Contactează-ne</h2>
 
-      <form id="contact-form" action="https://formspree.io/f/xovwqown" method="POST" class="space-y-4">
-        <input type="text" name="name" placeholder="Nume" required class="w-full p-3 border rounded" data-i18n-placeholder="name">
+  <form id="contact-form" action="https://formspree.io/f/xovwqown" method="POST" class="space-y-4">
+    <input type="text" name="name" placeholder="Nume" required class="w-full p-3 border rounded" data-i18n-placeholder="name">
+<input 
+type="email" 
+name="email" 
+placeholder="Email" 
+required 
+class="w-full p-3 border rounded"
+data-i18n-placeholder="email"
+data-error-email="Te rugăm să introduci o adresă de email validă (ex: nume@email.com)"
+oninvalid="this.setCustomValidity(this.getAttribute('data-error-email'))"
+oninput="this.setCustomValidity('')">
+    <textarea name="message" rows="5" placeholder="Mesaj" required class="w-full p-3 border rounded" data-i18n-placeholder="message"></textarea>
+    <button type="submit" class="bg-[#5D8CA7] text-white px-6 py-3 rounded hover:bg-[#4a708b] transition" data-i18n="submit">
+      Trimite
+    </button>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          required
-          class="w-full p-3 border rounded"
-          data-i18n-placeholder="email"
-          data-error-email="Te rugăm să introduci o adresă de email validă (ex: nume@email.com)"
-          oninvalid="this.setCustomValidity(this.getAttribute('data-error-email'))"
-          oninput="this.setCustomValidity('')">
-
-        <textarea name="message" rows="5" placeholder="Mesaj" required class="w-full p-3 border rounded" data-i18n-placeholder="message"></textarea>
-
-        <button type="submit" class="bg-[#5D8CA7] text-white px-6 py-3 rounded hover:bg-[#4a708b] transition" data-i18n="submit">
-          Trimite
-        </button>
-
-        <p id="form-message" class="text-sm mt-2"></p>
-      </form>
-    </div>
+    <p id="form-message" class="text-sm mt-2"></p>
+  </form>
+</div>
 
     <!-- Info contact + Harta -->
     <div class="space-y-6">
       <div>
         <h3 class="text-2xl font-semibold mb-2" data-i18n="contact_label">Date de contact</h3>
         <p><strong data-i18n="address_label">Adresă:</strong> <span data-i18n="address">Str. Principală 10, Lozova, Moldova</span></p>
-        <p><strong data-i18n="phone_label">Telefon:</strong> <a href="tel:+37378448654" class="text-blue-600 hover:underline" data-i18n="phone">+373 78 448 654</a></p>
+        <p><strong data-i18n="phone_label">Telefon:</strong> <a href="tel:+37378448654" class="text-blue-600 hover:underline" data-i18n="phone">+373 60 123 456</a></p>
         <p><strong data-i18n="email_label">Email:</strong> <a href="mailto:contact@isuscuvantulvietii.md" class="text-blue-600 hover:underline" data-i18n="email">contact@isuscuvantulvietii.md</a></p>
       </div>
-
       <div class="w-full overflow-hidden rounded">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2718.462004157759!2d28.38276!3d47.13289!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cba03f8d1f3b07%3A0x0!2zNDfCsDA3JzU4LjQiTiAyOMKwMjInNTguMCJF!5e0!3m2!1sen!2s!4v1717656439999!5m2!1sen!2s"
@@ -255,17 +252,17 @@
   <p>
     &copy; 2026 <span data-i18n="title">Isus Cuvântul Vieții</span>, Lozova |
     <span data-i18n="follow_us">Urmărește-ne pe pagina noastră de</span>
-
-    <a href="https://www.instagram.com/biserica_isus_cuvantul_vietii/"
+    
+    <a href="https://www.instagram.com/biserica_isus_cuvantul_vietii/" 
        target="_blank" rel="noopener noreferrer" class="underline" data-i18n="instagram">
-      Instagram
+       Instagram
     </a>
-
+    
     <span data-i18n="or">sau</span>
-
-    <a href="https://www.facebook.com/share/1WrFKxnBVy/?mibextid=wwXIfr"
+    
+    <a href="https://www.facebook.com/share/1WrFKxnBVy/?mibextid=wwXIfr" 
        target="_blank" rel="noopener noreferrer" class="underline" data-i18n="facebook">
-      Facebook
+       Facebook
     </a>
   </p>
 </footer>
@@ -308,25 +305,25 @@ const translations = {
     address_label: 'Adresă:',
     address: 'Str. Principală 10, Lozova, Moldova',
     phone_label: 'Telefon:',
-    phone: '+373 78 448 654',
+    phone: '+37378448654',
     email_label: 'Email:',
     email: 'contact@isuscuvantulvietii.md',
     name: 'Nume',
     message: 'Mesaj',
     submit: 'Trimite',
     follow_us: 'Urmărește-ne pe pagina noastră de',
-    instagram: 'Instagram',
-    or: 'sau',
-    facebook: 'Facebook',
     title: 'Isus Cuvântul Vieții',
     about_heading: 'Despre Biserică',
     about_text: 'Scopul Bisericii "Isus Cuvântul Vieții" din Lozova este de a vesti Evanghelia Domnului Isus Hristos și de a îndruma oamenii spre o relație vie cu Dumnezeu. Dorința noastră este ca fiecare suflet să cunoască dragostea lui Dumnezeu, să trăiască după Cuvântul Său și să crească în credință, dragoste și unitate. Viziunea noastră este să fim o lumină în satul nostru și dincolo de el.',
+    email_placeholder: 'Email',
+    instagram: 'Instagram',
+    or: 'sau',
+    facebook: 'Facebook',
     form_success: 'Mesajul a fost trimis cu succes!',
     form_error: 'A apărut o problemă. Încearcă din nou.',
     form_network_error: 'A apărut o eroare. Verifică internetul și încearcă din nou.',
     email_error: 'Te rugăm să introduci o adresă de email validă (ex: nume@email.com)'
   },
-
   en: {
     site_name: 'Jesus <span class="text-[#1f2937] font-light"> - Word of Life</span>',
     verse: '“Your word is a lamp to my feet.”',
@@ -358,25 +355,24 @@ const translations = {
     address_label: 'Address:',
     address: 'Str. Principală 10, Lozova, Moldova',
     phone_label: 'Phone:',
-    phone: '+373 78 448 654',
+    phone: '+37378448654',
     email_label: 'Email:',
     email: 'contact@isuscuvantulvietii.md',
     name: 'Name',
     message: 'Message',
     submit: 'Send',
     follow_us: 'Follow us on',
-    instagram: 'Instagram',
-    or: 'or',
-    facebook: 'Facebook',
     title: 'Jesus Word of Life',
     about_heading: 'About the Church',
     about_text: 'The purpose of the "Jesus Word of Life" Church in Lozova is to preach the Gospel of the Lord Jesus Christ and to guide people into a living relationship with God. Our desire is that every soul may come to know God\'s love, live according to His Word, and grow in faith, love, and unity. Our vision is to be a light in our village and beyond.',
+    instagram: 'Instagram',
+    or: 'or',
+    facebook: 'Facebook',
     form_success: 'Your message was sent successfully!',
     form_error: 'A problem occurred. Please try again.',
     form_network_error: 'An error occurred. Please check your internet connection and try again.',
     email_error: 'Please enter a valid email address (e.g. name@email.com)'
-  },
-
+},
   ru: {
     site_name: 'Иисус <span class="text-[#1f2937] font-light"> - Слово Жизни</span>',
     verse: '«Слово Твое — светильник ноге моей.»',
@@ -408,19 +404,19 @@ const translations = {
     address_label: 'Адрес:',
     address: 'Str. Principală 10, Lozova, Moldova',
     phone_label: 'Телефон:',
-    phone: '+373 78 448 654',
+    phone: '+37378448654',
     email_label: 'Эл. почта:',
     email: 'contact@isuscuvantulvietii.md',
     name: 'Имя',
     message: 'Сообщение',
     submit: 'Отправить',
     follow_us: 'Следите за нами на',
-    instagram: 'Instagram',
-    or: 'или',
-    facebook: 'Facebook',
     title: 'Иисус Слово Жизни',
     about_heading: 'О церкви',
     about_text: 'Цель церкви «Иисус Слово Жизни» в Лозове — проповедовать Евангелие Господа Иисуса Христа и направлять людей к живым отношениям с Богом. Наше желание — чтобы каждая душа познала любовь Божью, жила по Его Слову и возрастала в вере, любви и единстве. Наше видение — быть светом в нашем селе и за его пределами.',
+    instagram: 'Instagram',
+    or: 'или',
+    facebook: 'Facebook',
     form_success: 'Сообщение было успешно отправлено!',
     form_error: 'Возникла проблема. Пожалуйста, попробуйте снова.',
     form_network_error: 'Произошла ошибка. Проверьте интернет-соединение и попробуйте снова.',
@@ -454,7 +450,7 @@ function setLang(lang) {
 
   const emailInput = document.querySelector('input[name="email"]');
   if (emailInput && translations[lang] && translations[lang].email_error) {
-    emailInput.setAttribute("data-error-email", translations[lang].email_error);
+    emailInput.setAttribute('data-error-email', translations[lang].email_error);
   }
 }
 
@@ -478,6 +474,7 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
 });
 </script>
 
+</body>
 <script>
 const contactForm = document.getElementById("contact-form");
 const formMessage = document.getElementById("form-message");
@@ -486,7 +483,6 @@ contactForm.addEventListener("submit", async function(e) {
   e.preventDefault();
 
   const formData = new FormData(contactForm);
-  const currentLang = localStorage.getItem("lang") || "ro";
 
   try {
     const response = await fetch(contactForm.action, {
@@ -496,25 +492,25 @@ contactForm.addEventListener("submit", async function(e) {
         "Accept": "application/json"
       }
     });
+const currentLang = localStorage.getItem("lang") || "ro";
 
-    if (response.ok) {
-      formMessage.textContent = translations[currentLang].form_success;
-      formMessage.className = "text-green-600 text-sm mt-2";
-      contactForm.reset();
+if (response.ok) {
+  formMessage.textContent = translations[currentLang].form_success;
+  formMessage.className = "text-green-600 text-sm mt-2";
+  contactForm.reset();
 
-      setTimeout(() => {
-        formMessage.textContent = "";
-      }, 5000);
-    } else {
-      formMessage.textContent = translations[currentLang].form_error;
-      formMessage.className = "text-red-600 text-sm mt-2";
-    }
+  setTimeout(() => {
+    formMessage.textContent = "";
+  }, 5000);
+} else {
+  formMessage.textContent = translations[currentLang].form_error;
+  formMessage.className = "text-red-600 text-sm mt-2";
+}
   } catch (error) {
-    formMessage.textContent = translations[currentLang].form_network_error;
-    formMessage.className = "text-red-600 text-sm mt-2";
+const currentLang = localStorage.getItem("lang") || "ro";
+formMessage.textContent = translations[currentLang].form_network_error;
+formMessage.className = "text-red-600 text-sm mt-2";
   }
 });
 </script>
-
-</body>
 </html>
