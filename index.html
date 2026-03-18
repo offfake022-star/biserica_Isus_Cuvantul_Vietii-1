@@ -21,6 +21,9 @@
     html { scroll-behavior: smooth; }
     .pulse-animation { animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    html, body {
+  overflow-x: hidden;
+  }
   </style>
 </head>
 <body class="bg-white text-[#1f2937]">
@@ -87,10 +90,8 @@
 </header>
 
 <!-- Hero / Verset -->
-<section id="acasa" class="relative w-full h-screen flex items-center justify-center overflow-hidden">
-  <!-- Imagine background -->
-  <img src="images/img1.jpg" alt="Imagine verset" class="absolute inset-0 w-full h-full object-cover object-center" />
-  
+<section id="acasa" class="relative w-full min-h-screen flex items-center justify-center overflow-hidden">  <!-- Imagine background -->
+<img src="images/img1.jpg" class="absolute inset-0 w-full h-full object-cover object-center max-w-none" />  
   <!-- Overlay întunecat -->
   <div class="absolute inset-0 bg-black/40"></div>
   
