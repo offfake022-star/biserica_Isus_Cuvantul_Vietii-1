@@ -460,11 +460,15 @@ contactForm.addEventListener("submit", async function(e) {
       }
     });
 
-    if (response.ok) {
-      formMessage.textContent = "Mesajul a fost trimis cu succes!";
-      formMessage.className = "text-green-600 text-sm mt-2";
-      contactForm.reset();
-    } else {
+if (response.ok) {
+  formMessage.textContent = "Mesajul a fost trimis cu succes!";
+  formMessage.className = "text-green-600 text-sm mt-2";
+  contactForm.reset();
+
+  setTimeout(() => {
+    formMessage.textContent = "";
+  }, 5000);
+} else {
       formMessage.textContent = "A apărut o problemă. Încearcă din nou.";
       formMessage.className = "text-red-600 text-sm mt-2";
     }
