@@ -7,8 +7,34 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 text-gray-800 p-6">
+
+  <!-- LOGIN -->
+  <div id="loginBox" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-2xl shadow w-full max-w-sm">
+      <h2 class="text-2xl font-bold mb-4 text-center">Login Admin</h2>
+
+      <input id="loginEmail" type="email" placeholder="Email"
+        class="w-full p-3 border rounded mb-3">
+
+      <input id="loginPassword" type="password" placeholder="Parolă"
+        class="w-full p-3 border rounded mb-3">
+
+      <button id="loginBtn"
+        class="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700">
+        Login
+      </button>
+
+      <p id="loginError" class="text-red-600 mt-3 text-sm text-center"></p>
+    </div>
+  </div>
+
   <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow p-6">
-    <h1 class="text-3xl font-bold mb-6">Administrare site</h1>
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold">Administrare site</h1>
+      <button id="logoutBtn" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800">
+        Logout
+      </button>
+    </div>
 
     <div class="grid gap-6">
 
@@ -152,21 +178,38 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "PUNE_AICI",
-      authDomain: "PUNE_AICI",
-      projectId: "PUNE_AICI",
-      storageBucket: "PUNE_AICI",
-      messagingSenderId: "PUNE_AICI",
-      appId: "PUNE_AICI"
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyCJemQGq8vH9QNh_Xz8D_0ZOvMB6EsOrhY",
+    authDomain: "paginaweb-bisericalozova.firebaseapp.com",
+    projectId: "paginaweb-bisericalozova",
+    storageBucket: "paginaweb-bisericalozova.firebasestorage.app",
+    messagingSenderId: "381536114573",
+    appId: "1:381536114573:web:1c656364338ee2676fcfc4",
+    measurementId: "G-MCNB2P37DZ"
+  };
 
     const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
     const db = getFirestore(app);
-
     const ref = doc(db, "siteContent", "main");
+
+    const loginBox = document.getElementById("loginBox");
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const loginError = document.getElementById("loginError");
 
     async function loadData() {
       const snap = await getDoc(ref);
@@ -240,6 +283,32 @@
       setVal("instagram", d.instagram);
       setVal("facebook", d.facebook);
     }
+
+    // LOGIN
+    loginBtn.onclick = async () => {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        loginError.textContent = "";
+      } catch (error) {
+        loginError.textContent = "Email sau parolă greșită!";
+      }
+    };
+
+    // LOGOUT
+    logoutBtn.onclick = () => signOut(auth);
+
+    // PROTECȚIE PAGINĂ
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        loginBox.style.display = "none";
+        await loadData();
+      } else {
+        loginBox.style.display = "flex";
+      }
+    });
 
     document.getElementById("saveBtn").addEventListener("click", async () => {
       const getVal = (id) => document.getElementById(id).value;
@@ -330,8 +399,6 @@
         document.getElementById("status").className = "mt-3 text-sm text-red-600";
       }
     });
-
-    loadData();
   </script>
 </body>
 </html>
