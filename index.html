@@ -207,9 +207,16 @@ data-i18n-html="site_name">
 
   <form id="contact-form" action="https://formspree.io/f/xovwqown" method="POST" class="space-y-4">
     <input type="text" name="name" placeholder="Nume" required class="w-full p-3 border rounded" data-i18n-placeholder="name">
-    <input type="email" name="email" placeholder="Email" required class="w-full p-3 border rounded" data-i18n-placeholder="email">
+<input 
+type="email" 
+name="email" 
+placeholder="Email" 
+required 
+class="w-full p-3 border rounded"
+data-i18n-placeholder="email"
+oninvalid="this.setCustomValidity('Te rugăm să introduci o adresă de email validă (ex: nume@email.com)')"
+oninput="this.setCustomValidity('')">
     <textarea name="message" rows="5" placeholder="Mesaj" required class="w-full p-3 border rounded" data-i18n-placeholder="message"></textarea>
-
     <button type="submit" class="bg-[#5D8CA7] text-white px-6 py-3 rounded hover:bg-[#4a708b] transition" data-i18n="submit">
       Trimite
     </button>
