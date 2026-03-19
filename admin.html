@@ -1,47 +1,24 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="description" content="Biserica Penticostală Isus Cuvântul Vieții din Lozova. Programul slujbelor, predici, evenimente și contact.">
-  <title>Isus Cuvântul Vieții</title>
+  <title>Administrare vizuală site</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
   <style>
     html {
       scroll-behavior: smooth;
       overflow-x: hidden;
-      width: 100%;
-      margin: 0;
-      padding: 0;
     }
 
     body {
       font-family: 'Nunito', sans-serif;
       overflow-x: hidden;
-      overflow-y: auto;
-      width: 100%;
-      max-width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    * { box-sizing: border-box; }
-
-    img, iframe, video, canvas, svg {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    section, header, footer, div {
-      max-width: 100%;
     }
 
     .pulse-animation {
@@ -52,21 +29,196 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.7; }
     }
+
+    .admin-toolbar {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 30;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .admin-btn {
+      background: rgba(15, 23, 42, 0.92);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,.18);
+      transition: .2s;
+    }
+
+    .admin-btn:hover {
+      transform: translateY(-1px);
+      opacity: .95;
+    }
+
+    .admin-btn-danger {
+      background: rgba(185, 28, 28, 0.95);
+    }
+
+    .admin-section {
+      position: relative;
+      outline: 2px dashed transparent;
+      transition: .2s;
+    }
+
+    .admin-section:hover {
+      outline-color: rgba(65, 103, 143, 0.45);
+    }
+
+    .admin-card {
+      position: relative;
+    }
+
+    .admin-card .mini-toolbar {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 20;
+      display: flex;
+      gap: 6px;
+    }
+
+    .mini-btn {
+      background: rgba(15, 23, 42, .88);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .mini-btn-danger {
+      background: rgba(185, 28, 28, .95);
+    }
+
+    .admin-floating-bar {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      z-index: 60;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      background: rgba(255,255,255,.96);
+      border: 1px solid #dbeafe;
+      box-shadow: 0 15px 35px rgba(15, 23, 42, .16);
+      border-radius: 18px;
+      padding: 12px 14px;
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-wrap {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .modal-wrap.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(980px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 30px 70px rgba(0,0,0,.25);
+    }
+
+    .input,
+    .textarea {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 12px 14px;
+      outline: none;
+      transition: .2s;
+      background: white;
+    }
+
+    .input:focus,
+    .textarea:focus {
+      border-color: #41678f;
+      box-shadow: 0 0 0 4px rgba(65,103,143,.12);
+    }
+
+    .badge-lang {
+      display: inline-block;
+      background: #eff6ff;
+      color: #41678f;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
-<body class="bg-white text-[#1f2937] overflow-x-hidden">
+<body class="bg-white text-[#1f2937]">
+
+  <!-- LOGIN -->
+  <div id="loginBox" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[200] px-4">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl p-7">
+      <h2 class="text-3xl font-bold text-center mb-2">Login Admin</h2>
+      <p class="text-center text-gray-500 mb-6">Editor vizual al site-ului</p>
+
+      <div class="space-y-4">
+        <input id="loginEmail" type="email" placeholder="Email" class="input">
+        <input id="loginPassword" type="password" placeholder="Parolă" class="input">
+        <button id="loginBtn" class="w-full bg-[#41678f] text-white py-3 rounded-2xl font-bold hover:opacity-90">
+          Login
+        </button>
+        <p id="loginError" class="text-red-600 text-sm text-center min-h-[20px]"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP ADMIN BAR -->
+  <div class="fixed top-0 left-0 right-0 z-[70] bg-[#0f172a]/95 text-white border-b border-white/10 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div>
+        <p class="font-bold text-lg">Mod administrare vizuală</p>
+        <p class="text-sm text-slate-300">Editezi direct secțiunile paginii, ca pe site.</p>
+      </div>
+
+      <div class="flex flex-wrap gap-2 items-center">
+        <span id="saveState" class="text-sm font-semibold text-amber-300">Modificări nesalvate</span>
+        <button id="reloadBtn" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl font-semibold">Reîncarcă</button>
+        <button id="saveBtnTop" class="bg-[#41678f] hover:opacity-90 px-4 py-2 rounded-xl font-semibold">Salvează</button>
+        <button id="logoutBtn" class="bg-red-700 hover:bg-red-800 px-4 py-2 rounded-xl font-semibold">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-[76px]"></div>
 
   <!-- Header -->
-  <header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow z-50">
+  <header class="fixed top-[76px] left-0 w-full bg-white/90 backdrop-blur-md shadow z-50">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-2">
       <div class="flex items-center space-x-2 min-w-0">
         <img src="images/logo.png" alt="Logo Biserica" class="h-10 w-auto shrink-0" />
         <div class="leading-tight">
-          <h1
-            id="site_name_dynamic"
-            style="font-family: 'Cinzel', serif;"
-            class="text-[#41678f] text-sm sm:text-lg md:text-2xl uppercase tracking-wide drop-shadow-sm leading-tight max-w-[200px] sm:max-w-none"
-          >
+          <h1 id="site_name_dynamic"
+              style="font-family: 'Cinzel', serif;"
+              class="text-[#41678f] text-sm sm:text-lg md:text-2xl uppercase tracking-wide drop-shadow-sm leading-tight max-w-[220px] sm:max-w-none">
             Isus <span class="text-[#1f2937] font-light"> - Cuvântul Vieții </span>
           </h1>
           <p id="header_verse_dynamic" class="italic text-xs text-[#3d5e78] hidden sm:block">
@@ -77,12 +229,12 @@
 
       <nav class="hidden md:flex w-auto">
         <ul class="flex flex-wrap justify-center gap-6 text-sm md:text-base font-semibold text-gray-800">
-          <li><a href="#acasa" class="hover:text-[#41678f]" data-i18n="home">Acasă</a></li>
-          <li><a href="#despre" class="hover:text-[#41678f]" data-i18n="about">Despre</a></li>
-          <li><a href="#program" class="hover:text-[#41678f]" data-i18n="program_heading">Program</a></li>
-          <li><a href="#predici" class="hover:text-[#41678f]" data-i18n="sermons">Predici</a></li>
-          <li><a href="#noutati" class="hover:text-[#41678f]" data-i18n="news">Noutăți</a></li>
-          <li><a href="#contact" class="hover:text-[#41678f]" data-i18n="contact">Contact</a></li>
+          <li><a href="#acasa" class="hover:text-[#41678f]">Acasă</a></li>
+          <li><a href="#despre" class="hover:text-[#41678f]">Despre</a></li>
+          <li><a href="#program" class="hover:text-[#41678f]">Program</a></li>
+          <li><a href="#predici" class="hover:text-[#41678f]">Predici</a></li>
+          <li><a href="#noutati" class="hover:text-[#41678f]">Noutăți</a></li>
+          <li><a href="#contact" class="hover:text-[#41678f]">Contact</a></li>
         </ul>
       </nav>
 
@@ -103,23 +255,24 @@
 
     <div id="mobile-menu" class="hidden md:hidden bg-white w-full shadow-md">
       <ul class="flex flex-col gap-4 p-4 text-center">
-        <li><a href="#acasa" class="hover:text-[#41678f]" data-i18n="home">Acasă</a></li>
-        <li><a href="#despre" class="hover:text-[#41678f]" data-i18n="about">Despre</a></li>
-        <li><a href="#program" class="hover:text-[#41678f]" data-i18n="program_heading">Program</a></li>
-        <li><a href="#predici" class="hover:text-[#41678f]" data-i18n="sermons">Predici</a></li>
-        <li><a href="#noutati" class="hover:text-[#41678f]" data-i18n="news">Noutăți</a></li>
-        <li><a href="#contact" class="hover:text-[#41678f]" data-i18n="contact">Contact</a></li>
-        <div class="flex justify-center gap-2 mt-2">
-          <button onclick="setLang('ro')" class="hover:text-[#41678f]">RO</button>
-          <button onclick="setLang('ru')" class="hover:text-[#41678f]">RU</button>
-          <button onclick="setLang('en')" class="hover:text-[#41678f]">EN</button>
-        </div>
+        <li><a href="#acasa" class="hover:text-[#41678f]">Acasă</a></li>
+        <li><a href="#despre" class="hover:text-[#41678f]">Despre</a></li>
+        <li><a href="#program" class="hover:text-[#41678f]">Program</a></li>
+        <li><a href="#predici" class="hover:text-[#41678f]">Predici</a></li>
+        <li><a href="#noutati" class="hover:text-[#41678f]">Noutăți</a></li>
+        <li><a href="#contact" class="hover:text-[#41678f]">Contact</a></li>
       </ul>
     </div>
   </header>
 
+  <div class="h-[56px]"></div>
+
   <!-- Hero -->
-  <section id="acasa" class="relative w-full h-[55vh] md:h-[60vh] flex items-center justify-center overflow-hidden mt-14">
+  <section id="acasa" class="admin-section relative w-full h-[55vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
+    <div class="admin-toolbar">
+      <button class="admin-btn" onclick="openHeroModal()">Editează</button>
+    </div>
+
     <img src="images/img1.jpg" alt="Imagine principală" class="absolute inset-0 w-full h-full object-cover object-center" />
     <div class="absolute inset-0 bg-black/40"></div>
 
@@ -131,74 +284,85 @@
     </div>
   </section>
 
-  <!-- Despre -->
-  <section id="despre" class="scroll-mt-24 py-10 px-6 max-w-4xl mx-auto bg-white text-[#1f2937]" data-aos="fade-up">
-    <h2 class="text-3xl font-bold text-center mb-6" data-i18n="about_heading">Despre Biserică</h2>
-    <p id="about_text_dynamic" class="text-lg leading-relaxed text-justify"></p>
+  <!-- About -->
+  <section id="despre" class="admin-section scroll-mt-24 py-10 px-6 max-w-4xl mx-auto bg-white text-[#1f2937]">
+    <div class="admin-toolbar">
+      <button class="admin-btn" onclick="openAboutModal()">Editează</button>
+    </div>
+
+    <h2 class="text-3xl font-bold text-center mb-6">Despre Biserică</h2>
+    <p id="about_text_dynamic" class="text-lg leading-relaxed text-justify">
+      Scopul Bisericii...
+    </p>
   </section>
 
   <!-- Program -->
-  <section id="program" class="scroll-mt-24 bg-[#41678f] text-white py-16 px-6" data-aos="zoom-in">
+  <section id="program" class="admin-section scroll-mt-24 bg-[#41678f] text-white py-16 px-6">
+    <div class="admin-toolbar">
+      <button class="admin-btn" onclick="openProgramsModal()">Editează</button>
+      <button class="admin-btn" onclick="addProgram()">Adaugă</button>
+    </div>
+
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6" data-i18n="program_heading">Program</h2>
+      <h2 class="text-3xl font-bold mb-6">Program</h2>
       <ul id="program_list_dynamic" class="text-lg space-y-3"></ul>
     </div>
   </section>
 
-  <!-- Predici -->
-  <section id="predici" class="scroll-mt-24 py-16 px-6 max-w-5xl mx-auto bg-white text-[#1f2937]" data-aos="fade-left">
-    <h2 class="text-3xl font-bold text-center mb-6" data-i18n="sermons1">Predici Recente</h2>
+  <!-- Sermons -->
+  <section id="predici" class="admin-section scroll-mt-24 py-16 px-6 max-w-5xl mx-auto bg-white text-[#1f2937]">
+    <div class="admin-toolbar">
+      <button class="admin-btn" onclick="openSermonsModal()">Editează lista</button>
+      <button class="admin-btn" onclick="addSermon()">Adaugă</button>
+    </div>
+
+    <h2 class="text-3xl font-bold text-center mb-6">Predici Recente</h2>
     <div id="sermons_list_dynamic" class="grid md:grid-cols-2 gap-6"></div>
   </section>
 
-  <!-- Noutăți -->
-  <section id="noutati" class="scroll-mt-24 bg-[#41678f] text-white py-16 px-6" data-aos="fade-right">
+  <!-- News -->
+  <section id="noutati" class="admin-section scroll-mt-24 bg-[#41678f] text-white py-16 px-6">
+    <div class="admin-toolbar">
+      <button class="admin-btn" onclick="openNewsModal()">Editează lista</button>
+      <button class="admin-btn" onclick="addNews()">Adaugă</button>
+    </div>
+
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-10" data-i18n="news1">Noutăți & Evenimente</h2>
+      <h2 class="text-3xl font-bold text-center mb-10">Noutăți & Evenimente</h2>
       <div id="news_list_dynamic" class="grid md:grid-cols-3 gap-6"></div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="scroll-mt-24 bg-white text-[#1f2937] py-16 px-6" data-aos="fade-up">
+  <section id="contact" class="admin-section scroll-mt-24 bg-white text-[#1f2937] py-16 px-6">
+    <div class="admin-toolbar">
+      <button class="admin-btn" onclick="openContactModal()">Editează</button>
+    </div>
+
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
       <div>
-        <h2 class="text-3xl font-bold mb-6 text-left" data-i18n="contact_heading">Contactează-ne</h2>
+        <h2 class="text-3xl font-bold mb-6 text-left">Contactează-ne</h2>
 
-        <form id="contact-form" action="https://formspree.io/f/xovwqown" method="POST" class="space-y-4">
-          <input type="text" name="name" placeholder="Nume" required class="w-full p-3 border rounded" data-i18n-placeholder="name">
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-            class="w-full p-3 border rounded"
-            data-i18n-placeholder="email"
-            data-error-email="Te rugăm să introduci o adresă de email validă (ex: nume@email.com)"
-            oninvalid="this.setCustomValidity(this.getAttribute('data-error-email'))"
-            oninput="this.setCustomValidity('')">
-
-          <textarea name="message" rows="5" placeholder="Mesaj" required class="w-full p-3 border rounded" data-i18n-placeholder="message"></textarea>
-
-          <button type="submit" class="bg-[#5D8CA7] text-white px-6 py-3 rounded hover:bg-[#4a708b] transition" data-i18n="submit">
+        <form class="space-y-4" onsubmit="event.preventDefault()">
+          <input type="text" placeholder="Nume" class="w-full p-3 border rounded">
+          <input type="email" placeholder="Email" class="w-full p-3 border rounded">
+          <textarea rows="5" placeholder="Mesaj" class="w-full p-3 border rounded"></textarea>
+          <button type="button" class="bg-[#5D8CA7] text-white px-6 py-3 rounded">
             Trimite
           </button>
-
-          <p id="form-message" class="text-sm mt-2"></p>
         </form>
       </div>
 
       <div class="space-y-6">
         <div>
-          <h3 class="text-2xl font-semibold mb-2" data-i18n="contact_label">Date de contact</h3>
-          <p><strong data-i18n="address_label">Adresă:</strong> <span id="address_dynamic"></span></p>
+          <h3 class="text-2xl font-semibold mb-2">Date de contact</h3>
+          <p><strong>Adresă:</strong> <span id="address_dynamic"></span></p>
           <p>
-            <strong data-i18n="phone_label">Telefon:</strong>
+            <strong>Telefon:</strong>
             <a id="phone_dynamic" href="#" class="text-blue-600 hover:underline"></a>
           </p>
           <p>
-            <strong data-i18n="email_label">Email:</strong>
+            <strong>Email:</strong>
             <a id="email_dynamic" href="#" class="text-blue-600 hover:underline"></a>
           </p>
         </div>
@@ -221,236 +385,58 @@
   <footer class="bg-[#41678f] text-white text-center py-6 px-4">
     <p>
       &copy; 2026 <span id="footer_title_dynamic">Isus Cuvântul Vieții</span>, Lozova |
-      <span data-i18n="follow_us">Urmărește-ne pe pagina noastră de</span>
-
-      <a id="instagram_dynamic" href="#" target="_blank" rel="noopener noreferrer" class="underline">
-        Instagram
-      </a>
-
-      <span data-i18n="or">sau</span>
-
-      <a id="facebook_dynamic" href="#" target="_blank" rel="noopener noreferrer" class="underline">
-        Facebook
-      </a>
+      Urmărește-ne pe pagina noastră de
+      <a id="instagram_dynamic" href="#" target="_blank" rel="noopener noreferrer" class="underline">Instagram</a>
+      sau
+      <a id="facebook_dynamic" href="#" target="_blank" rel="noopener noreferrer" class="underline">Facebook</a>
     </p>
   </footer>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init();</script>
+  <!-- Floating -->
+  <div class="admin-floating-bar">
+    <span id="bottomStatus" class="text-sm font-semibold text-slate-700">Editor activ</span>
+    <button id="saveBtnBottom" class="bg-[#41678f] text-white px-4 py-2 rounded-xl font-bold hover:opacity-90">Salvează</button>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modalWrap" class="modal-wrap">
+    <div class="modal-box">
+      <div class="flex justify-between items-start gap-4 mb-6">
+        <div>
+          <h3 id="modalTitle" class="text-2xl font-bold text-slate-900">Editare</h3>
+          <p id="modalSubtitle" class="text-slate-500 mt-1">Modifică și salvează.</p>
+        </div>
+        <button onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-xl font-bold">Închide</button>
+      </div>
+
+      <div id="modalContent"></div>
+    </div>
+  </div>
 
   <script>
-    const translations = {
-      ro: {
-        home: 'Acasă',
-        about: 'Despre',
-        program_heading: 'Program',
-        sermons: 'Predici',
-        sermons1: 'Predici Recente',
-        news: 'Noutăți',
-        news1: 'Noutăți & Evenimente',
-        contact: 'Contact',
-        contact_heading: 'Contactează-ne',
-        contact_label: 'Date de contact',
-        address_label: 'Adresă:',
-        phone_label: 'Telefon:',
-        email_label: 'Email:',
-        name: 'Nume',
-        message: 'Mesaj',
-        submit: 'Trimite',
-        follow_us: 'Urmărește-ne pe pagina noastră de',
-        or: 'sau',
-        about_heading: 'Despre Biserică',
-        form_success: 'Mesajul a fost trimis cu succes!',
-        form_error: 'A apărut o problemă. Încearcă din nou.',
-        form_network_error: 'A apărut o eroare. Verifică internetul și încearcă din nou.',
-        email_error: 'Te rugăm să introduci o adresă de email validă (ex: nume@email.com)'
-      },
-      en: {
-        home: 'Home',
-        about: 'About',
-        program_heading: 'Program',
-        sermons: 'Sermons',
-        sermons1: 'Recent Sermons',
-        news: 'News',
-        news1: 'News & Events',
-        contact: 'Contact',
-        contact_heading: 'Contact Us',
-        contact_label: 'Contact Details',
-        address_label: 'Address:',
-        phone_label: 'Phone:',
-        email_label: 'Email:',
-        name: 'Name',
-        message: 'Message',
-        submit: 'Send',
-        follow_us: 'Follow us on',
-        or: 'or',
-        about_heading: 'About the Church',
-        form_success: 'Your message was sent successfully!',
-        form_error: 'A problem occurred. Please try again.',
-        form_network_error: 'An error occurred. Please check your internet connection and try again.',
-        email_error: 'Please enter a valid email address (e.g. name@email.com)'
-      },
-      ru: {
-        home: 'Главная',
-        about: 'О нас',
-        program_heading: 'Расписание',
-        sermons: 'Проповеди',
-        sermons1: 'Последние проповеди',
-        news: 'Новости',
-        news1: 'Новости и события',
-        contact: 'Контакт',
-        contact_heading: 'Свяжитесь с нами',
-        contact_label: 'Контактная информация',
-        address_label: 'Адрес:',
-        phone_label: 'Телефон:',
-        email_label: 'Эл. почта:',
-        name: 'Имя',
-        message: 'Сообщение',
-        submit: 'Отправить',
-        follow_us: 'Следите за нами на',
-        or: 'или',
-        about_heading: 'О церкви',
-        form_success: 'Сообщение было успешно отправлено!',
-        form_error: 'Возникла проблема. Пожалуйста, попробуйте снова.',
-        form_network_error: 'Произошла ошибка. Проверьте интернет-соединение и попробуйте снова.',
-        email_error: 'Пожалуйста, введите корректный адрес электронной почты'
-      }
-    };
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
 
-    let siteContent = {
-      site_name: { ro:"", en:"", ru:"" },
-      header_verse: { ro:"", en:"", ru:"" },
-      hero_verse: { ro:"", en:"", ru:"" },
-      hero_ref: { ro:"", en:"", ru:"" },
-      about_text: { ro:"", en:"", ru:"" },
-      programs: [],
-      sermons: [],
-      news: [],
-      contact: {
-        phone: "",
-        email: "",
-        instagram: "",
-        facebook: "",
-        address: { ro:"", en:"", ru:"" }
-      }
-    };
-
-    function getLangValue(obj, lang, fallback = "ro") {
-      if (!obj) return "";
-      return obj[lang] || obj[fallback] || "";
-    }
-
-    function setLang(lang) {
-      localStorage.setItem("lang", lang);
-
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (translations[lang] && translations[lang][key]) {
-          el.textContent = translations[lang][key];
-        }
-      });
-
-      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-        const key = el.getAttribute("data-i18n-placeholder");
-        if (translations[lang] && translations[lang][key]) {
-          el.setAttribute("placeholder", translations[lang][key]);
-        }
-      });
-
-      const emailInput = document.querySelector('input[name="email"]');
-      if (emailInput && translations[lang] && translations[lang].email_error) {
-        emailInput.setAttribute("data-error-email", translations[lang].email_error);
-      }
-
-      renderDynamicContent(lang);
-    }
-
-    function renderDynamicContent(lang) {
-      const siteName = getLangValue(siteContent.site_name, lang);
-      const headerVerse = getLangValue(siteContent.header_verse, lang);
-      const heroVerse = getLangValue(siteContent.hero_verse, lang);
-      const heroRef = getLangValue(siteContent.hero_ref, lang);
-      const aboutText = getLangValue(siteContent.about_text, lang);
-      const address = getLangValue(siteContent.contact?.address, lang);
-
-      document.getElementById("site_name_dynamic").innerHTML = siteName || 'Isus <span class="text-[#1f2937] font-light"> - Cuvântul Vieții </span>';
-      document.getElementById("header_verse_dynamic").textContent = headerVerse || "";
-      document.getElementById("hero_verse_dynamic").textContent = heroVerse || "";
-      document.getElementById("hero_ref_dynamic").textContent = heroRef || "";
-      document.getElementById("about_text_dynamic").textContent = aboutText || "";
-      document.getElementById("address_dynamic").textContent = address || "";
-
-      const phone = siteContent.contact?.phone || "";
-      const email = siteContent.contact?.email || "";
-
-      const phoneEl = document.getElementById("phone_dynamic");
-      const emailEl = document.getElementById("email_dynamic");
-
-      phoneEl.textContent = phone;
-      phoneEl.href = "tel:" + phone.replace(/\s+/g, "");
-
-      emailEl.textContent = email;
-      emailEl.href = "mailto:" + email;
-
-      document.getElementById("instagram_dynamic").href = siteContent.contact?.instagram || "#";
-      document.getElementById("facebook_dynamic").href = siteContent.contact?.facebook || "#";
-      document.getElementById("footer_title_dynamic").textContent = siteName.replace(/<[^>]*>/g, "") || "Isus Cuvântul Vieții";
-
-      const programContainer = document.getElementById("program_list_dynamic");
-      programContainer.innerHTML = "";
-      (siteContent.programs || []).forEach(item => {
-        const li = document.createElement("li");
-        li.innerHTML = getLangValue(item, lang);
-        programContainer.appendChild(li);
-      });
-
-      const sermonsContainer = document.getElementById("sermons_list_dynamic");
-      sermonsContainer.innerHTML = "";
-      (siteContent.sermons || []).forEach(item => {
-        const card = document.createElement("div");
-        card.className = "bg-[#41678f] text-white rounded shadow p-4 transform hover:scale-105 transition duration-300";
-        card.innerHTML = `
-          <h3 class="text-xl font-semibold">${getLangValue(item.title, lang)}</h3>
-          <p class="text-sm">${getLangValue(item.subtitle, lang)}</p>
-        `;
-        sermonsContainer.appendChild(card);
-      });
-
-      const newsContainer = document.getElementById("news_list_dynamic");
-      newsContainer.innerHTML = "";
-      (siteContent.news || []).forEach(item => {
-        const card = document.createElement("div");
-        card.className = "bg-white text-[#1f2937] p-4 shadow rounded transform hover:scale-105 transition duration-300";
-        card.innerHTML = `
-          <h3 class="font-bold mb-2">${getLangValue(item.title, lang)}</h3>
-          <p class="text-sm">${getLangValue(item.description, lang)}</p>
-        `;
-        newsContainer.appendChild(card);
-      });
-    }
-
-    window.addEventListener("load", () => {
-      const savedLang = localStorage.getItem("lang") || "ro";
-      setLang(savedLang);
-    });
-
-    const btn = document.getElementById("menu-btn");
-    const menu = document.getElementById("mobile-menu");
-
-    btn.addEventListener("click", () => {
-      menu.classList.toggle("hidden");
-    });
-
-    document.querySelectorAll("#mobile-menu a").forEach(link => {
-      link.addEventListener("click", () => {
-        menu.classList.add("hidden");
-      });
+    menuBtn?.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
     });
   </script>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCJemQGq8vH9QNh_Xz8D_0ZOvMB6EsOrhY",
@@ -463,58 +449,823 @@
     };
 
     const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
     const db = getFirestore(app);
+    const ref = doc(db, "siteContent", "main");
 
-    async function loadSiteContent() {
-      try {
-        const ref = doc(db, "siteContent", "main");
-        const snap = await getDoc(ref);
+    const loginBox = document.getElementById("loginBox");
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const loginError = document.getElementById("loginError");
+    const saveBtnTop = document.getElementById("saveBtnTop");
+    const saveBtnBottom = document.getElementById("saveBtnBottom");
+    const reloadBtn = document.getElementById("reloadBtn");
+    const saveState = document.getElementById("saveState");
+    const bottomStatus = document.getElementById("bottomStatus");
 
-        if (!snap.exists()) return;
+    const modalWrap = document.getElementById("modalWrap");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalSubtitle = document.getElementById("modalSubtitle");
+    const modalContent = document.getElementById("modalContent");
 
-        siteContent = snap.data();
-        const savedLang = localStorage.getItem("lang") || "ro";
-        renderDynamicContent(savedLang);
-      } catch (err) {
-        console.error("Eroare la încărcarea conținutului:", err);
+    let currentLang = localStorage.getItem("lang") || "ro";
+    let hasUnsavedChanges = false;
+
+    let siteContent = {
+      site_name: {
+        ro: 'Isus <span class="text-[#1f2937] font-light"> - Cuvântul Vieții </span>',
+        en: 'Jesus <span class="text-[#1f2937] font-light"> - Word of Life </span>',
+        ru: 'Иисус <span class="text-[#1f2937] font-light"> - Слово Жизни </span>'
+      },
+      header_verse: {
+        ro: '„Cuvântul Tău este o candelă pentru picioarele mele.”',
+        en: '“Your word is a lamp to my feet.”',
+        ru: '«Слово Твое — светильник ноге моей.»'
+      },
+      hero_verse: {
+        ro: '„Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu, pentru ca oricine crede în El să nu piară, ci să aibă viață veșnică.”',
+        en: '“For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.”',
+        ru: '«Ибо так возлюбил Бог мир, что отдал Сына Своего Единородного, чтобы всякий верующий в Него не погиб, но имел жизнь вечную.»'
+      },
+      hero_ref: {
+        ro: 'Ioan 3:16',
+        en: 'John 3:16',
+        ru: 'Иоанн 3:16'
+      },
+      about_text: {
+        ro: 'Scopul Bisericii "Isus Cuvântul Vieții" din Lozova este de a vesti Evanghelia Domnului Isus Hristos și de a îndruma oamenii spre o relație vie cu Dumnezeu.',
+        en: 'The purpose of the "Jesus Word of Life" Church in Lozova is to preach the Gospel of the Lord Jesus Christ and guide people into a living relationship with God.',
+        ru: 'Цель церкви «Иисус Слово Жизни» в Лозове — проповедовать Евангелие Господа Иисуса Христа и направлять людей к живым отношениям с Богом.'
+      },
+      programs: [
+        {
+          ro: '<strong>Duminică:</strong> Adunare Lozova - 10:00 & Adunare Vorniceni - 17:00',
+          en: '<strong>Sunday:</strong> Lozova Gathering - 10:00 & Vorniceni Gathering - 17:00',
+          ru: '<strong>Воскресенье:</strong> Сбор Лозова - 10:00 & Сбор Ворницены - 17:00'
+        },
+        {
+          ro: '<strong>Miercuri:</strong> Seara de rugăciune - 19:00',
+          en: '<strong>Wednesday:</strong> Prayer Evening - 19:00',
+          ru: '<strong>Среда:</strong> Вечер молитвы - 19:00'
+        },
+        {
+          ro: '<strong>Sâmbătă:</strong> Clubul copiilor - 14:00',
+          en: '<strong>Saturday:</strong> Children Club - 14:00',
+          ru: '<strong>Суббота:</strong> Детский клуб - 14:00'
+        }
+      ],
+      sermons: [
+        {
+          title: {
+            ro: 'Credința care mută munții',
+            en: 'Faith that Moves Mountains',
+            ru: 'Вера, которая двигает горы'
+          },
+          subtitle: {
+            ro: 'Pastor Spiridon Cozaru',
+            en: 'Pastor Spiridon Cozaru',
+            ru: 'Пастор Спиридон Козарю'
+          }
+        },
+        {
+          title: {
+            ro: 'Puterea Cuvântului',
+            en: 'The Power of the Word',
+            ru: 'Сила Слова'
+          },
+          subtitle: {
+            ro: 'Invitat special',
+            en: 'Guest Speaker',
+            ru: 'Приглашенный спикер'
+          }
+        }
+      ],
+      news: [
+        {
+          title: {
+            ro: 'Post și rugăciune – 15 iunie',
+            en: 'Fasting & Prayer – June 15',
+            ru: 'Пост и молитва – 15 июня'
+          },
+          description: {
+            ro: 'Vino alături de noi într-o zi specială de post și rugăciune pentru satul Lozova.',
+            en: 'Join us for a special day of fasting and prayer for the village of Lozova.',
+            ru: 'Присоединяйтесь к нам в особый день поста и молитвы за деревню Лозова.'
+          }
+        }
+      ],
+      contact: {
+        phone: '+373 78 448 654',
+        email: 'contact@isuscuvantulvietii.md',
+        instagram: 'https://www.instagram.com/biserica_isus_cuvantul_vietii/',
+        facebook: 'https://www.facebook.com/share/1WrFKxnBVy/?mibextid=wwXIfr',
+        address: {
+          ro: 'Str. Principală 10, Lozova, Moldova',
+          en: 'Str. Principală 10, Lozova, Moldova',
+          ru: 'Str. Principală 10, Lozova, Moldova'
+        }
+      }
+    };
+
+    function getTripleValue(obj) {
+      return obj?.[currentLang] || obj?.ro || "";
+    }
+
+    function setDirty(flag = true) {
+      hasUnsavedChanges = flag;
+      if (flag) {
+        saveState.textContent = "Modificări nesalvate";
+        saveState.className = "text-sm font-semibold text-amber-300";
+        bottomStatus.textContent = "Ai modificări nesalvate";
+      } else {
+        saveState.textContent = "Salvat";
+        saveState.className = "text-sm font-semibold text-emerald-300";
+        bottomStatus.textContent = "Totul este salvat";
       }
     }
 
-    loadSiteContent();
-  </script>
+    function closeModal() {
+      modalWrap.classList.remove("show");
+      modalContent.innerHTML = "";
+    }
 
-  <script>
-    const contactForm = document.getElementById("contact-form");
-    const formMessage = document.getElementById("form-message");
+    window.closeModal = closeModal;
 
-    contactForm.addEventListener("submit", async function(e) {
-      e.preventDefault();
+    function openModal(title, subtitle, html) {
+      modalTitle.textContent = title;
+      modalSubtitle.textContent = subtitle;
+      modalContent.innerHTML = html;
+      modalWrap.classList.add("show");
+    }
 
-      const formData = new FormData(contactForm);
-      const currentLang = localStorage.getItem("lang") || "ro";
+    function renderPrograms() {
+      const container = document.getElementById("program_list_dynamic");
+      container.innerHTML = "";
+
+      (siteContent.programs || []).forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = "relative admin-card rounded-xl";
+        li.innerHTML = `
+          <div class="mini-toolbar">
+            <button class="mini-btn" data-edit-program="${index}">Editează</button>
+            <button class="mini-btn mini-btn-danger" data-delete-program="${index}">Șterge</button>
+          </div>
+          <div class="pr-28">${getTripleValue(item)}</div>
+        `;
+        container.appendChild(li);
+      });
+
+      container.querySelectorAll("[data-edit-program]").forEach(btn => {
+        btn.addEventListener("click", () => openSingleProgramModal(Number(btn.dataset.editProgram)));
+      });
+
+      container.querySelectorAll("[data-delete-program]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const i = Number(btn.dataset.deleteProgram);
+          if (!confirm("Ștergi acest program?")) return;
+          siteContent.programs.splice(i, 1);
+          renderAll();
+          setDirty(true);
+        });
+      });
+    }
+
+    function renderSermons() {
+      const container = document.getElementById("sermons_list_dynamic");
+      container.innerHTML = "";
+
+      (siteContent.sermons || []).forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "bg-[#41678f] text-white rounded shadow p-4 transform hover:scale-105 transition duration-300 admin-card";
+        card.innerHTML = `
+          <div class="mini-toolbar">
+            <button class="mini-btn" data-edit-sermon="${index}">Editează</button>
+            <button class="mini-btn mini-btn-danger" data-delete-sermon="${index}">Șterge</button>
+          </div>
+          <h3 class="text-xl font-semibold pr-28">${getTripleValue(item.title)}</h3>
+          <p class="text-sm pr-28">${getTripleValue(item.subtitle)}</p>
+        `;
+        container.appendChild(card);
+      });
+
+      container.querySelectorAll("[data-edit-sermon]").forEach(btn => {
+        btn.addEventListener("click", () => openSingleSermonModal(Number(btn.dataset.editSermon)));
+      });
+
+      container.querySelectorAll("[data-delete-sermon]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const i = Number(btn.dataset.deleteSermon);
+          if (!confirm("Ștergi această predică?")) return;
+          siteContent.sermons.splice(i, 1);
+          renderAll();
+          setDirty(true);
+        });
+      });
+    }
+
+    function renderNews() {
+      const container = document.getElementById("news_list_dynamic");
+      container.innerHTML = "";
+
+      (siteContent.news || []).forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "bg-white text-[#1f2937] p-4 shadow rounded transform hover:scale-105 transition duration-300 admin-card";
+        card.innerHTML = `
+          <div class="mini-toolbar">
+            <button class="mini-btn" data-edit-news="${index}">Editează</button>
+            <button class="mini-btn mini-btn-danger" data-delete-news="${index}">Șterge</button>
+          </div>
+          <h3 class="font-bold mb-2 pr-28">${getTripleValue(item.title)}</h3>
+          <p class="text-sm pr-28">${getTripleValue(item.description)}</p>
+        `;
+        container.appendChild(card);
+      });
+
+      container.querySelectorAll("[data-edit-news]").forEach(btn => {
+        btn.addEventListener("click", () => openSingleNewsModal(Number(btn.dataset.editNews)));
+      });
+
+      container.querySelectorAll("[data-delete-news]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const i = Number(btn.dataset.deleteNews);
+          if (!confirm("Ștergi această noutate?")) return;
+          siteContent.news.splice(i, 1);
+          renderAll();
+          setDirty(true);
+        });
+      });
+    }
+
+    function renderContact() {
+      const address = getTripleValue(siteContent.contact?.address || {});
+      const phone = siteContent.contact?.phone || "";
+      const email = siteContent.contact?.email || "";
+      const siteNameText = (getTripleValue(siteContent.site_name) || "").replace(/<[^>]*>/g, "");
+
+      document.getElementById("address_dynamic").textContent = address;
+      document.getElementById("phone_dynamic").textContent = phone;
+      document.getElementById("phone_dynamic").href = "tel:" + phone.replace(/\s+/g, "");
+      document.getElementById("email_dynamic").textContent = email;
+      document.getElementById("email_dynamic").href = "mailto:" + email;
+      document.getElementById("instagram_dynamic").href = siteContent.contact?.instagram || "#";
+      document.getElementById("facebook_dynamic").href = siteContent.contact?.facebook || "#";
+      document.getElementById("footer_title_dynamic").textContent = siteNameText || "Isus Cuvântul Vieții";
+    }
+
+    function renderHeroAbout() {
+      document.getElementById("site_name_dynamic").innerHTML = getTripleValue(siteContent.site_name) || "";
+      document.getElementById("header_verse_dynamic").textContent = getTripleValue(siteContent.header_verse) || "";
+      document.getElementById("hero_verse_dynamic").textContent = getTripleValue(siteContent.hero_verse) || "";
+      document.getElementById("hero_ref_dynamic").textContent = getTripleValue(siteContent.hero_ref) || "";
+      document.getElementById("about_text_dynamic").textContent = getTripleValue(siteContent.about_text) || "";
+    }
+
+    function renderAll() {
+      renderHeroAbout();
+      renderPrograms();
+      renderSermons();
+      renderNews();
+      renderContact();
+    }
+
+    window.setLang = function(lang) {
+      currentLang = lang;
+      localStorage.setItem("lang", lang);
+      renderAll();
+    };
+
+    function tripleEditorFields(prefix, data = {}) {
+      return `
+        <div class="grid md:grid-cols-3 gap-4">
+          <div>
+            <span class="badge-lang">RO</span>
+            <textarea id="${prefix}_ro" class="textarea" rows="4">${data.ro || ""}</textarea>
+          </div>
+          <div>
+            <span class="badge-lang">EN</span>
+            <textarea id="${prefix}_en" class="textarea" rows="4">${data.en || ""}</textarea>
+          </div>
+          <div>
+            <span class="badge-lang">RU</span>
+            <textarea id="${prefix}_ru" class="textarea" rows="4">${data.ru || ""}</textarea>
+          </div>
+        </div>
+      `;
+    }
+
+    function tripleInputFields(prefix, data = {}) {
+      return `
+        <div class="grid md:grid-cols-3 gap-4">
+          <div>
+            <span class="badge-lang">RO</span>
+            <input id="${prefix}_ro" class="input" value="${data.ro || ""}">
+          </div>
+          <div>
+            <span class="badge-lang">EN</span>
+            <input id="${prefix}_en" class="input" value="${data.en || ""}">
+          </div>
+          <div>
+            <span class="badge-lang">RU</span>
+            <input id="${prefix}_ru" class="input" value="${data.ru || ""}">
+          </div>
+        </div>
+      `;
+    }
+
+    window.openHeroModal = function() {
+      openModal(
+        "Editează secțiunea principală",
+        "Nume site, verset mic, verset principal și referință.",
+        `
+          <div class="space-y-6">
+            <div>
+              <label class="block font-bold mb-2">Nume site</label>
+              ${tripleInputFields("site_name", siteContent.site_name)}
+            </div>
+
+            <div>
+              <label class="block font-bold mb-2">Verset mic din header</label>
+              ${tripleInputFields("header_verse", siteContent.header_verse)}
+            </div>
+
+            <div>
+              <label class="block font-bold mb-2">Verset principal</label>
+              ${tripleEditorFields("hero_verse", siteContent.hero_verse)}
+            </div>
+
+            <div>
+              <label class="block font-bold mb-2">Referință verset</label>
+              ${tripleInputFields("hero_ref", siteContent.hero_ref)}
+            </div>
+
+            <div class="flex justify-end">
+              <button id="saveHeroModalBtn" class="bg-[#41678f] text-white px-5 py-3 rounded-2xl font-bold">Salvează secțiunea</button>
+            </div>
+          </div>
+        `
+      );
+
+      document.getElementById("saveHeroModalBtn").onclick = () => {
+        siteContent.site_name = {
+          ro: document.getElementById("site_name_ro").value.trim(),
+          en: document.getElementById("site_name_en").value.trim(),
+          ru: document.getElementById("site_name_ru").value.trim()
+        };
+        siteContent.header_verse = {
+          ro: document.getElementById("header_verse_ro").value.trim(),
+          en: document.getElementById("header_verse_en").value.trim(),
+          ru: document.getElementById("header_verse_ru").value.trim()
+        };
+        siteContent.hero_verse = {
+          ro: document.getElementById("hero_verse_ro").value.trim(),
+          en: document.getElementById("hero_verse_en").value.trim(),
+          ru: document.getElementById("hero_verse_ru").value.trim()
+        };
+        siteContent.hero_ref = {
+          ro: document.getElementById("hero_ref_ro").value.trim(),
+          en: document.getElementById("hero_ref_en").value.trim(),
+          ru: document.getElementById("hero_ref_ru").value.trim()
+        };
+
+        renderAll();
+        setDirty(true);
+        closeModal();
+      };
+    };
+
+    window.openAboutModal = function() {
+      openModal(
+        "Editează secțiunea Despre",
+        "Textul principal al bisericii.",
+        `
+          <div class="space-y-6">
+            ${tripleEditorFields("about_text", siteContent.about_text)}
+            <div class="flex justify-end">
+              <button id="saveAboutModalBtn" class="bg-[#41678f] text-white px-5 py-3 rounded-2xl font-bold">Salvează</button>
+            </div>
+          </div>
+        `
+      );
+
+      document.getElementById("saveAboutModalBtn").onclick = () => {
+        siteContent.about_text = {
+          ro: document.getElementById("about_text_ro").value.trim(),
+          en: document.getElementById("about_text_en").value.trim(),
+          ru: document.getElementById("about_text_ru").value.trim()
+        };
+        renderAll();
+        setDirty(true);
+        closeModal();
+      };
+    };
+
+    function openSingleProgramModal(index) {
+      const item = siteContent.programs[index] || { ro: "", en: "", ru: "" };
+
+      openModal(
+        `Editează programul ${index + 1}`,
+        "Poți modifica cele 3 limbi.",
+        `
+          <div class="space-y-6">
+            ${tripleEditorFields("program_item", item)}
+            <div class="flex justify-end">
+              <button id="saveProgramItemBtn" class="bg-[#41678f] text-white px-5 py-3 rounded-2xl font-bold">Salvează</button>
+            </div>
+          </div>
+        `
+      );
+
+      document.getElementById("saveProgramItemBtn").onclick = () => {
+        siteContent.programs[index] = {
+          ro: document.getElementById("program_item_ro").value.trim(),
+          en: document.getElementById("program_item_en").value.trim(),
+          ru: document.getElementById("program_item_ru").value.trim()
+        };
+        renderAll();
+        setDirty(true);
+        closeModal();
+      };
+    }
+
+    window.openProgramsModal = function() {
+      let html = `<div class="space-y-4">`;
+
+      (siteContent.programs || []).forEach((item, index) => {
+        html += `
+          <div class="border rounded-2xl p-4">
+            <div class="flex justify-between items-center mb-3">
+              <h4 class="font-bold">Program ${index + 1}</h4>
+              <div class="flex gap-2">
+                <button class="bg-slate-800 text-white px-3 py-2 rounded-xl text-sm font-bold" onclick="window.__editProgramFromList(${index})">Editează</button>
+                <button class="bg-red-700 text-white px-3 py-2 rounded-xl text-sm font-bold" onclick="window.__deleteProgramFromList(${index})">Șterge</button>
+              </div>
+            </div>
+            <div class="text-sm text-slate-700">${item[currentLang] || item.ro || ""}</div>
+          </div>
+        `;
+      });
+
+      html += `
+        <div class="flex justify-end">
+          <button id="addProgramInsideModal" class="bg-[#41678f] text-white px-5 py-3 rounded-2xl font-bold">Adaugă program nou</button>
+        </div>
+      </div>
+      `;
+
+      openModal("Administrare program", "Editezi, ștergi sau adaugi rânduri.", html);
+
+      document.getElementById("addProgramInsideModal").onclick = () => {
+        addProgram();
+        closeModal();
+      };
+    };
+
+    window.__editProgramFromList = function(index) {
+      openSingleProgramModal(index);
+    };
+
+    window.__deleteProgramFromList = function(index) {
+      if (!confirm("Ștergi acest program?")) return;
+      siteContent.programs.splice(index, 1);
+      renderAll();
+      setDirty(true);
+      openProgramsModal();
+    };
+
+    window.addProgram = function() {
+      siteContent.programs.push({ ro: "", en: "", ru: "" });
+      renderAll();
+      setDirty(true);
+      openSingleProgramModal(siteContent.programs.length - 1);
+    };
+
+    function openSingleSermonModal(index) {
+      const item = siteContent.sermons[index] || {
+        title: { ro: "", en: "", ru: "" },
+        subtitle: { ro: "", en: "", ru: "" }
+      };
+
+      openModal(
+        `Editează predica ${index + 1}`,
+        "Titlu și subtitlu în toate limbile.",
+        `
+          <div class="space-y-6">
+            <div>
+              <label class="block font-bold mb-2">Titlu</label>
+              ${tripleInputFields("sermon_title", item.title)}
+            </div>
+
+            <div>
+              <label class="block font-bold mb-2">Subtitlu</label>
+              ${tripleInputFields("sermon_subtitle", item.subtitle)}
+            </div>
+
+            <div class="flex justify-end">
+              <button id="saveSermonItemBtn" class="bg-[#41678f] text-white px-5 py-3 rounded-2xl font-bold">Salvează</button>
+            </div>
+          </div>
+        `
+      );
+
+      document.getElementById("saveSermonItemBtn").onclick = () => {
+        siteContent.sermons[index] = {
+          title: {
+            ro: document.getElementById("sermon_title_ro").value.trim(),
+            en: document.getElementById("sermon_title_en").value.trim(),
+            ru: document.getElementById("sermon_title_ru").value.trim()
+          },
+          subtitle: {
+            ro: document.getElementById("sermon_subtitle_ro").value.trim(),
+            en: document.getElementById("sermon_subtitle_en").value.trim(),
+            ru: document.getElementById("sermon_subtitle_ru").value.trim()
+          }
+        };
+        renderAll();
+        setDirty(true);
+        closeModal();
+      };
+    }
+
+    window.openSermonsModal = function() {
+      let html = `<div class="space-y-4">`;
+
+      (siteContent.sermons || []).forEach((item, index) => {
+        html += `
+          <div class="border rounded-2xl p-4">
+            <div class="flex justify-between items-center mb-3">
+              <h4 class="font-bold">Predica ${index + 1}</h4>
+              <div class="flex gap-2">
+                <button class="bg-slate-800 text-white px-3 py-2 rounded-xl text-sm font-bold" onclick="window.__editSermonFromList(${index})">Editează</button>
+                <button class="bg-red-700 text-white px-3 py-2 rounded-xl text-sm font-bold" onclick="window.__deleteSermonFromList(${index})">Șterge</button>
+              </div>
+            </div>
+            <div class="font-semibold">${item.title?.[currentLang] || item.title?.ro || ""}</div>
+            <div class="text-sm text-slate-600">${item.subtitle?.[currentLang] || item.subtitle?.ro || ""}</div>
+          </div>
+        `;
+      });
+
+      html += `
+        <div class="flex justify-end">
+          <button id="addSermonInsideModal" class="bg-[#41678f] text-white px-5 py-3 rounded-2xl font-bold">Adaugă predică nouă</button>
+        </div>
+      </div>
+      `;
+
+      openModal("Administrare predici", "Editezi, ștergi sau adaugi predici.", html);
+
+      document.getElementById("addSermonInsideModal").onclick = () => {
+        addSermon();
+        closeModal();
+      };
+    };
+
+    window.__editSermonFromList = function(index) {
+      openSingleSermonModal(index);
+    };
+
+    window.__deleteSermonFromList = function(index) {
+      if (!confirm("Ștergi această predică?")) return;
+      siteContent.sermons.splice(index, 1);
+      renderAll();
+      setDirty(true);
+      openSermonsModal();
+    };
+
+    window.addSermon = function() {
+      siteContent.sermons.push({
+        title: { ro: "", en: "", ru: "" },
+        subtitle: { ro: "", en: "", ru: "" }
+      });
+      renderAll();
+      setDirty(true);
+      openSingleSermonModal(siteContent.sermons.length - 1);
+    };
+
+    function openSingleNewsModal(index) {
+      const item = siteContent.news[index] || {
+        title: { ro: "", en: "", ru: "" },
+        description: { ro: "", en: "", ru: "" }
+      };
+
+      openModal(
+        `Editează noutatea ${index + 1}`,
+        "Titlu și descriere în toate limbile.",
+        `
+          <div class="space-y-6">
+            <div>
+              <label class="block font-bold mb-2">Titlu</label>
+              ${tripleInputFields("news_title", item.title)}
+            </div>
+
+            <div>
+              <label class="block font-bold mb-2">Descriere</label>
+              ${tripleEditorFields("news_description", item.description)}
+            </div>
+
+            <div class="flex justify-end">
+              <button id="saveNewsItemBtn" class="bg-[#41678f] text-white px-5 py-3 rounded-2xl font-bold">Salvează</button>
+            </div>
+          </div>
+        `
+      );
+
+      document.getElementById("saveNewsItemBtn").onclick = () => {
+        siteContent.news[index] = {
+          title: {
+            ro: document.getElementById("news_title_ro").value.trim(),
+            en: document.getElementById("news_title_en").value.trim(),
+            ru: document.getElementById("news_title_ru").value.trim()
+          },
+          description: {
+            ro: document.getElementById("news_description_ro").value.trim(),
+            en: document.getElementById("news_description_en").value.trim(),
+            ru: document.getElementById("news_description_ru").value.trim()
+          }
+        };
+        renderAll();
+        setDirty(true);
+        closeModal();
+      };
+    }
+
+    window.openNewsModal = function() {
+      let html = `<div class="space-y-4">`;
+
+      (siteContent.news || []).forEach((item, index) => {
+        html += `
+          <div class="border rounded-2xl p-4">
+            <div class="flex justify-between items-center mb-3">
+              <h4 class="font-bold">Noutatea ${index + 1}</h4>
+              <div class="flex gap-2">
+                <button class="bg-slate-800 text-white px-3 py-2 rounded-xl text-sm font-bold" onclick="window.__editNewsFromList(${index})">Editează</button>
+                <button class="bg-red-700 text-white px-3 py-2 rounded-xl text-sm font-bold" onclick="window.__deleteNewsFromList(${index})">Șterge</button>
+              </div>
+            </div>
+            <div class="font-semibold">${item.title?.[currentLang] || item.title?.ro || ""}</div>
+            <div class="text-sm text-slate-600">${item.description?.[currentLang] || item.description?.ro || ""}</div>
+          </div>
+        `;
+      });
+
+      html += `
+        <div class="flex justify-end">
+          <button id="addNewsInsideModal" class="bg-[#41678f] text-white px-5 py-3 rounded-2xl font-bold">Adaugă noutate nouă</button>
+        </div>
+      </div>
+      `;
+
+      openModal("Administrare noutăți", "Editezi, ștergi sau adaugi noutăți.", html);
+
+      document.getElementById("addNewsInsideModal").onclick = () => {
+        addNews();
+        closeModal();
+      };
+    };
+
+    window.__editNewsFromList = function(index) {
+      openSingleNewsModal(index);
+    };
+
+    window.__deleteNewsFromList = function(index) {
+      if (!confirm("Ștergi această noutate?")) return;
+      siteContent.news.splice(index, 1);
+      renderAll();
+      setDirty(true);
+      openNewsModal();
+    };
+
+    window.addNews = function() {
+      siteContent.news.push({
+        title: { ro: "", en: "", ru: "" },
+        description: { ro: "", en: "", ru: "" }
+      });
+      renderAll();
+      setDirty(true);
+      openSingleNewsModal(siteContent.news.length - 1);
+    };
+
+    window.openContactModal = function() {
+      openModal(
+        "Editează contactul",
+        "Telefon, email, social media și adresa.",
+        `
+          <div class="space-y-6">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-bold mb-2">Telefon</label>
+                <input id="contact_phone" class="input" value="${siteContent.contact?.phone || ""}">
+              </div>
+              <div>
+                <label class="block font-bold mb-2">Email</label>
+                <input id="contact_email" class="input" value="${siteContent.contact?.email || ""}">
+              </div>
+              <div>
+                <label class="block font-bold mb-2">Instagram</label>
+                <input id="contact_instagram" class="input" value="${siteContent.contact?.instagram || ""}">
+              </div>
+              <div>
+                <label class="block font-bold mb-2">Facebook</label>
+                <input id="contact_facebook" class="input" value="${siteContent.contact?.facebook || ""}">
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-bold mb-2">Adresă</label>
+              ${tripleInputFields("contact_address", siteContent.contact?.address || {})}
+            </div>
+
+            <div class="flex justify-end">
+              <button id="saveContactModalBtn" class="bg-[#41678f] text-white px-5 py-3 rounded-2xl font-bold">Salvează</button>
+            </div>
+          </div>
+        `
+      );
+
+      document.getElementById("saveContactModalBtn").onclick = () => {
+        siteContent.contact = {
+          phone: document.getElementById("contact_phone").value.trim(),
+          email: document.getElementById("contact_email").value.trim(),
+          instagram: document.getElementById("contact_instagram").value.trim(),
+          facebook: document.getElementById("contact_facebook").value.trim(),
+          address: {
+            ro: document.getElementById("contact_address_ro").value.trim(),
+            en: document.getElementById("contact_address_en").value.trim(),
+            ru: document.getElementById("contact_address_ru").value.trim()
+          }
+        };
+        renderAll();
+        setDirty(true);
+        closeModal();
+      };
+    };
+
+    async function loadData() {
+      try {
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+          const dbData = snap.data();
+          siteContent = {
+            ...siteContent,
+            ...dbData,
+            contact: {
+              ...siteContent.contact,
+              ...(dbData.contact || {})
+            }
+          };
+        }
+        renderAll();
+        setDirty(false);
+      } catch (e) {
+        console.error(e);
+        alert("Eroare la încărcarea datelor.");
+      }
+    }
+
+    async function saveData() {
+      try {
+        await setDoc(ref, {
+          ...siteContent,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+
+        setDirty(false);
+      } catch (e) {
+        console.error(e);
+        alert("A apărut o eroare la salvare.");
+      }
+    }
+
+    loginBtn.onclick = async () => {
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
 
       try {
-        const response = await fetch(contactForm.action, {
-          method: "POST",
-          body: formData,
-          headers: { "Accept": "application/json" }
-        });
-
-        if (response.ok) {
-          formMessage.textContent = translations[currentLang].form_success;
-          formMessage.className = "text-green-600 text-sm mt-2";
-          contactForm.reset();
-
-          setTimeout(() => {
-            formMessage.textContent = "";
-          }, 5000);
-        } else {
-          formMessage.textContent = translations[currentLang].form_error;
-          formMessage.className = "text-red-600 text-sm mt-2";
-        }
+        await signInWithEmailAndPassword(auth, email, password);
+        loginError.textContent = "";
       } catch (error) {
-        formMessage.textContent = translations[currentLang].form_network_error;
-        formMessage.className = "text-red-600 text-sm mt-2";
+        loginError.textContent = "Email sau parolă greșită!";
+      }
+    };
+
+    logoutBtn.onclick = () => signOut(auth);
+    saveBtnTop.onclick = saveData;
+    saveBtnBottom.onclick = saveData;
+    reloadBtn.onclick = loadData;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        loginBox.style.display = "none";
+        await loadData();
+      } else {
+        loginBox.style.display = "flex";
+      }
+    });
+
+    window.addEventListener("beforeunload", (e) => {
+      if (hasUnsavedChanges) {
+        e.preventDefault();
+        e.returnValue = "";
       }
     });
   </script>
