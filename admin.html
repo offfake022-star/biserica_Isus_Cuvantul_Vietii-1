@@ -1,178 +1,514 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administrare site</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: linear-gradient(135deg, #eef2f7 0%, #f8fafc 100%);
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .field-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .input-field, .textarea-field {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 0.85rem;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+
+    .input-field:focus, .textarea-field:focus {
+      border-color: #41678f;
+      box-shadow: 0 0 0 4px rgba(65, 103, 143, 0.12);
+    }
+
+    .lang-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      padding: 0.3rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: #eff6ff;
+      color: #41678f;
+      border: 1px solid #bfdbfe;
+    }
+
+    .sidebar-link {
+      display: block;
+      padding: 0.8rem 1rem;
+      border-radius: 0.8rem;
+      font-weight: 600;
+      color: #334155;
+      transition: 0.2s ease;
+    }
+
+    .sidebar-link:hover,
+    .sidebar-link.active {
+      background: #41678f;
+      color: #fff;
+    }
+
+    .top-stat {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .hidden-by-search {
+      display: none !important;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-800 p-6">
+<body class="text-gray-800 min-h-screen">
 
   <!-- LOGIN -->
-  <div id="loginBox" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div class="bg-white p-6 rounded-2xl shadow w-full max-w-sm">
-      <h2 class="text-2xl font-bold mb-4 text-center">Login Admin</h2>
+  <div id="loginBox" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl p-7">
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 rounded-2xl bg-[#41678f] text-white mx-auto flex items-center justify-center text-2xl font-bold shadow-lg mb-4">
+          A
+        </div>
+        <h2 class="text-3xl font-bold text-gray-900">Login Admin</h2>
+        <p class="text-sm text-gray-500 mt-2">Autentifică-te pentru a administra conținutul site-ului</p>
+      </div>
 
-      <input id="loginEmail" type="email" placeholder="Email"
-        class="w-full p-3 border rounded mb-3">
+      <div class="space-y-4">
+        <div>
+          <label class="field-label">Email</label>
+          <input id="loginEmail" type="email" placeholder="Email" class="input-field" />
+        </div>
 
-      <input id="loginPassword" type="password" placeholder="Parolă"
-        class="w-full p-3 border rounded mb-3">
+        <div>
+          <label class="field-label">Parolă</label>
+          <input id="loginPassword" type="password" placeholder="Parolă" class="input-field" />
+        </div>
 
-      <button id="loginBtn"
-        class="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700">
-        Login
-      </button>
+        <button id="loginBtn" class="w-full bg-[#41678f] text-white p-3.5 rounded-2xl hover:opacity-90 transition font-semibold shadow">
+          Login
+        </button>
 
-      <p id="loginError" class="text-red-600 mt-3 text-sm text-center"></p>
+        <p id="loginError" class="text-red-600 text-sm text-center min-h-[20px]"></p>
+      </div>
     </div>
   </div>
 
-  <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow p-6">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-bold">Administrare site</h1>
-      <button id="logoutBtn" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800">
-        Logout
-      </button>
+  <!-- APP -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <!-- TOP -->
+    <div class="flex flex-col xl:flex-row gap-4 xl:items-center xl:justify-between mb-6">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Panou de administrare</h1>
+        <p class="text-gray-600 mt-2">Gestionează conținutul afișat pe pagina principală a bisericii</p>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button id="reloadBtn" class="bg-white border border-gray-300 hover:bg-gray-50 px-5 py-3 rounded-2xl font-semibold">
+          Reîncarcă datele
+        </button>
+        <button id="resetBtn" class="bg-amber-500 text-white hover:bg-amber-600 px-5 py-3 rounded-2xl font-semibold shadow">
+          Resetează formularul
+        </button>
+        <button id="saveBtnTop" class="bg-[#41678f] hover:opacity-90 text-white px-5 py-3 rounded-2xl font-semibold shadow">
+          Salvează
+        </button>
+        <button id="logoutBtn" class="bg-gray-800 text-white hover:bg-black px-5 py-3 rounded-2xl font-semibold shadow">
+          Logout
+        </button>
+      </div>
     </div>
 
-    <div class="grid gap-6">
-
-      <div>
-        <h2 class="text-xl font-semibold mb-2">Despre Biserică</h2>
-        <label class="block font-medium mb-1">RO</label>
-        <textarea id="about_ro" class="w-full border rounded p-3 mb-3" rows="4"></textarea>
-        <label class="block font-medium mb-1">EN</label>
-        <textarea id="about_en" class="w-full border rounded p-3 mb-3" rows="4"></textarea>
-        <label class="block font-medium mb-1">RU</label>
-        <textarea id="about_ru" class="w-full border rounded p-3" rows="4"></textarea>
+    <!-- STATS -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="top-stat p-4">
+        <p class="text-sm text-gray-500">Câmpuri totale</p>
+        <p id="totalFields" class="text-3xl font-bold text-gray-900 mt-1">0</p>
       </div>
-
-      <div>
-        <h2 class="text-xl font-semibold mb-2">Program</h2>
-
-        <label class="block font-medium mt-2">Program 1 - RO</label>
-        <input id="program1_ro" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Program 1 - EN</label>
-        <input id="program1_en" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Program 1 - RU</label>
-        <input id="program1_ru" class="w-full border rounded p-3 mb-4">
-
-        <label class="block font-medium">Program 2 - RO</label>
-        <input id="program2_ro" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Program 2 - EN</label>
-        <input id="program2_en" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Program 2 - RU</label>
-        <input id="program2_ru" class="w-full border rounded p-3 mb-4">
-
-        <label class="block font-medium">Program 3 - RO</label>
-        <input id="program3_ro" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Program 3 - EN</label>
-        <input id="program3_en" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Program 3 - RU</label>
-        <input id="program3_ru" class="w-full border rounded p-3">
+      <div class="top-stat p-4">
+        <p class="text-sm text-gray-500">Câmpuri completate</p>
+        <p id="filledFields" class="text-3xl font-bold text-green-600 mt-1">0</p>
       </div>
-
-      <div>
-        <h2 class="text-xl font-semibold mb-2">Predici</h2>
-
-        <label class="block font-medium">Predica 1 - RO</label>
-        <input id="sermon1_ro" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Predica 1 - EN</label>
-        <input id="sermon1_en" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Predica 1 - RU</label>
-        <input id="sermon1_ru" class="w-full border rounded p-3 mb-4">
-
-        <label class="block font-medium">Subtitlu 1 - RO</label>
-        <input id="preacher1_ro" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Subtitlu 1 - EN</label>
-        <input id="preacher1_en" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Subtitlu 1 - RU</label>
-        <input id="preacher1_ru" class="w-full border rounded p-3 mb-4">
-
-        <label class="block font-medium">Predica 2 - RO</label>
-        <input id="sermon2_ro" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Predica 2 - EN</label>
-        <input id="sermon2_en" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Predica 2 - RU</label>
-        <input id="sermon2_ru" class="w-full border rounded p-3 mb-4">
-
-        <label class="block font-medium">Subtitlu 2 - RO</label>
-        <input id="preacher2_ro" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Subtitlu 2 - EN</label>
-        <input id="preacher2_en" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Subtitlu 2 - RU</label>
-        <input id="preacher2_ru" class="w-full border rounded p-3">
+      <div class="top-stat p-4">
+        <p class="text-sm text-gray-500">Stare</p>
+        <p id="saveState" class="text-lg font-bold text-amber-600 mt-2">Nesalvat</p>
       </div>
-
-      <div>
-        <h2 class="text-xl font-semibold mb-2">Noutăți</h2>
-
-        <label class="block font-medium">Titlu noutate 1 - RO</label>
-        <input id="post_date_1_ro" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Titlu noutate 1 - EN</label>
-        <input id="post_date_1_en" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Titlu noutate 1 - RU</label>
-        <input id="post_date_1_ru" class="w-full border rounded p-3 mb-4">
-
-        <label class="block font-medium">Descriere noutate 1 - RO</label>
-        <textarea id="post_descr_1_ro" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
-        <label class="block font-medium">Descriere noutate 1 - EN</label>
-        <textarea id="post_descr_1_en" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
-        <label class="block font-medium">Descriere noutate 1 - RU</label>
-        <textarea id="post_descr_1_ru" class="w-full border rounded p-3 mb-4" rows="3"></textarea>
-
-        <label class="block font-medium">Titlu noutate 2 - RO</label>
-        <input id="post_date_2_ro" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Titlu noutate 2 - EN</label>
-        <input id="post_date_2_en" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Titlu noutate 2 - RU</label>
-        <input id="post_date_2_ru" class="w-full border rounded p-3 mb-4">
-
-        <label class="block font-medium">Descriere noutate 2 - RO</label>
-        <textarea id="post_descr_2_ro" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
-        <label class="block font-medium">Descriere noutate 2 - EN</label>
-        <textarea id="post_descr_2_en" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
-        <label class="block font-medium">Descriere noutate 2 - RU</label>
-        <textarea id="post_descr_2_ru" class="w-full border rounded p-3 mb-4" rows="3"></textarea>
-
-        <label class="block font-medium">Titlu noutate 3 - RO</label>
-        <input id="post_date_3_ro" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Titlu noutate 3 - EN</label>
-        <input id="post_date_3_en" class="w-full border rounded p-3 mb-2">
-        <label class="block font-medium">Titlu noutate 3 - RU</label>
-        <input id="post_date_3_ru" class="w-full border rounded p-3 mb-4">
-
-        <label class="block font-medium">Descriere noutate 3 - RO</label>
-        <textarea id="post_descr_3_ro" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
-        <label class="block font-medium">Descriere noutate 3 - EN</label>
-        <textarea id="post_descr_3_en" class="w-full border rounded p-3 mb-2" rows="3"></textarea>
-        <label class="block font-medium">Descriere noutate 3 - RU</label>
-        <textarea id="post_descr_3_ru" class="w-full border rounded p-3" rows="3"></textarea>
+      <div class="top-stat p-4">
+        <p class="text-sm text-gray-500">Ultima actualizare</p>
+        <p id="lastUpdated" class="text-base font-semibold text-gray-900 mt-2">—</p>
       </div>
+    </div>
 
-      <div>
-        <h2 class="text-xl font-semibold mb-2">Contact și social media</h2>
-        <label class="block font-medium">Telefon</label>
-        <input id="phone" class="w-full border rounded p-3 mb-3">
-
-        <label class="block font-medium">Email</label>
-        <input id="email" class="w-full border rounded p-3 mb-3">
-
-        <label class="block font-medium">Instagram link</label>
-        <input id="instagram" class="w-full border rounded p-3 mb-3">
-
-        <label class="block font-medium">Facebook link</label>
-        <input id="facebook" class="w-full border rounded p-3">
+    <!-- SEARCH -->
+    <div class="section-card p-4 mb-6">
+      <div class="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-gray-900">Căutare rapidă</h2>
+          <p class="text-sm text-gray-500 mt-1">Scrie un cuvânt precum „program”, „predică”, „facebook”, „noutate” etc.</p>
+        </div>
+        <div class="w-full md:max-w-md">
+          <input id="searchFields" type="text" placeholder="Caută în panou..." class="input-field" />
+        </div>
       </div>
+    </div>
 
-      <div class="pt-4">
-        <button id="saveBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl">
-          Salvează modificările
-        </button>
-        <p id="status" class="mt-3 text-sm"></p>
-      </div>
+    <div class="grid lg:grid-cols-[260px_1fr] gap-6">
+      <!-- SIDEBAR -->
+      <aside class="section-card p-4 h-fit lg:sticky lg:top-6">
+        <h3 class="text-lg font-bold mb-4">Navigare</h3>
+        <nav class="space-y-2">
+          <a href="#sec-about" class="sidebar-link active">Despre Biserică</a>
+          <a href="#sec-program" class="sidebar-link">Program</a>
+          <a href="#sec-sermons" class="sidebar-link">Predici</a>
+          <a href="#sec-news" class="sidebar-link">Noutăți</a>
+          <a href="#sec-contact" class="sidebar-link">Contact & Social</a>
+        </nav>
 
+        <div class="mt-6 pt-5 border-t">
+          <p class="text-sm font-semibold text-gray-700 mb-2">Limbi administrate</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="lang-badge">RO</span>
+            <span class="lang-badge">EN</span>
+            <span class="lang-badge">RU</span>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t">
+          <p class="text-sm font-semibold text-gray-700">Status salvare</p>
+          <p id="status" class="mt-2 text-sm text-gray-500">Nu există modificări noi.</p>
+        </div>
+      </aside>
+
+      <!-- FORM -->
+      <main class="space-y-6">
+        <!-- ABOUT -->
+        <section id="sec-about" class="section-card p-6 admin-section" data-search="despre biserica about about_text text introducere">
+          <div class="flex items-center justify-between gap-3 mb-5">
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900">Despre Biserică</h2>
+              <p class="text-sm text-gray-500 mt-1">Textul principal din secțiunea „Despre”</p>
+            </div>
+          </div>
+
+          <div class="grid gap-5">
+            <div>
+              <label class="field-label">Text RO</label>
+              <textarea id="about_ro" class="textarea-field auto-resize" rows="5"></textarea>
+            </div>
+            <div>
+              <label class="field-label">Text EN</label>
+              <textarea id="about_en" class="textarea-field auto-resize" rows="5"></textarea>
+            </div>
+            <div>
+              <label class="field-label">Text RU</label>
+              <textarea id="about_ru" class="textarea-field auto-resize" rows="5"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROGRAM -->
+        <section id="sec-program" class="section-card p-6 admin-section" data-search="program orar schedule servicii slujbe">
+          <div class="mb-5">
+            <h2 class="text-2xl font-bold text-gray-900">Program</h2>
+            <p class="text-sm text-gray-500 mt-1">Programul slujbelor și activităților</p>
+          </div>
+
+          <div class="space-y-6">
+            <div class="border border-gray-200 rounded-2xl p-4">
+              <h3 class="font-bold text-lg mb-4">Program 1</h3>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label class="field-label">RO</label>
+                  <input id="program1_ro" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">EN</label>
+                  <input id="program1_en" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">RU</label>
+                  <input id="program1_ru" class="input-field" />
+                </div>
+              </div>
+            </div>
+
+            <div class="border border-gray-200 rounded-2xl p-4">
+              <h3 class="font-bold text-lg mb-4">Program 2</h3>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label class="field-label">RO</label>
+                  <input id="program2_ro" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">EN</label>
+                  <input id="program2_en" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">RU</label>
+                  <input id="program2_ru" class="input-field" />
+                </div>
+              </div>
+            </div>
+
+            <div class="border border-gray-200 rounded-2xl p-4">
+              <h3 class="font-bold text-lg mb-4">Program 3</h3>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label class="field-label">RO</label>
+                  <input id="program3_ro" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">EN</label>
+                  <input id="program3_en" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">RU</label>
+                  <input id="program3_ru" class="input-field" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERMONS -->
+        <section id="sec-sermons" class="section-card p-6 admin-section" data-search="predici sermons preacher subtitle subtitlu pastor invitat">
+          <div class="mb-5">
+            <h2 class="text-2xl font-bold text-gray-900">Predici</h2>
+            <p class="text-sm text-gray-500 mt-1">Titluri și subtitluri pentru predicile recente</p>
+          </div>
+
+          <div class="space-y-6">
+            <div class="border border-gray-200 rounded-2xl p-4">
+              <h3 class="font-bold text-lg mb-4">Predica 1</h3>
+              <div class="grid md:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <label class="field-label">Titlu RO</label>
+                  <input id="sermon1_ro" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Titlu EN</label>
+                  <input id="sermon1_en" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Titlu RU</label>
+                  <input id="sermon1_ru" class="input-field" />
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label class="field-label">Subtitlu RO</label>
+                  <input id="preacher1_ro" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Subtitlu EN</label>
+                  <input id="preacher1_en" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Subtitlu RU</label>
+                  <input id="preacher1_ru" class="input-field" />
+                </div>
+              </div>
+            </div>
+
+            <div class="border border-gray-200 rounded-2xl p-4">
+              <h3 class="font-bold text-lg mb-4">Predica 2</h3>
+              <div class="grid md:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <label class="field-label">Titlu RO</label>
+                  <input id="sermon2_ro" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Titlu EN</label>
+                  <input id="sermon2_en" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Titlu RU</label>
+                  <input id="sermon2_ru" class="input-field" />
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label class="field-label">Subtitlu RO</label>
+                  <input id="preacher2_ro" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Subtitlu EN</label>
+                  <input id="preacher2_en" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Subtitlu RU</label>
+                  <input id="preacher2_ru" class="input-field" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- NEWS -->
+        <section id="sec-news" class="section-card p-6 admin-section" data-search="noutati news evenimente postari post descriere titlu">
+          <div class="mb-5">
+            <h2 class="text-2xl font-bold text-gray-900">Noutăți & Evenimente</h2>
+            <p class="text-sm text-gray-500 mt-1">Titluri și descrieri pentru cele 3 carduri de noutăți</p>
+          </div>
+
+          <div class="space-y-6">
+            <div class="border border-gray-200 rounded-2xl p-4">
+              <h3 class="font-bold text-lg mb-4">Noutate 1</h3>
+              <div class="grid md:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <label class="field-label">Titlu RO</label>
+                  <input id="post_date_1_ro" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Titlu EN</label>
+                  <input id="post_date_1_en" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Titlu RU</label>
+                  <input id="post_date_1_ru" class="input-field" />
+                </div>
+              </div>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label class="field-label">Descriere RO</label>
+                  <textarea id="post_descr_1_ro" class="textarea-field auto-resize" rows="3"></textarea>
+                </div>
+                <div>
+                  <label class="field-label">Descriere EN</label>
+                  <textarea id="post_descr_1_en" class="textarea-field auto-resize" rows="3"></textarea>
+                </div>
+                <div>
+                  <label class="field-label">Descriere RU</label>
+                  <textarea id="post_descr_1_ru" class="textarea-field auto-resize" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="border border-gray-200 rounded-2xl p-4">
+              <h3 class="font-bold text-lg mb-4">Noutate 2</h3>
+              <div class="grid md:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <label class="field-label">Titlu RO</label>
+                  <input id="post_date_2_ro" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Titlu EN</label>
+                  <input id="post_date_2_en" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Titlu RU</label>
+                  <input id="post_date_2_ru" class="input-field" />
+                </div>
+              </div>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label class="field-label">Descriere RO</label>
+                  <textarea id="post_descr_2_ro" class="textarea-field auto-resize" rows="3"></textarea>
+                </div>
+                <div>
+                  <label class="field-label">Descriere EN</label>
+                  <textarea id="post_descr_2_en" class="textarea-field auto-resize" rows="3"></textarea>
+                </div>
+                <div>
+                  <label class="field-label">Descriere RU</label>
+                  <textarea id="post_descr_2_ru" class="textarea-field auto-resize" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="border border-gray-200 rounded-2xl p-4">
+              <h3 class="font-bold text-lg mb-4">Noutate 3</h3>
+              <div class="grid md:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <label class="field-label">Titlu RO</label>
+                  <input id="post_date_3_ro" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Titlu EN</label>
+                  <input id="post_date_3_en" class="input-field" />
+                </div>
+                <div>
+                  <label class="field-label">Titlu RU</label>
+                  <input id="post_date_3_ru" class="input-field" />
+                </div>
+              </div>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label class="field-label">Descriere RO</label>
+                  <textarea id="post_descr_3_ro" class="textarea-field auto-resize" rows="3"></textarea>
+                </div>
+                <div>
+                  <label class="field-label">Descriere EN</label>
+                  <textarea id="post_descr_3_en" class="textarea-field auto-resize" rows="3"></textarea>
+                </div>
+                <div>
+                  <label class="field-label">Descriere RU</label>
+                  <textarea id="post_descr_3_ru" class="textarea-field auto-resize" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="sec-contact" class="section-card p-6 admin-section" data-search="contact telefon email instagram facebook social media">
+          <div class="mb-5">
+            <h2 class="text-2xl font-bold text-gray-900">Contact & Social Media</h2>
+            <p class="text-sm text-gray-500 mt-1">Datele care apar în secțiunea de contact și footer</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="field-label">Telefon</label>
+              <input id="phone" class="input-field" placeholder="+373..." />
+            </div>
+            <div>
+              <label class="field-label">Email</label>
+              <input id="email" class="input-field" placeholder="email@exemplu.com" />
+            </div>
+            <div>
+              <label class="field-label">Instagram link</label>
+              <input id="instagram" class="input-field" placeholder="https://instagram.com/..." />
+            </div>
+            <div>
+              <label class="field-label">Facebook link</label>
+              <input id="facebook" class="input-field" placeholder="https://facebook.com/..." />
+            </div>
+          </div>
+        </section>
+
+        <div class="flex flex-wrap gap-3 justify-end pb-8">
+          <button id="saveBtn" class="bg-[#41678f] hover:opacity-90 text-white px-6 py-3 rounded-2xl font-semibold shadow">
+            Salvează modificările
+          </button>
+        </div>
+      </main>
     </div>
   </div>
 
@@ -188,18 +524,19 @@
       getFirestore,
       doc,
       getDoc,
-      setDoc
+      setDoc,
+      serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCJemQGq8vH9QNh_Xz8D_0ZOvMB6EsOrhY",
-    authDomain: "paginaweb-bisericalozova.firebaseapp.com",
-    projectId: "paginaweb-bisericalozova",
-    storageBucket: "paginaweb-bisericalozova.firebasestorage.app",
-    messagingSenderId: "381536114573",
-    appId: "1:381536114573:web:1c656364338ee2676fcfc4",
-    measurementId: "G-MCNB2P37DZ"
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyCJemQGq8vH9QNh_Xz8D_0ZOvMB6EsOrhY",
+      authDomain: "paginaweb-bisericalozova.firebaseapp.com",
+      projectId: "paginaweb-bisericalozova",
+      storageBucket: "paginaweb-bisericalozova.firebasestorage.app",
+      messagingSenderId: "381536114573",
+      appId: "1:381536114573:web:1c656364338ee2676fcfc4",
+      measurementId: "G-MCNB2P37DZ"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -210,110 +547,226 @@
     const loginBtn = document.getElementById("loginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
     const loginError = document.getElementById("loginError");
+    const statusEl = document.getElementById("status");
+    const saveStateEl = document.getElementById("saveState");
+    const lastUpdatedEl = document.getElementById("lastUpdated");
+    const searchInput = document.getElementById("searchFields");
 
-    async function loadData() {
-      const snap = await getDoc(ref);
-      if (!snap.exists()) return;
+    const saveBtn = document.getElementById("saveBtn");
+    const saveBtnTop = document.getElementById("saveBtnTop");
+    const reloadBtn = document.getElementById("reloadBtn");
+    const resetBtn = document.getElementById("resetBtn");
 
-      const d = snap.data();
+    let initialDataSnapshot = {};
+    let hasUnsavedChanges = false;
 
-      const setVal = (id, value) => {
-        const el = document.getElementById(id);
-        if (el) el.value = value || "";
-      };
+    const allFieldIds = [
+      "about_ro", "about_en", "about_ru",
+      "program1_ro", "program1_en", "program1_ru",
+      "program2_ro", "program2_en", "program2_ru",
+      "program3_ro", "program3_en", "program3_ru",
+      "sermon1_ro", "sermon1_en", "sermon1_ru",
+      "preacher1_ro", "preacher1_en", "preacher1_ru",
+      "sermon2_ro", "sermon2_en", "sermon2_ru",
+      "preacher2_ro", "preacher2_en", "preacher2_ru",
+      "post_date_1_ro", "post_date_1_en", "post_date_1_ru",
+      "post_descr_1_ro", "post_descr_1_en", "post_descr_1_ru",
+      "post_date_2_ro", "post_date_2_en", "post_date_2_ru",
+      "post_descr_2_ro", "post_descr_2_en", "post_descr_2_ru",
+      "post_date_3_ro", "post_date_3_en", "post_date_3_ru",
+      "post_descr_3_ro", "post_descr_3_en", "post_descr_3_ru",
+      "phone", "email", "instagram", "facebook"
+    ];
 
-      setVal("about_ro", d.about_text?.ro);
-      setVal("about_en", d.about_text?.en);
-      setVal("about_ru", d.about_text?.ru);
-
-      setVal("program1_ro", d.program1?.ro);
-      setVal("program1_en", d.program1?.en);
-      setVal("program1_ru", d.program1?.ru);
-
-      setVal("program2_ro", d.program2?.ro);
-      setVal("program2_en", d.program2?.en);
-      setVal("program2_ru", d.program2?.ru);
-
-      setVal("program3_ro", d.program3?.ro);
-      setVal("program3_en", d.program3?.en);
-      setVal("program3_ru", d.program3?.ru);
-
-      setVal("sermon1_ro", d.sermon1?.ro);
-      setVal("sermon1_en", d.sermon1?.en);
-      setVal("sermon1_ru", d.sermon1?.ru);
-
-      setVal("preacher1_ro", d.preacher1?.ro);
-      setVal("preacher1_en", d.preacher1?.en);
-      setVal("preacher1_ru", d.preacher1?.ru);
-
-      setVal("sermon2_ro", d.sermon2?.ro);
-      setVal("sermon2_en", d.sermon2?.en);
-      setVal("sermon2_ru", d.sermon2?.ru);
-
-      setVal("preacher2_ro", d.preacher2?.ro);
-      setVal("preacher2_en", d.preacher2?.en);
-      setVal("preacher2_ru", d.preacher2?.ru);
-
-      setVal("post_date_1_ro", d.post_date_1?.ro);
-      setVal("post_date_1_en", d.post_date_1?.en);
-      setVal("post_date_1_ru", d.post_date_1?.ru);
-
-      setVal("post_descr_1_ro", d.post_descr_1?.ro);
-      setVal("post_descr_1_en", d.post_descr_1?.en);
-      setVal("post_descr_1_ru", d.post_descr_1?.ru);
-
-      setVal("post_date_2_ro", d.post_date_2?.ro);
-      setVal("post_date_2_en", d.post_date_2?.en);
-      setVal("post_date_2_ru", d.post_date_2?.ru);
-
-      setVal("post_descr_2_ro", d.post_descr_2?.ro);
-      setVal("post_descr_2_en", d.post_descr_2?.en);
-      setVal("post_descr_2_ru", d.post_descr_2?.ru);
-
-      setVal("post_date_3_ro", d.post_date_3?.ro);
-      setVal("post_date_3_en", d.post_date_3?.en);
-      setVal("post_date_3_ru", d.post_date_3?.ru);
-
-      setVal("post_descr_3_ro", d.post_descr_3?.ro);
-      setVal("post_descr_3_en", d.post_descr_3?.en);
-      setVal("post_descr_3_ru", d.post_descr_3?.ru);
-
-      setVal("phone", d.phone);
-      setVal("email", d.email);
-      setVal("instagram", d.instagram);
-      setVal("facebook", d.facebook);
+    function getEl(id) {
+      return document.getElementById(id);
     }
 
-    // LOGIN
-    loginBtn.onclick = async () => {
-      const email = document.getElementById("loginEmail").value;
-      const password = document.getElementById("loginPassword").value;
+    function setVal(id, value) {
+      const el = getEl(id);
+      if (el) el.value = value || "";
+    }
+
+    function getVal(id) {
+      const el = getEl(id);
+      return el ? el.value.trim() : "";
+    }
+
+    function autoResizeTextareas() {
+      document.querySelectorAll(".auto-resize").forEach(textarea => {
+        const resize = () => {
+          textarea.style.height = "auto";
+          textarea.style.height = textarea.scrollHeight + "px";
+        };
+        textarea.addEventListener("input", resize);
+        resize();
+      });
+    }
+
+    function updateStats() {
+      const total = allFieldIds.length;
+      let filled = 0;
+
+      allFieldIds.forEach(id => {
+        if (getVal(id) !== "") filled++;
+      });
+
+      document.getElementById("totalFields").textContent = total;
+      document.getElementById("filledFields").textContent = filled;
+    }
+
+    function updateSaveIndicators(saved = false) {
+      if (saved) {
+        hasUnsavedChanges = false;
+        saveStateEl.textContent = "Salvat";
+        saveStateEl.className = "text-lg font-bold text-green-600 mt-2";
+        statusEl.textContent = "Toate modificările au fost salvate cu succes.";
+        statusEl.className = "mt-2 text-sm text-green-600";
+      } else {
+        hasUnsavedChanges = true;
+        saveStateEl.textContent = "Modificări nesalvate";
+        saveStateEl.className = "text-lg font-bold text-amber-600 mt-2";
+        statusEl.textContent = "Există modificări nesalvate.";
+        statusEl.className = "mt-2 text-sm text-amber-600";
+      }
+    }
+
+    function captureCurrentFormState() {
+      const snapshot = {};
+      allFieldIds.forEach(id => {
+        snapshot[id] = getVal(id);
+      });
+      return snapshot;
+    }
+
+    function compareWithInitialSnapshot() {
+      const current = captureCurrentFormState();
+      const changed = JSON.stringify(current) !== JSON.stringify(initialDataSnapshot);
+
+      if (changed) {
+        updateSaveIndicators(false);
+      } else {
+        hasUnsavedChanges = false;
+        saveStateEl.textContent = "Salvat";
+        saveStateEl.className = "text-lg font-bold text-green-600 mt-2";
+        statusEl.textContent = "Nu există modificări noi.";
+        statusEl.className = "mt-2 text-sm text-gray-500";
+      }
+
+      updateStats();
+    }
+
+    function setLastUpdatedDisplay(dateValue) {
+      if (!dateValue) {
+        lastUpdatedEl.textContent = "—";
+        return;
+      }
 
       try {
-        await signInWithEmailAndPassword(auth, email, password);
-        loginError.textContent = "";
+        let dateObj;
+        if (dateValue?.toDate) {
+          dateObj = dateValue.toDate();
+        } else {
+          dateObj = new Date(dateValue);
+        }
+
+        lastUpdatedEl.textContent = dateObj.toLocaleString("ro-RO");
+      } catch {
+        lastUpdatedEl.textContent = "—";
+      }
+    }
+
+    async function loadData() {
+      try {
+        const snap = await getDoc(ref);
+        if (!snap.exists()) {
+          initialDataSnapshot = captureCurrentFormState();
+          updateStats();
+          return;
+        }
+
+        const d = snap.data();
+
+        setVal("about_ro", d.about_text?.ro);
+        setVal("about_en", d.about_text?.en);
+        setVal("about_ru", d.about_text?.ru);
+
+        setVal("program1_ro", d.program1?.ro);
+        setVal("program1_en", d.program1?.en);
+        setVal("program1_ru", d.program1?.ru);
+
+        setVal("program2_ro", d.program2?.ro);
+        setVal("program2_en", d.program2?.en);
+        setVal("program2_ru", d.program2?.ru);
+
+        setVal("program3_ro", d.program3?.ro);
+        setVal("program3_en", d.program3?.en);
+        setVal("program3_ru", d.program3?.ru);
+
+        setVal("sermon1_ro", d.sermon1?.ro);
+        setVal("sermon1_en", d.sermon1?.en);
+        setVal("sermon1_ru", d.sermon1?.ru);
+
+        setVal("preacher1_ro", d.preacher1?.ro);
+        setVal("preacher1_en", d.preacher1?.en);
+        setVal("preacher1_ru", d.preacher1?.ru);
+
+        setVal("sermon2_ro", d.sermon2?.ro);
+        setVal("sermon2_en", d.sermon2?.en);
+        setVal("sermon2_ru", d.sermon2?.ru);
+
+        setVal("preacher2_ro", d.preacher2?.ro);
+        setVal("preacher2_en", d.preacher2?.en);
+        setVal("preacher2_ru", d.preacher2?.ru);
+
+        setVal("post_date_1_ro", d.post_date_1?.ro);
+        setVal("post_date_1_en", d.post_date_1?.en);
+        setVal("post_date_1_ru", d.post_date_1?.ru);
+
+        setVal("post_descr_1_ro", d.post_descr_1?.ro);
+        setVal("post_descr_1_en", d.post_descr_1?.en);
+        setVal("post_descr_1_ru", d.post_descr_1?.ru);
+
+        setVal("post_date_2_ro", d.post_date_2?.ro);
+        setVal("post_date_2_en", d.post_date_2?.en);
+        setVal("post_date_2_ru", d.post_date_2?.ru);
+
+        setVal("post_descr_2_ro", d.post_descr_2?.ro);
+        setVal("post_descr_2_en", d.post_descr_2?.en);
+        setVal("post_descr_2_ru", d.post_descr_2?.ru);
+
+        setVal("post_date_3_ro", d.post_date_3?.ro);
+        setVal("post_date_3_en", d.post_date_3?.en);
+        setVal("post_date_3_ru", d.post_date_3?.ru);
+
+        setVal("post_descr_3_ro", d.post_descr_3?.ro);
+        setVal("post_descr_3_en", d.post_descr_3?.en);
+        setVal("post_descr_3_ru", d.post_descr_3?.ru);
+
+        setVal("phone", d.phone);
+        setVal("email", d.email);
+        setVal("instagram", d.instagram);
+        setVal("facebook", d.facebook);
+
+        setLastUpdatedDisplay(d.updatedAt);
+
+        autoResizeTextareas();
+        updateStats();
+
+        initialDataSnapshot = captureCurrentFormState();
+        hasUnsavedChanges = false;
+        saveStateEl.textContent = "Salvat";
+        saveStateEl.className = "text-lg font-bold text-green-600 mt-2";
+        statusEl.textContent = "Datele au fost încărcate.";
+        statusEl.className = "mt-2 text-sm text-gray-500";
       } catch (error) {
-        loginError.textContent = "Email sau parolă greșită!";
+        statusEl.textContent = "Eroare la încărcarea datelor.";
+        statusEl.className = "mt-2 text-sm text-red-600";
       }
-    };
+    }
 
-    // LOGOUT
-    logoutBtn.onclick = () => signOut(auth);
-
-    // PROTECȚIE PAGINĂ
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        loginBox.style.display = "none";
-        await loadData();
-      } else {
-        loginBox.style.display = "flex";
-      }
-    });
-
-    document.getElementById("saveBtn").addEventListener("click", async () => {
-      const getVal = (id) => document.getElementById(id).value;
-
-      const payload = {
+    function buildPayload() {
+      return {
         about_text: {
           ro: getVal("about_ro"),
           en: getVal("about_en"),
@@ -387,18 +840,139 @@
         phone: getVal("phone"),
         email: getVal("email"),
         instagram: getVal("instagram"),
-        facebook: getVal("facebook")
+        facebook: getVal("facebook"),
+        updatedAt: serverTimestamp()
       };
+    }
+
+    async function saveData() {
+      const payload = buildPayload();
 
       try {
-        await setDoc(ref, payload);
-        document.getElementById("status").textContent = "Modificările au fost salvate cu succes.";
-        document.getElementById("status").className = "mt-3 text-sm text-green-600";
+        saveBtn.disabled = true;
+        saveBtnTop.disabled = true;
+
+        await setDoc(ref, payload, { merge: true });
+
+        initialDataSnapshot = captureCurrentFormState();
+        updateSaveIndicators(true);
+        setLastUpdatedDisplay(new Date());
+
       } catch (e) {
-        document.getElementById("status").textContent = "A apărut o eroare la salvare.";
-        document.getElementById("status").className = "mt-3 text-sm text-red-600";
+        statusEl.textContent = "A apărut o eroare la salvare.";
+        statusEl.className = "mt-2 text-sm text-red-600";
+        saveStateEl.textContent = "Eroare";
+        saveStateEl.className = "text-lg font-bold text-red-600 mt-2";
+      } finally {
+        saveBtn.disabled = false;
+        saveBtnTop.disabled = false;
+      }
+    }
+
+    function resetFormToLoadedValues() {
+      Object.keys(initialDataSnapshot).forEach(id => {
+        setVal(id, initialDataSnapshot[id]);
+      });
+      autoResizeTextareas();
+      compareWithInitialSnapshot();
+      statusEl.textContent = "Formularul a fost resetat la ultima versiune încărcată.";
+      statusEl.className = "mt-2 text-sm text-blue-600";
+    }
+
+    function attachInputListeners() {
+      allFieldIds.forEach(id => {
+        const el = getEl(id);
+        if (!el) return;
+
+        el.addEventListener("input", () => {
+          if (el.tagName === "TEXTAREA") {
+            el.style.height = "auto";
+            el.style.height = el.scrollHeight + "px";
+          }
+          compareWithInitialSnapshot();
+        });
+      });
+    }
+
+    function initSearch() {
+      searchInput.addEventListener("input", () => {
+        const q = searchInput.value.toLowerCase().trim();
+        const sections = document.querySelectorAll(".admin-section");
+
+        sections.forEach(section => {
+          const ownText = (section.getAttribute("data-search") || "").toLowerCase();
+          const fieldValues = Array.from(section.querySelectorAll("input, textarea"))
+            .map(el => (el.value || "").toLowerCase())
+            .join(" ");
+
+          const isMatch = q === "" || ownText.includes(q) || fieldValues.includes(q);
+          section.classList.toggle("hidden-by-search", !isMatch);
+        });
+      });
+    }
+
+    function initSidebarActiveState() {
+      const links = document.querySelectorAll(".sidebar-link");
+
+      links.forEach(link => {
+        link.addEventListener("click", () => {
+          links.forEach(l => l.classList.remove("active"));
+          link.classList.add("active");
+        });
+      });
+    }
+
+    // LOGIN
+    loginBtn.onclick = async () => {
+      const email = getEl("loginEmail").value.trim();
+      const password = getEl("loginPassword").value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        loginError.textContent = "";
+      } catch (error) {
+        loginError.textContent = "Email sau parolă greșită!";
+      }
+    };
+
+    // LOGOUT
+    logoutBtn.onclick = () => signOut(auth);
+
+    // AUTH
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        loginBox.style.display = "none";
+        await loadData();
+      } else {
+        loginBox.style.display = "flex";
       }
     });
+
+    // BUTTONS
+    saveBtn.addEventListener("click", saveData);
+    saveBtnTop.addEventListener("click", saveData);
+
+    reloadBtn.addEventListener("click", async () => {
+      await loadData();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      resetFormToLoadedValues();
+    });
+
+    // WARN BEFORE LEAVING
+    window.addEventListener("beforeunload", (e) => {
+      if (hasUnsavedChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    });
+
+    autoResizeTextareas();
+    attachInputListeners();
+    initSearch();
+    initSidebarActiveState();
+    updateStats();
   </script>
 </body>
 </html>
