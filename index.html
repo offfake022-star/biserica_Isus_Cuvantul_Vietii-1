@@ -119,9 +119,9 @@ body {
       <li><a href="#noutati" class="hover:text-[#41678f]" data-i18n="announcements">Anunțuri</a></li>
       <li><a href="#contact" class="hover:text-[#41678f]" data-i18n="contact">Contact</a></li>
       <div class="flex justify-center gap-2 mt-2">
-        <button onclick="setLang('ro')" class="hover:text-[#41678f]">RO</button>
-        <button onclick="setLang('ru')" class="hover:text-[#41678f]">RU</button>
-        <button onclick="setLang('en')" class="hover:text-[#41678f]">EN</button>
+        <button onclick="setLang('ro'); document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-[#41678f]">RO</button>
+        <button onclick="setLang('ru'); document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-[#41678f]">RU</button>
+        <button onclick="setLang('en'); document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-[#41678f]">EN</button>
       </div>
     </ul>
   </div>
@@ -453,6 +453,11 @@ function setLang(lang) {
   const emailInput = document.querySelector('input[name="email"]');
   if (emailInput && translations[lang] && translations[lang].email_error) {
     emailInput.setAttribute('data-error-email', translations[lang].email_error);
+  }
+
+  const menu = document.getElementById('mobile-menu');
+  if (menu) {
+    menu.classList.add('hidden');
   }
 }
 
