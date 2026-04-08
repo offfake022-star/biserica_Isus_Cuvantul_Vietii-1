@@ -469,8 +469,8 @@ btn.addEventListener('click', () => {
   menu.classList.toggle('hidden');
 });
 
-document.querySelectorAll('#mobile-menu a').forEach(link => {
-  link.addEventListener('click', () => {
+document.querySelectorAll('#mobile-menu a, #mobile-menu button').forEach(item => {
+  item.addEventListener('click', () => {
     menu.classList.add('hidden');
   });
 });
