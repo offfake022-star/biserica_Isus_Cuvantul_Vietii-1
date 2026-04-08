@@ -28,7 +28,7 @@ html {
 body {
   font-family: 'Nunito', sans-serif;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
   width: 100%;
   max-width: 100%;
   margin: 0;
@@ -64,19 +64,21 @@ body {
 <header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow z-50">
   <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-2">
     <!-- Logo + Titlu -->
-<a href="#acasa" class="flex items-center space-x-2 min-w-0">
-  <img src="images/logo.png" alt="Logo Biserica" class="h-10 w-auto shrink-0" />
-  <div class="leading-tight">
-    <h1 style="font-family: 'Cinzel', serif;"
-    class="text-[#41678f] text-sm sm:text-lg md:text-2xl uppercase tracking-wide drop-shadow-sm leading-tight max-w-[200px] sm:max-w-none cursor-pointer"
-    data-i18n-html="site_name">
-      Isus <span class="text-[#1f2937] font-light"> - Cuvântul Vieții </span>
-    </h1>
-    <p class="italic text-xs text-[#3d5e78] hidden sm:block" data-i18n="verse">
-      „Cuvântul Tău este o candelă pentru picioarele mele.”
-    </p>
-  </div>
+    <div class="flex items-center space-x-2 min-w-0">
+      <img src="images/logo.png" alt="Logo Biserica" class="h-10 w-auto shrink-0" />
+<div class="leading-tight">
+<a href="#acasa">
+  <h1 style="font-family: 'Cinzel', serif;"
+  class="text-[#41678f] text-sm sm:text-lg md:text-2xl uppercase tracking-wide drop-shadow-sm leading-tight max-w-[200px] sm:max-w-none cursor-pointer"
+  data-i18n-html="site_name">
+    Isus <span class="text-[#1f2937] font-light"> - Cuvântul Vieții </span>
+  </h1>
 </a>
+        <p class="italic text-xs text-[#3d5e78] hidden sm:block" data-i18n="verse">
+          „Cuvântul Tău este o candelă pentru picioarele mele.”
+        </p>
+      </div>
+    </div>
 
     <!-- Meniu Navigatie desktop -->
     <nav class="hidden md:flex w-auto">
