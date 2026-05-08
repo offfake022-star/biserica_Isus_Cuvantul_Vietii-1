@@ -126,19 +126,40 @@ body {
 </header>
 
 <!-- Hero / Verset -->
-<section id="acasa" class="relative w-full h-[55vh] md:h-[60vh] flex items-center justify-center overflow-hidden mt-14">      
-  <!-- Imagine background -->
-  <img src="images/img1.jpg" alt="Imagine principală" class="absolute inset-0 w-full h-full object-cover object-center" />
+<section id="acasa" class="relative w-full min-h-[75vh] flex items-center justify-center overflow-hidden mt-14">
 
-  <!-- Overlay întunecat -->
-  <div class="absolute inset-0 bg-black/40"></div>
+  <img 
+    src="images/img1.jpg" 
+    alt="Imagine principală" 
+    class="absolute inset-0 w-full h-full object-cover object-center" 
+  />
 
-  <!-- Text verset -->
-  <div class="relative z-10 text-center pulse-animation px-4 max-w-7xl mx-auto">
-    <p class="text-white text-2xl md:text-4xl font-bold leading-snug" data-i18n="welcome_verse">
-      „Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu, pentru ca oricine crede în El să nu piară, ci să aibă viață veșnică.”
+  <div class="absolute inset-0 bg-black/55"></div>
+
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+    
+    <p class="text-white/80 uppercase tracking-[0.25em] text-sm md:text-base font-semibold mb-5">
+      Biserica Penticostală din Lozova
     </p>
-    <p class="mt-4 text-lg md:text-xl text-white font-light" data-i18n="verse_ref">Ioan 3:16</p>
+
+    <h2 class="text-white text-3xl md:text-5xl font-bold leading-tight mb-6" data-i18n="welcome_verse">
+      „Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu, pentru ca oricine crede în El să nu piară, ci să aibă viață veșnică.”
+    </h2>
+
+    <p class="text-white/90 text-xl md:text-2xl font-light mb-8" data-i18n="verse_ref">
+      Ioan 3:16
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#program" class="bg-[#41678f] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-[#355879] transition">
+        Vezi programul
+      </a>
+
+      <a href="#contact" class="bg-white text-[#41678f] px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition">
+        Contactează-ne
+      </a>
+    </div>
+
   </div>
 </section>
 
