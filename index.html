@@ -59,70 +59,221 @@ body {
 </head>
 <body class="bg-white text-[#1f2937] overflow-x-hidden">
   <!-- Header -->
-<header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow z-50">
-  <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-2">
+<!-- Header -->
+<header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-[0_4px_20px_rgba(65,103,143,0.12)] border-b border-gray-100 z-50">
+
+  <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
+
     <!-- Logo + Titlu -->
-    <div class="flex items-center space-x-2 min-w-0">
-      <img src="images/logo.png" alt="Logo Biserica" class="h-10 w-auto shrink-0" />
-<div class="leading-tight">
-<a href="#acasa">
-  <h1 style="font-family: 'Cinzel', serif;"
-  class="text-[#41678f] text-sm sm:text-lg md:text-2xl uppercase tracking-wide drop-shadow-sm leading-tight max-w-[200px] sm:max-w-none cursor-pointer"
-  data-i18n-html="site_name">
-    Isus <span class="text-[#1f2937] font-light"> - Cuvântul Vieții </span>
-  </h1>
-</a>
-        <p class="italic text-xs text-[#3d5e78] hidden sm:block" data-i18n="verse">
+    <div class="flex items-center space-x-3 min-w-0">
+
+      <img src="images/logo.png" alt="Logo Biserica" class="h-12 w-auto shrink-0" />
+
+      <div class="leading-tight">
+
+        <a href="#acasa">
+          <h1
+            style="font-family: 'Cinzel', serif;"
+            class="text-[#41678f] text-sm sm:text-xl md:text-3xl uppercase tracking-wide leading-tight cursor-pointer"
+            data-i18n-html="site_name">
+
+            Isus
+            <span class="text-[#1f2937] font-light">
+              - Cuvântul Vieții
+            </span>
+
+          </h1>
+        </a>
+
+        <p class="italic text-xs text-[#3d5e78] hidden sm:block"
+           data-i18n="verse">
           „Cuvântul Tău este o candelă pentru picioarele mele.”
         </p>
+
       </div>
+
     </div>
 
-    <!-- Meniu Navigatie desktop -->
-    <nav class="hidden md:flex w-auto">
-      <ul class="flex flex-wrap justify-center gap-6 text-sm md:text-base font-semibold text-gray-800">
-        <li><a href="#acasa" class="hover:text-[#41678f]" data-i18n="home">Acasă</a></li>
-        <li><a href="#despre" class="hover:text-[#41678f]" data-i18n="about">Despre</a></li>
-        <li><a href="#program" class="hover:text-[#41678f]" data-i18n-html="program_heading">Program</a></li>
-        <li><a href="#predici" class="hover:text-[#41678f]" data-i18n="sermons">Predici</a></li>
-        <li><a href="#noutati" class="hover:text-[#41678f]" data-i18n="announcements">Anunțuri</a></li>
-        <li><a href="#contact" class="hover:text-[#41678f]" data-i18n="contact">Contact</a></li>
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex">
+
+      <ul class="flex items-center gap-2 text-sm md:text-base font-semibold text-gray-800">
+
+        <li>
+          <a href="#acasa"
+             class="px-4 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
+             data-i18n="home">
+             Acasă
+          </a>
+        </li>
+
+        <li>
+          <a href="#despre"
+             class="px-4 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
+             data-i18n="about">
+             Despre
+          </a>
+        </li>
+
+        <li>
+          <a href="#program"
+             class="px-4 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
+             data-i18n-html="program_heading">
+             Program
+          </a>
+        </li>
+
+        <li>
+          <a href="#predici"
+             class="px-4 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
+             data-i18n="sermons">
+             Predici
+          </a>
+        </li>
+
+        <li>
+          <a href="#noutati"
+             class="px-4 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
+             data-i18n="announcements">
+             Anunțuri
+          </a>
+        </li>
+
+        <li>
+          <a href="#contact"
+             class="bg-[#41678f] text-white px-5 py-2 rounded-full hover:bg-[#355879] transition duration-300 shadow-md"
+             data-i18n="contact">
+             Contact
+          </a>
+        </li>
+
       </ul>
+
     </nav>
 
-    <!-- Limbi desktop -->
-    <div class="hidden md:flex gap-2 text-sm font-semibold text-[#1f2937]">
-      <button onclick="setLang('ro')" class="hover:text-[#41678f]">RO</button>
-      <button onclick="setLang('ru')" class="hover:text-[#41678f]">RU</button>
-      <button onclick="setLang('en')" class="hover:text-[#41678f]">EN</button>
-    </div>
+    <!-- Limbi -->
+    <div class="hidden md:flex items-center gap-1 text-sm font-bold text-[#1f2937] bg-[#41678f]/5 rounded-full px-3 py-2">
 
-    <!-- Hamburger mobil -->
-    <div class="md:hidden flex items-center shrink-0">
-      <button id="menu-btn" class="focus:outline-none" aria-label="Deschide meniul">
-        <svg class="w-6 h-6 text-[#41678f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
+      <button onclick="setLang('ro')"
+              class="px-2 hover:text-[#41678f] transition">
+              RO
       </button>
+
+      <button onclick="setLang('ru')"
+              class="px-2 hover:text-[#41678f] transition">
+              RU
+      </button>
+
+      <button onclick="setLang('en')"
+              class="px-2 hover:text-[#41678f] transition">
+              EN
+      </button>
+
     </div>
+
+    <!-- Hamburger -->
+    <div class="md:hidden flex items-center shrink-0">
+
+      <button id="menu-btn"
+              class="p-2 rounded-xl bg-[#41678f]/10"
+              aria-label="Deschide meniul">
+
+        <svg class="w-6 h-6 text-[#41678f]"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             viewBox="0 0 24 24">
+
+          <path stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16">
+          </path>
+
+        </svg>
+
+      </button>
+
+    </div>
+
   </div>
 
-  <!-- Meniu mobil -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white w-full shadow-md">
-    <ul class="flex flex-col gap-4 p-4 text-center">
-      <li><a href="#acasa" class="hover:text-[#41678f]" data-i18n="home">Acasă</a></li>
-      <li><a href="#despre" class="hover:text-[#41678f]" data-i18n="about">Despre</a></li>
-      <li><a href="#program" class="hover:text-[#41678f]" data-i18n-html="program_heading">Program</a></li>
-      <li><a href="#predici" class="hover:text-[#41678f]" data-i18n="sermons">Predici</a></li>
-      <li><a href="#noutati" class="hover:text-[#41678f]" data-i18n="announcements">Anunțuri</a></li>
-      <li><a href="#contact" class="hover:text-[#41678f]" data-i18n="contact">Contact</a></li>
-      <div class="flex justify-center gap-2 mt-2">
-        <button onclick="setLang('ro'); document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-[#41678f]">RO</button>
-        <button onclick="setLang('ru'); document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-[#41678f]">RU</button>
-        <button onclick="setLang('en'); document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-[#41678f]">EN</button>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu"
+       class="hidden md:hidden bg-white border-t border-gray-100 shadow-md">
+
+    <ul class="flex flex-col gap-2 p-4 text-center font-semibold">
+
+      <li>
+        <a href="#acasa"
+           class="block py-2 hover:text-[#41678f]"
+           data-i18n="home">
+           Acasă
+        </a>
+      </li>
+
+      <li>
+        <a href="#despre"
+           class="block py-2 hover:text-[#41678f]"
+           data-i18n="about">
+           Despre
+        </a>
+      </li>
+
+      <li>
+        <a href="#program"
+           class="block py-2 hover:text-[#41678f]"
+           data-i18n-html="program_heading">
+           Program
+        </a>
+      </li>
+
+      <li>
+        <a href="#predici"
+           class="block py-2 hover:text-[#41678f]"
+           data-i18n="sermons">
+           Predici
+        </a>
+      </li>
+
+      <li>
+        <a href="#noutati"
+           class="block py-2 hover:text-[#41678f]"
+           data-i18n="announcements">
+           Anunțuri
+        </a>
+      </li>
+
+      <li>
+        <a href="#contact"
+           class="block py-2 text-[#41678f]"
+           data-i18n="contact">
+           Contact
+        </a>
+      </li>
+
+      <div class="flex justify-center gap-4 mt-3">
+
+        <button onclick="setLang('ro')"
+                class="hover:text-[#41678f]">
+                RO
+        </button>
+
+        <button onclick="setLang('ru')"
+                class="hover:text-[#41678f]">
+                RU
+        </button>
+
+        <button onclick="setLang('en')"
+                class="hover:text-[#41678f]">
+                EN
+        </button>
+
       </div>
+
     </ul>
+
   </div>
+
 </header>
 
 <!-- Hero / Verset -->
@@ -195,7 +346,7 @@ body {
         <div class="bg-[#41678f]/5 rounded-2xl p-8 border border-[#41678f]/10">
           
           <h3 class="text-2xl font-bold text-[#41678f] mb-4">
-            Viziunea noastră
+            Scopul nostru
           </h3>
 
           <p class="text-gray-700 leading-8">
