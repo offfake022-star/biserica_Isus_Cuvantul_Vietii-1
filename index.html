@@ -30,7 +30,7 @@ html {
 body {
   font-family: 'Nunito', sans-serif;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
   width: 100%;
   max-width: 100%;
   margin: 0;
@@ -64,7 +64,7 @@ body {
 <body class="bg-white text-[#1f2937] overflow-x-hidden">
   <!-- Header -->
 <!-- Header -->
-<header class="sticky top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-[0_4px_20px_rgba(65,103,143,0.12)] border-b border-gray-100 z-50">
+<header id="main-header" class="sticky top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-[0_4px_20px_rgba(65,103,143,0.12)] border-b border-gray-100 z-50 transition-all duration-300">
 
 <div class="w-full pl-2 pr-8 py-2 flex items-center justify-between">
 
@@ -801,7 +801,19 @@ document.querySelectorAll('#mobile-menu a, #mobile-menu button').forEach(item =>
   });
 });
 </script>
+<script>
+const mainHeader = document.getElementById("main-header");
 
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    mainHeader.classList.remove("bg-white/95");
+    mainHeader.classList.add("bg-white/70", "backdrop-blur-xl", "shadow-lg");
+  } else {
+    mainHeader.classList.remove("bg-white/70", "backdrop-blur-xl", "shadow-lg");
+    mainHeader.classList.add("bg-white/95");
+  }
+});
+</script>
 </body>
 <script>
 const contactForm = document.getElementById("contact-form");
