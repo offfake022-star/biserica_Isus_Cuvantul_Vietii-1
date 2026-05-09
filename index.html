@@ -512,57 +512,69 @@ body {
 </section>
 
 <!-- Contact -->
-<section id="contact" class="scroll-mt-24 bg-white text-[#1f2937] py-16 px-6" data-aos="fade-up">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+<section id="contact" class="scroll-mt-24 bg-white text-[#1f2937] py-20 px-6" data-aos="fade-up">
+  <div class="max-w-6xl mx-auto">
 
-<!-- Formular de contact -->
-<div>
-  <h2 class="text-3xl font-bold mb-6 text-left" data-i18n="contact_heading">Contactează-ne</h2>
-  <div class="w-20 h-1 bg-[#41678f] rounded-full mb-6"></div>
-
-  <form id="contact-form" action="https://formspree.io/f/xovwqown" method="POST" class="space-y-4">
-    <input type="text" name="name" placeholder="Nume" required class="w-full p-3 border rounded" data-i18n-placeholder="name">
-<input 
-type="email" 
-name="email" 
-placeholder="Email" 
-required 
-class="w-full p-3 border rounded"
-data-i18n-placeholder="email"
-data-error-email="Te rugăm să introduci o adresă de email validă (ex: nume@email.com)"
-oninvalid="this.setCustomValidity(this.getAttribute('data-error-email'))"
-oninput="this.setCustomValidity('')">
-    <textarea name="message" rows="5" placeholder="Mesaj" required class="w-full p-3 border rounded" data-i18n-placeholder="message"></textarea>
-    <button type="submit" class="bg-[#5D8CA7] text-white px-6 py-3 rounded hover:bg-[#4a708b] transition" data-i18n="submit">
-      Trimite
-    </button>
-
-    <p id="form-message" class="text-sm mt-2"></p>
-  </form>
-</div>
-
-    <!-- Info contact + Harta -->
-    <div class="space-y-6">
-      <div>
-        <h3 class="text-2xl font-semibold mb-2" data-i18n="contact_label">Date de contact</h3>
-        <p><strong data-i18n="address_label">Adresă:</strong> <span data-i18n="address">Str. Principală 10, Lozova, Moldova</span></p>
-        <p><strong data-i18n="phone_label">Telefon:</strong> <a href="tel:+37378448654" class="text-blue-600 hover:underline" data-i18n="phone">+373 60 123 456</a></p>
-        <p><strong data-i18n="email_label">Email:</strong> <a href="mailto:contact@isuscuvantulvietii.md" class="text-blue-600 hover:underline" data-i18n="email">contact@isuscuvantulvietii.md</a></p>
-      </div>
-      <div class="w-full overflow-hidden rounded">
-<div class="w-full overflow-hidden rounded-lg shadow">
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2579.943734411582!2d28.3858462!3d47.1335213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cbc90047d09cef%3A0xa4f316b1568fdd3b!2sBiserica%20Isus%20Cuv%C3%A2ntul%20Vie%C8%9Bii!5e1!3m2!1sro!2s!4v1778151082804!5m2!1sro!2s"
-    width="100%"
-    height="500"
-    style="border:0;"
-    allowfullscreen=""
-    loading="lazy">
-  </iframe>
-</div>
-</div>
-      </div>
+    <div class="text-center mb-14">
+      <h2 class="text-4xl font-bold mb-3" data-i18n="contact_heading">Contactează-ne</h2>
+      <div class="w-24 h-1 bg-[#41678f] mx-auto rounded-full"></div>
     </div>
+
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+
+      <!-- Formular -->
+      <div class="bg-white rounded-[28px] p-8 md:p-10 shadow-[0_20px_50px_rgba(65,103,143,0.15)] border border-gray-100">
+        <form id="contact-form" action="https://formspree.io/f/xovwqown" method="POST" class="space-y-5">
+          
+          <input type="text" name="name" placeholder="Nume" required
+            class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#41678f]/40"
+            data-i18n-placeholder="name">
+
+          <input type="email" name="email" placeholder="Email" required
+            class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#41678f]/40"
+            data-i18n-placeholder="email"
+            data-error-email="Te rugăm să introduci o adresă de email validă (ex: nume@email.com)"
+            oninvalid="this.setCustomValidity(this.getAttribute('data-error-email'))"
+            oninput="this.setCustomValidity('')">
+
+          <textarea name="message" rows="6" placeholder="Mesaj" required
+            class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#41678f]/40"
+            data-i18n-placeholder="message"></textarea>
+
+          <button type="submit"
+            class="bg-[#41678f] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-[#355879] transition"
+            data-i18n="submit">
+            Trimite
+          </button>
+
+          <p id="form-message" class="text-sm mt-2"></p>
+        </form>
+      </div>
+
+      <!-- Date contact -->
+      <div class="bg-[#41678f]/5 rounded-[28px] p-8 md:p-10 shadow-[0_20px_50px_rgba(65,103,143,0.12)] border border-[#41678f]/10">
+        <h3 class="text-2xl font-bold mb-6 text-[#41678f]" data-i18n="contact_label">Date de contact</h3>
+
+        <div class="space-y-3 text-lg mb-8">
+          <p><strong data-i18n="address_label">Adresă:</strong> <span data-i18n="address">Str. Principală 10, Lozova, Moldova</span></p>
+          <p><strong data-i18n="phone_label">Telefon:</strong> <a href="tel:+37378448654" class="text-[#41678f] font-semibold hover:underline" data-i18n="phone">+37378448654</a></p>
+          <p><strong data-i18n="email_label">Email:</strong> <a href="mailto:contact@isuscuvantulvietii.md" class="text-[#41678f] font-semibold hover:underline" data-i18n="email">contact@isuscuvantulvietii.md</a></p>
+        </div>
+
+        <div class="w-full overflow-hidden rounded-2xl shadow-lg border border-white">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2579.943734411582!2d28.3858462!3d47.1335213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cbc90047d09cef%3A0xa4f316b1568fdd3b!2sBiserica%20Isus%20Cuv%C3%A2ntul%20Vie%C8%9Bii!5e1!3m2!1sro!2s!4v1778151082804!5m2!1sro!2s"
+            width="100%"
+            height="320"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
 <!-- Footer -->
