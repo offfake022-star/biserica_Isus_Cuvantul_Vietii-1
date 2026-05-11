@@ -1038,6 +1038,15 @@ btn.addEventListener('click', () => {
   menu.classList.toggle('hidden');
 });
 
+document.addEventListener('click', (event) => {
+  const clickedInsideMenu = menu.contains(event.target);
+  const clickedOnButton = btn.contains(event.target);
+
+  if (!clickedInsideMenu && !clickedOnButton) {
+    menu.classList.add('hidden');
+  }
+});
+
 document.querySelectorAll('#mobile-menu a, #mobile-menu button').forEach(item => {
   item.addEventListener('click', () => {
     menu.classList.add('hidden');
