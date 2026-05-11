@@ -1047,6 +1047,10 @@ document.addEventListener('click', (event) => {
   }
 });
 
+window.addEventListener('scroll', () => {
+  menu.classList.add('hidden');
+});
+
 document.querySelectorAll('#mobile-menu a, #mobile-menu button').forEach(item => {
   item.addEventListener('click', () => {
     menu.classList.add('hidden');
