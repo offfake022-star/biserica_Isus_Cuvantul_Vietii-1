@@ -41,11 +41,16 @@ body {
       box-sizing: border-box;
     }
 
-    img, iframe, video, canvas, svg {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+  img, iframe, video, canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  svg {
+    max-width: 100%;
+    display: block;
+  }
 
     section, header, footer, div {
       max-width: 100%;
@@ -343,18 +348,18 @@ body {
     </div>
 
   </div>
-  <!-- Curba elegantă -->
-<div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+<!-- Curba elegantă -->
+<div class="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-none">
 
   <svg 
-    class="relative block w-full h-[55px]"
+    class="relative block w-full h-[95px]"
     viewBox="0 0 1440 120"
     preserveAspectRatio="none">
 
-<path
-  d="M0,55 C320,95 1120,5 1440,55 L1440,120 L0,120 Z"
-  fill="#ffffff">
-</path>
+    <path
+      d="M0,40 C320,95 660,95 940,50 C1140,18 1300,24 1440,42 L1440,120 L0,120 Z"
+      fill="#ffffff">
+    </path>
 
   </svg>
 
@@ -626,7 +631,7 @@ body {
   </div>
 </section>
 <!-- Donații -->
-<section id="donatii" class="scroll-mt-24 py-20 px-6 bg-white border-t border-gray-100" data-aos="fade-up">
+<section id="donatii" class="scroll-mt-24 py-20 px-6 bg-white" data-aos="fade-up">
 
   <div class="max-w-5xl mx-auto">
 
