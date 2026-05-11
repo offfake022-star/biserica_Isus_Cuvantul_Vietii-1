@@ -60,6 +60,11 @@ body {
       50% { opacity: 0.7; }
     }
   </style>
+
+  <script 
+  src="https://www.paypal.com/sdk/js?client-id=BAA5-PqfAAo6tFDjNRNE9C5VRmzod2NRvGQImD4A8rU9n-NHh0BPHiTzl6vyxAAMNVpYyhgMMT33RTdJuk&components=hosted-buttons&disable-funding=venmo&currency=EUR">
+</script>
+
 </head>
 <body class="bg-white text-[#1f2937] overflow-x-hidden">
   <!-- Header -->
@@ -652,36 +657,38 @@ body {
 
       </div>
 
-      <!-- Donație online -->
-      <div class="bg-[#41678f] text-white rounded-[28px] p-8 shadow-[0_20px_50px_rgba(65,103,143,0.25)]">
+<!-- Donație online -->
+<div class="bg-[#41678f] text-white rounded-[28px] p-8 shadow-[0_20px_50px_rgba(65,103,143,0.25)]">
 
-        <h3 class="text-2xl font-bold mb-6">
-          Donație online
-        </h3>
+  <h3 class="text-2xl font-bold mb-6">
+    Donație online
+  </h3>
 
-        <p class="text-white/90 leading-8 mb-8">
-          Poți susține biserica rapid și securizat folosind PayPal sau Revolut.
-        </p>
+  <p class="text-white/90 leading-8 mb-8">
+    Poți susține biserica rapid și securizat folosind PayPal sau Revolut.
+  </p>
 
-        <div class="flex flex-col gap-4">
+  <div class="flex flex-col gap-4">
 
-          <!-- PayPal -->
-          <a href="https://www.paypal.com/ncp/payment/JZD2H3Y94W7YG"
-             target="_blank"
-             class="bg-white text-[#41678f] text-center py-3 rounded-full font-bold hover:bg-gray-100 transition">
-             Donează prin PayPal
-          </a>
+    <!-- PAYPAL REAL -->
+    <div id="paypal-container-JZD2H3Y94W7YG"></div>
 
-          <!-- Revolut -->
-          <a href="https://revolut.me/NUMELETAU"
-             target="_blank"
-             class="border border-white text-center py-3 rounded-full font-bold hover:bg-white hover:text-[#41678f] transition">
-             Donează prin Revolut
-          </a>
+    <script>
+      paypal.HostedButtons({
+        hostedButtonId: "JZD2H3Y94W7YG",
+      }).render("#paypal-container-JZD2H3Y94W7YG")
+    </script>
 
-        </div>
+    <!-- Revolut -->
+    <a href="https://revolut.me/NUMELETAU"
+       target="_blank"
+       class="border border-white text-center py-3 rounded-full font-bold hover:bg-white hover:text-[#41678f] transition">
+       Donează prin Revolut
+    </a>
 
-      </div>
+  </div>
+
+</div>
 
     </div>
 
