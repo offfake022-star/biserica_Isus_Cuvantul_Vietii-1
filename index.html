@@ -777,16 +777,15 @@ nav a:hover::after {
               Versetul zilei
             </p>
 
-            <h3 class="text-2xl font-bold text-[#17365d]">
-              Psalmul 119:105
-            </h3>
+          <h3 id="daily-verse-ref" class="text-2xl font-bold text-[#17365d]">
+            Psalmul 119:105
+          </h3>
           </div>
 
         </div>
 
-        <p class="text-gray-700 text-xl leading-9 italic">
-          „Cuvântul Tău este o candelă pentru picioarele mele
-          și o lumină pe cărarea mea.”
+        <p id="daily-verse-text" class="text-gray-700 text-xl leading-9 italic">
+          „Cuvântul Tău este o candelă pentru picioarele mele și o lumină pe cărarea mea.”
         </p>
 
       </div>
@@ -1348,6 +1347,87 @@ function revealOnScroll() {
 window.addEventListener("scroll", revealOnScroll);
 window.addEventListener("load", revealOnScroll);
 </script>
+
+<script>
+const dailyVerses = [
+
+  {
+    ref: "Psalmul 119:105",
+    text: "„Cuvântul Tău este o candelă pentru picioarele mele și o lumină pe cărarea mea.”"
+  },
+
+  {
+    ref: "Ioan 3:16",
+    text: "„Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu.”"
+  },
+
+  {
+    ref: "Filipeni 4:13",
+    text: "„Pot totul în Hristos, care mă întărește.”"
+  },
+
+  {
+    ref: "Psalmul 23:1",
+    text: "„Domnul este Păstorul meu: nu voi duce lipsă de nimic.”"
+  },
+
+  {
+    ref: "Matei 5:14",
+    text: "„Voi sunteți lumina lumii.”"
+  },
+
+  {
+    ref: "Romani 8:31",
+    text: "„Dacă Dumnezeu este pentru noi, cine va fi împotriva noastră?”"
+  },
+
+  {
+    ref: "Proverbe 3:5",
+    text: "„Încrede-te în Domnul din toată inima ta.”"
+  },
+
+  {
+    ref: "Isaia 41:10",
+    text: "„Nu te teme, căci Eu sunt cu tine.”"
+  },
+
+  {
+    ref: "Iosua 1:9",
+    text: "„Fii tare și curajos! Nu te înspăimânta.”"
+  },
+
+  {
+    ref: "1 Ioan 4:19",
+    text: "„Noi Îl iubim pentru că El ne-a iubit întâi.”"
+  },
+
+  {
+    ref: "Matei 11:28",
+    text: "„Veniți la Mine toți cei trudiți și împovărați.”"
+  },
+
+  {
+    ref: "Psalmul 46:1",
+    text: "„Dumnezeu este adăpostul și sprijinul nostru.”"
+  }
+
+];
+
+const today = new Date();
+const start = new Date(today.getFullYear(), 0, 0);
+
+const diff =
+  today - start +
+  ((start.getTimezoneOffset() - today.getTimezoneOffset()) * 60 * 1000);
+
+const dayOfYear = Math.floor(diff / 86400000);
+
+const verse = dailyVerses[dayOfYear % dailyVerses.length];
+
+document.getElementById("daily-verse-ref").textContent = verse.ref;
+document.getElementById("daily-verse-text").textContent = verse.text;
+</script>
+
 </body>
 <script>
 const contactForm = document.getElementById("contact-form");
