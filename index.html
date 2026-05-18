@@ -128,6 +128,45 @@ nav a::after {
 nav a:hover::after {
   width: 60%;
 }
+
+/* HERO VERSET ANIMATION */
+.hero-verse {
+  animation: verseFade 1.8s ease forwards;
+  opacity: 0;
+  transform: translateY(40px);
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.15),
+    0 0 25px rgba(255,255,255,0.08);
+}
+
+@keyframes verseFade {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* animație pentru Ioan 3:16 */
+.hero-ref {
+  animation: glowGold 2.5s ease-in-out infinite;
+}
+
+@keyframes glowGold {
+  0%,100% {
+    text-shadow: 0 0 5px rgba(212,166,42,0.3);
+  }
+
+  50% {
+    text-shadow:
+      0 0 12px rgba(212,166,42,0.7),
+      0 0 24px rgba(212,166,42,0.45);
+  }
+}
   </style>
 
   <script 
@@ -468,11 +507,11 @@ nav a:hover::after {
       <div class="w-36 h-[2px] bg-[#d4a62a]"></div>
     </div>
 
-    <h2 class="text-white text-[28px] md:text-[44px] font-bold leading-[1.2] mb-5 max-w-6xl mx-auto" data-i18n="welcome_verse">
+    <h2 class="hero-verse text-white text-[28px] md:text-[44px] font-bold leading-[1.2] mb-5 max-w-6xl mx-auto" data-i18n="welcome_verse">
       „Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu, pentru ca oricine crede în El să nu piară, ci să aibă viață veșnică.”
     </h2>
 
-    <p class="text-[#d4a62a] text-xl md:text-2xl font-semibold mb-14" data-i18n="verse_ref">
+    <p class="hero-ref text-[#d4a62a] text-xl md:text-2xl font-semibold mb-14" data-i18n="verse_ref">
       Ioan 3:16
     </p>
 
