@@ -79,43 +79,87 @@ body {
 <div class="w-full px-4 py-3 flex items-center justify-between">
 
     <!-- Logo + Titlu -->
-<div class="flex items-center gap-4 shrink-0 min-w-[260px]">
+<!-- Logo + Titlu -->
+<div class="flex items-center gap-4 shrink-0">
 
   <!-- LOGO -->
-  <img 
-    src="images/logo3.png"
-    alt="Logo"
-    class="h-12 md:h-14 w-auto object-contain"
-  />
+  <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20">
 
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 120 120"
+      class="w-full h-full"
+      fill="none">
 
-  <!-- TEXT LOGO -->
-  <div class="flex flex-col leading-none">
+      <!-- Cerc -->
+      <circle
+        cx="60"
+        cy="60"
+        r="54"
+        stroke="#17365d"
+        stroke-width="3"/>
 
-    <!-- TEXT MIC -->
-    <span 
-      class="text-[9px] md:text-[11px] tracking-[0.22em] font-semibold text-[#17365d] uppercase"
-      data-i18n="church_small">
-      Biserica Penticostală
+      <!-- Cruce -->
+      <path
+        d="M60 18 V62"
+        stroke="#d4a62a"
+        stroke-width="5"
+        stroke-linecap="round"/>
+
+      <path
+        d="M47 32 H73"
+        stroke="#d4a62a"
+        stroke-width="5"
+        stroke-linecap="round"/>
+
+      <!-- Carte -->
+      <path
+        d="M28 78
+           Q45 60 60 74
+           Q75 60 92 78"
+        stroke="#17365d"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"/>
+
+      <path
+        d="M36 44
+           Q48 40 58 50
+           V82
+           Q47 72 36 76 Z"
+        stroke="#17365d"
+        stroke-width="2.5"
+        fill="none"/>
+
+      <path
+        d="M84 44
+           Q72 40 62 50
+           V82
+           Q73 72 84 76 Z"
+        stroke="#17365d"
+        stroke-width="2.5"
+        fill="none"/>
+
+    </svg>
+
+  </div>
+
+  <!-- TEXT -->
+  <div class="flex flex-col leading-tight">
+
+    <span class="text-[26px] md:text-[34px] font-serif tracking-[0.04em] text-[#17365d] uppercase">
+      Isus Cuvântul Vieții
     </span>
 
-    <!-- ISUS -->
-    <span 
-       class="text-[28px] md:text-[20px] font-light tracking-[0.22em] text-[#17365d] leading-[0.9]"
-      data-i18n="church_name">
-      ISUS
-    </span>
+    <div class="flex items-center gap-3 mt-1">
 
-    <!-- CUVANTUL VIETII -->
-    <div class="flex flex-col">
+      <div class="w-8 h-[1px] bg-[#d4a62a]"></div>
 
-      <span 
-        class="text-[12px] md:text-[10px] tracking-[0.18em] font-medium text-[#17365d] uppercase"
-        data-i18n="church_subtitle">
-        Cuvântul Vieții
+      <span class="text-[11px] md:text-[13px] tracking-[0.18em] text-[#b8891f] uppercase whitespace-nowrap">
+        Biserica Penticostală din Lozova
       </span>
 
-      <div class="h-[2px] bg-[#d4a62a] mt-1 rounded-full"></div>
+      <div class="w-8 h-[1px] bg-[#d4a62a]"></div>
 
     </div>
 
