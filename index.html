@@ -64,6 +64,70 @@ body {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.7; }
     }
+
+  /* ANIMAȚII PREMIUM */
+a, button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+
+a:hover, button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(65,103,143,0.25);
+}
+
+a:active, button:active {
+  transform: scale(0.96);
+}
+
+/* efect glow pe butoane */
+.hero-btn {
+  animation: softFloat 3s ease-in-out infinite;
+}
+
+@keyframes softFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* apariție la scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(45px);
+  transition: all 0.9s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* logo animație */
+.logo-animate {
+  transition: transform 0.5s ease;
+}
+
+.logo-animate:hover {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+/* meniu underline */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 0;
+  height: 2px;
+  background: #d4a62a;
+  transition: all 0.35s ease;
+  transform: translateX(-50%);
+}
+
+nav a:hover::after {
+  width: 60%;
+}
   </style>
 
   <script 
@@ -83,7 +147,7 @@ body {
 <div class="flex items-center gap-3 shrink-0">
 
   <!-- LOGO -->
-<div class="flex items-center justify-center w-12 h-12 md:w-14 md:h-14">
+<div class="logo-animate flex items-center justify-center w-12 h-12 md:w-14 md:h-14">
 
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -413,11 +477,11 @@ body {
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#program" class="bg-[#41678f] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-[#355879] transition">
+      <a href="#program" class="hero-btn bg-[#41678f] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-[#355879] transition">
         Vezi programul 
       </a>
 
-      <a href="#contact" class="bg-white text-[#17365d] px-10 py-4 rounded-full font-bold shadow-lg hover:bg-gray-100 transition">
+      <a href="#contact" class="hero-btn bg-white text-[#17365d] px-10 py-4 rounded-full font-bold shadow-lg hover:bg-gray-100 transition">
         Contactează-ne 
       </a>
     </div>
@@ -426,7 +490,7 @@ body {
 </section>
 
 <!-- Despre -->
-<section id="despre" class="scroll-mt-24 py-20 px-6 bg-white text-[#1f2937]" data-aos="fade-up">
+<section id="despre" class="reveal scroll-mt-24 py-20 px-6 bg-white text-[#1f2937]" data-aos="fade-up">
 
   <div class="max-w-6xl mx-auto">
     
@@ -507,7 +571,7 @@ body {
 
 <!-- Galerie -->
 
-<section id="galerie" class="scroll-mt-24 py-20 px-6 bg-[#f8fafc]" data-aos="fade-up">
+<section id="galerie" class=" reveal scroll-mt-24 py-20 px-6 bg-[#f8fafc]" data-aos="fade-up">
 
   <div class="max-w-7xl mx-auto">
 
@@ -570,7 +634,7 @@ body {
 </section>
 
 <!-- Program -->
-<section id="program" class="scroll-mt-24 bg-[#41678f] text-white pt-10 pb-16 px-6" data-aos="zoom-in">
+<section id="program" class=" revealscroll-mt-24 bg-[#41678f] text-white pt-10 pb-16 px-6" data-aos="zoom-in">
 
   <div class="max-w-6xl mx-auto text-center">
     <h2 class="text-4xl font-bold mb-3" data-i18n-html="program_heading">
@@ -610,7 +674,7 @@ body {
 </section>
 
 <!-- Predici -->
-<section id="predici" class="scroll-mt-24 py-20 px-6 bg-white text-[#1f2937]" data-aos="fade-left">
+<section id="predici" class="reveal scroll-mt-24 py-20 px-6 bg-white text-[#1f2937]" data-aos="fade-left">
   <div class="max-w-5xl mx-auto">
     <h2 class="text-4xl font-bold text-center mb-3" data-i18n="sermons1">
       Predici Recente
@@ -638,7 +702,7 @@ body {
 </section>
 
 <!-- Noutăți -->
-<section id="noutati" class="scroll-mt-24 bg-[#41678f] text-white py-20 px-6" data-aos="fade-right">
+<section id="noutati" class="reveal scroll-mt-24 bg-[#41678f] text-white py-20 px-6" data-aos="fade-right">
   <div class="max-w-6xl mx-auto">
 
     <div class="text-center mb-12">
@@ -691,7 +755,7 @@ body {
   </div>
 </section>
 <!-- Donații -->
-<section id="donatii" class="scroll-mt-24 py-20 px-6 bg-white" data-aos="fade-up">
+<section id="donatii" class="reveal scroll-mt-24 py-20 px-6 bg-white" data-aos="fade-up">
 
   <div class="max-w-5xl mx-auto">
 
@@ -812,7 +876,7 @@ body {
 </section>
 
 <!-- Contact -->
-<section id="contact" class="scroll-mt-24 bg-white text-[#1f2937] py-20 px-6" data-aos="fade-up">
+<section id="contact" class="reveal scroll-mt-24 bg-white text-[#1f2937] py-20 px-6" data-aos="fade-up">
   <div class="max-w-6xl mx-auto">
 
     <div class="text-center mb-14">
@@ -1180,6 +1244,23 @@ window.addEventListener("scroll", () => {
   }
 
 });
+</script>
+<script>
+const revealElements = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+  revealElements.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    if (top < windowHeight - 100) {
+      el.classList.add("active");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
 </script>
 </body>
 <script>
