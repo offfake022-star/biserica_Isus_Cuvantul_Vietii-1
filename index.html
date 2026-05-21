@@ -312,7 +312,8 @@ nav a:hover::after {
 
         <li>
         <a href="#biblia"
-          class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 whitespace-nowrap text-[17px]">
+          class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 whitespace-nowrap text-[17px]"
+          data-i18n="read_bible_btn">
           Biblia
         </a>
        </li>
@@ -436,10 +437,11 @@ nav a:hover::after {
       </li>
 
       <li>
-  <a href="#biblia"
-     class="block py-2 hover:text-[#41678f]">
-     Biblia
-  </a>
+      <a href="#biblia"
+        class="block py-2 hover:text-[#41678f]"
+        data-i18n="read_bible_btn">
+        Biblia
+      </a>
 </li>
 
       <li>
@@ -512,7 +514,8 @@ nav a:hover::after {
 
   <div class="relative z-10 text-center px-6 max-w-6xl mx-auto mt-10">
 
-    <p class="text-white uppercase tracking-[0.32em] text-sm md:text-base font-semibold mb-5">
+    <p class="text-white uppercase tracking-[0.32em] text-sm md:text-base font-semibold mb-5"
+      data-i18n="hero_subtitle">
       Biserica Penticostală din Lozova
     </p>
 
@@ -532,13 +535,15 @@ nav a:hover::after {
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#program" class="hero-btn bg-[#41678f] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-[#355879] transition">
-        Vezi programul 
-      </a>
+    <a href="#program" class="hero-btn bg-[#41678f] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-[#355879] transition"
+      data-i18n="see_program">
+      Vezi programul 
+    </a>
 
-      <a href="#contact" class="hero-btn bg-white text-[#17365d] px-10 py-4 rounded-full font-bold shadow-lg hover:bg-gray-100 transition">
-        Contactează-ne 
-      </a>
+    <a href="#contact" class="hero-btn bg-white text-[#17365d] px-10 py-4 rounded-full font-bold shadow-lg hover:bg-gray-100 transition"
+      data-i18n="contact_us_btn">
+      Contactează-ne 
+    </a>
     </div>
 
   </div>
@@ -706,24 +711,32 @@ nav a:hover::after {
         <p>Vorniceni - 17:00</p>
       </div>
 
-      <div class="bg-white/10 border border-white/20 rounded-2xl p-6 shadow-lg">
-        <p class="text-sm uppercase tracking-wide text-white/70 mb-2">Miercuri</p>
-        <h3 class="text-xl font-bold mb-2">Rugăciune</h3>
-        <p>Ora 19:00</p>
-      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+  
+  <div class="bg-white/10 border border-white/20 rounded-2xl p-6 shadow-lg">
+    <p class="text-sm uppercase tracking-wide text-white/70 mb-2" data-i18n="sunday">Duminică</p>
+    <h3 class="text-xl font-bold mb-2" data-i18n="service">Adunare</h3>
+    <p data-i18n="lozova_service">Lozova - 10:00</p>
+    <p data-i18n="vorniceni_service">Vorniceni - 17:00</p>
+  </div>
 
-      <div class="bg-white/10 border border-white/20 rounded-2xl p-6 shadow-lg">
-        <p class="text-sm uppercase tracking-wide text-white/70 mb-2">Sâmbătă</p>
-        <h3 class="text-xl font-bold mb-2">Clubul copiilor</h3>
-        <p>Ora 14:00</p>
-      </div>
+  <div class="bg-white/10 border border-white/20 rounded-2xl p-6 shadow-lg">
+    <p class="text-sm uppercase tracking-wide text-white/70 mb-2" data-i18n="wednesday">Miercuri</p>
+    <h3 class="text-xl font-bold mb-2" data-i18n="prayer">Rugăciune</h3>
+    <p data-i18n="time_19">Ora 19:00</p>
+  </div>
 
-      <div class="bg-white/10 border border-white/20 rounded-2xl p-6 shadow-lg">
-        <p class="text-sm uppercase tracking-wide text-white/70 mb-2">Marți & Vineri</p>
-        <h3 class="text-xl font-bold mb-2">Seara de adolescenți</h3>
-        <p>Ora 18:00</p>
-      </div>
+  <div class="bg-white/10 border border-white/20 rounded-2xl p-6 shadow-lg">
+    <p class="text-sm uppercase tracking-wide text-white/70 mb-2" data-i18n="saturday">Sâmbătă</p>
+    <h3 class="text-xl font-bold mb-2" data-i18n="kids_club">Clubul copiilor</h3>
+    <p data-i18n="time_14">Ora 14:00</p>
+  </div>
 
+  <div class="bg-white/10 border border-white/20 rounded-2xl p-6 shadow-lg">
+    <p class="text-sm uppercase tracking-wide text-white/70 mb-2" data-i18n="tuesday_friday">Marți & Vineri</p>
+    <h3 class="text-xl font-bold mb-2" data-i18n="teen_evening">Seara de adolescenți</h3>
+    <p data-i18n="time_18">Ora 18:00</p>
+  </div>
     </div>
   </div>
 </section>
@@ -736,28 +749,32 @@ nav a:hover::after {
     <!-- TEXT -->
     <div>
 
-      <p class="text-[#d4a62a] uppercase tracking-[0.25em] font-semibold mb-4">
-        Cuvântul lui Dumnezeu
-      </p>
+    <p class="text-[#d4a62a] uppercase tracking-[0.25em] font-semibold mb-4"
+      data-i18n="word_of_god">
+      Cuvântul lui Dumnezeu
+    </p>
 
-      <h2 class="text-4xl md:text-5xl font-bold text-[#17365d] leading-tight mb-6">
-        Citește Biblia zilnic
-      </h2>
+    <h2 class="text-4xl md:text-5xl font-bold text-[#17365d] leading-tight mb-6"
+        data-i18n="read_bible_daily">
+      Citește Biblia zilnic
+    </h2>
 
-      <p class="text-gray-600 text-lg leading-8 mb-8">
-        „Toată Scriptura este insuflată de Dumnezeu și de folos
-        ca să învețe, să mustre, să îndrepte și să dea înțelepciune.”
-      </p>
+    <p class="text-gray-600 text-lg leading-8 mb-8"
+      data-i18n="bible_quote">
+      „Toată Scriptura este insuflată de Dumnezeu și de folos
+      ca să învețe, să mustre, să îndrepte și să dea înțelepciune.”
+    </p>
 
       <p class="text-[#d4a62a] font-semibold text-lg mb-10">
         2 Timotei 3:16
       </p>
 
-      <a href="https://www.bible.com/ro/bible"
-         target="_blank"
-         class="hero-btn inline-block bg-[#17365d] text-white px-10 py-4 rounded-full font-semibold hover:bg-[#22466f] transition">
-        Citește Biblia
-      </a>
+    <a href="https://www.bible.com/ro/bible"
+      target="_blank"
+      class="hero-btn inline-block bg-[#17365d] text-white px-10 py-4 rounded-full font-semibold hover:bg-[#22466f] transition"
+      data-i18n="read_bible_btn">
+      Citește Biblia
+    </a>
 
     </div>
 
@@ -773,9 +790,10 @@ nav a:hover::after {
           </div>
 
           <div>
-            <p class="text-sm uppercase tracking-[0.2em] text-[#d4a62a] font-semibold">
-              Versetul zilei
-            </p>
+      <p class="text-sm uppercase tracking-[0.2em] text-[#d4a62a] font-semibold"
+        data-i18n="verse_of_day">
+        Versetul zilei
+      </p>
 
           <h3 id="daily-verse-ref" class="text-2xl font-bold text-[#17365d]">
             Psalmul 119:105
@@ -884,37 +902,40 @@ nav a:hover::after {
   <div class="max-w-6xl mx-auto">
 
     <div class="text-center mb-14">
-      <p class="text-[#d4a62a] uppercase tracking-[0.25em] font-semibold mb-4">
-        Generozitate
-      </p>
+    <p class="text-[#d4a62a] uppercase tracking-[0.25em] font-semibold mb-4"
+      data-i18n="generosity">
+      Generozitate
+    </p>
 
-      <h2 class="text-4xl md:text-5xl font-bold text-[#17365d] mb-5">
-        Susține lucrarea
-      </h2>
+    <h2 class="text-4xl md:text-5xl font-bold text-[#17365d] mb-5"
+        data-i18n="support_ministry">
+      Susține lucrarea
+    </h2>
 
-      <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-8">
-        Donația ta ajută la susținerea lucrării bisericii, a activităților și a proiectelor dedicate comunității.
-      </p>
+    <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-8"
+      data-i18n="donation_text">
+      Donația ta ajută la susținerea lucrării bisericii, a activităților și a proiectelor dedicate comunității.
+    </p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
 
       <div class="hero-btn bg-[#17365d] text-white rounded-[28px] p-8 shadow-xl">
-        <h3 class="text-2xl font-bold mb-4">MIA QR</h3>
-        <p class="text-white/80 leading-7 mb-6">
-          Donează rapid și sigur prin MIA, scanând codul QR.
-        </p>
+      <h3 class="text-2xl font-bold mb-4" data-i18n="mia_qr">MIA QR</h3>
+      <p class="text-white/80 leading-7 mb-6" data-i18n="mia_text">
+        Donează rapid și sigur prin MIA, scanând codul QR.
+      </p>
         <img src="images/qr-mia.png" alt="QR MIA" class="w-40 h-40 object-contain bg-white rounded-2xl p-3 mx-auto">
       </div>
 <div class="hero-btn bg-white rounded-[28px] p-8 shadow-xl border border-gray-100">
 
-  <h3 class="text-2xl font-bold text-[#17365d] mb-4">
-    PayPal
-  </h3>
+      <h3 class="text-2xl font-bold text-[#17365d] mb-4" data-i18n="paypal_title">
+        PayPal
+      </h3>
 
-  <p class="text-gray-600 leading-7 mb-8">
-    Poți dona online prin PayPal sau scanând codul QR.
-  </p>
+      <p class="text-gray-600 leading-7 mb-8" data-i18n="paypal_text">
+        Poți dona online prin PayPal sau scanând codul QR.
+      </p>
 
   <!-- QR -->
   <div class="bg-[#f8fafc] rounded-3xl p-5 border border-gray-100 mb-8">
@@ -925,29 +946,28 @@ nav a:hover::after {
       class="w-44 h-44 object-contain mx-auto mb-4"
     >
 
-    <p class="text-center text-sm text-gray-500">
+    <p class="text-center text-sm text-gray-500" data-i18n="scan_fast_donation">
       Scanează pentru donație rapidă
     </p>
 
   </div>
 
   <!-- BUTTON -->
-  <a href="https://www.paypal.com/ncp/payment/JZD2H3Y94W7YG"
-     target="_blank"
-     rel="noopener noreferrer"
-     class="inline-flex items-center justify-center w-full bg-[#17365d] text-white px-8 py-4 rounded-full font-bold hover:bg-[#22466f] transition duration-300 hover:scale-[1.02]">
-
-     Donează prin PayPal
-
-  </a>
+<a href="https://www.paypal.com/ncp/payment/JZD2H3Y94W7YG"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="inline-flex items-center justify-center w-full bg-[#17365d] text-white px-8 py-4 rounded-full font-bold hover:bg-[#22466f] transition duration-300 hover:scale-[1.02]"
+   data-i18n="donate_paypal">
+   Donează prin PayPal
+</a>
 
 </div>
 
 <div class="hero-btn bg-white rounded-[28px] p-8 shadow-xl border border-gray-100">
 
-  <h3 class="text-2xl font-bold text-[#17365d] mb-6">
-    Transfer bancar
-  </h3>
+<h3 class="text-2xl font-bold text-[#17365d] mb-6" data-i18n="bank_transfer">
+  Transfer bancar
+</h3>
 
   <div class="space-y-8 text-gray-700 leading-8">
 
@@ -1061,7 +1081,7 @@ nav a:hover::after {
           ISUS - CUVÂNTUL VIEȚII
         </h3>
 
-        <p class="text-white/80 text-xs">
+        <p class="text-white/80 text-xs" data-i18n="footer_subtitle">
           Biserica Penticostală din Lozova
         </p>
       </div>
@@ -1093,9 +1113,9 @@ nav a:hover::after {
     <div class="w-full h-px bg-white/20 my-2"></div>
 
     <!-- Bottom -->
-    <div class="text-center text-white/70 text-xs">
-      © 2026 Isus Cuvântul Vieții, Lozova. Toate drepturile rezervate.
-    </div>
+      <div class="text-center text-white/70 text-xs">
+        © 2026 Isus Cuvântul Vieții, Lozova. <span data-i18n="all_rights_reserved">Toate drepturile rezervate.</span>
+      </div>
 
   </div>
 </footer>
