@@ -179,16 +179,16 @@ nav a:hover::after {
 <body class="bg-white text-[#1f2937] overflow-x-hidden">
 
   <!-- Header -->
-<header id="main-header" class="fixed top-0 left-0 w-full bg-white shadow-md border-b border-gray-200 z-50 transition-all duration-300">
+<header id="main-header" class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-xl shadow-sm border-b border-gray-100 z-50 transition-all duration-300">
 
-<div class="w-full px-4 py-3 flex items-center justify-between">
+<div class="w-full px-6 py-2 flex items-center justify-between">
 
     <!-- Logo + Titlu -->
 <!-- Logo + Titlu -->
 <div class="flex items-center gap-3 shrink-0">
 
   <!-- LOGO -->
-<div class="logo-animate flex items-center justify-center w-12 h-12 md:w-14 md:h-14">
+<div class="logo-animate flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
 
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -252,7 +252,7 @@ nav a:hover::after {
   <!-- TEXT -->
   <div class="flex flex-col leading-tight">
 
-    <span class="text-[16px] md:text-[20px] font-serif tracking-[0.02em] text-[#17365d] uppercase whitespace-nowrap">
+    <span class="text-[15px] md:text-[17px]font-serif tracking-[0.02em] text-[#17365d] uppercase whitespace-nowrap">
       Isus Cuvântul Vieții
     </span>
 
@@ -261,12 +261,11 @@ nav a:hover::after {
 </div>
 
     <!-- Desktop Menu -->
-    <nav class="hidden 2xl:flex items-center gap-3">
-<ul class="flex items-center gap-7 text-[19px] font-semibold text-gray-800 whitespace-nowrap">
-
+<nav class="hidden xl:flex items-center justify-center flex-1">
+  <ul class="flex items-center gap-5 text-[17px] font-semibold text-gray-800 whitespace-nowrap">
   <li>
     <a href="#acasa"
-       class="px-5 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
+       class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
        data-i18n="home">
        Acasă
     </a>
@@ -274,7 +273,7 @@ nav a:hover::after {
 
   <li>
     <a href="#despre"
-       class="px-5 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
+       class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
        data-i18n="about">
        Despre
     </a>
@@ -282,7 +281,7 @@ nav a:hover::after {
 
   <li>
     <a href="#program"
-       class="px-5 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
+       class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
        data-i18n-html="program_heading">
        Program
     </a>
@@ -290,7 +289,7 @@ nav a:hover::after {
 
   <li class="relative group">
     <button
-      class="px-5 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
+      class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
       data-i18n="resources">
       Resurse
     </button>
@@ -304,7 +303,7 @@ nav a:hover::after {
 
   <li class="relative group">
     <button
-      class="px-5 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
+      class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
       data-i18n="get_involved">
       Implică-te
     </button>
@@ -317,7 +316,7 @@ nav a:hover::after {
 
   <li>
     <a href="#contact"
-       class="px-5 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
+       class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
        data-i18n="contact">
        Contact
     </a>
@@ -328,7 +327,7 @@ nav a:hover::after {
     </nav>
 
     <!-- Limbi -->
-<div class="hidden 2xl:flex items-center gap-1 text-sm font-bold text-[#1f2937] bg-[#41678f]/5 rounded-full px-2 py-2 ml-2">
+<div class="hidden xl:flex items-center gap-1 text-[15px] font-semibold text-[#1f2937] bg-[#41678f]/5 rounded-full px-2 py-2 ml-2">
       <button onclick="setLang('ro')"
               class="px-2 hover:text-[#41678f] transition">
               RO
