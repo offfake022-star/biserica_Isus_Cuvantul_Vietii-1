@@ -1678,44 +1678,20 @@ document.getElementById("daily-verse-text").textContent = verse.text;
 
 <script>
 
-function toggleResourcesMenu() {
-
-  const menu = document.getElementById("resourcesMenu");
-  const involved = document.getElementById("involvedMenu");
-
-  involved.classList.add("hidden");
-
-  menu.classList.toggle("hidden");
+function openResourcesMenu() {
+  document.getElementById("resourcesMenu").classList.remove("hidden");
+  document.getElementById("involvedMenu").classList.add("hidden");
 }
 
-function toggleInvolvedMenu() {
-
-  const menu = document.getElementById("involvedMenu");
-  const resources = document.getElementById("resourcesMenu");
-
-  resources.classList.add("hidden");
-
-  menu.classList.toggle("hidden");
+function openInvolvedMenu() {
+  document.getElementById("involvedMenu").classList.remove("hidden");
+  document.getElementById("resourcesMenu").classList.add("hidden");
 }
 
-document.addEventListener("click", function(event) {
-
-  const resourcesMenu = document.getElementById("resourcesMenu");
-  const involvedMenu = document.getElementById("involvedMenu");
-
-  if (!event.target.closest("#resourcesMenu") &&
-      !event.target.closest('[onclick="toggleResourcesMenu()"]')) {
-
-    resourcesMenu.classList.add("hidden");
-  }
-
-  if (!event.target.closest("#involvedMenu") &&
-      !event.target.closest('[onclick="toggleInvolvedMenu()"]')) {
-
-    involvedMenu.classList.add("hidden");
-  }
-
-});
+function closeAllDropdowns() {
+  document.getElementById("resourcesMenu").classList.add("hidden");
+  document.getElementById("involvedMenu").classList.add("hidden");
+}
 
 </script>
 </body>
