@@ -287,7 +287,9 @@ nav a:hover::after {
     </a>
   </li>
 
-<li class="relative" onmouseenter="openResourcesMenu()">
+<li class="relative"
+    onmouseenter="openResourcesMenu()"
+    onmouseleave="closeAllDropdowns()">
 
   <button
     class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
@@ -324,7 +326,9 @@ nav a:hover::after {
 
 </li>
 
-<li class="relative" onmouseenter="openInvolvedMenu()">
+<li class="relative"
+    onmouseenter="openInvolvedMenu()"
+    onmouseleave="closeAllDropdowns()">
 
   <button
     class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
