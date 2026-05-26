@@ -288,8 +288,7 @@ nav a:hover::after {
   </li>
 
 <li class="relative"
-    onmouseenter="openResourcesMenu()"
-    onmouseleave="closeAllDropdowns()">
+    onmouseenter="openResourcesMenu()">
 
   <button
     class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
@@ -299,6 +298,7 @@ nav a:hover::after {
 
   <div
     id="resourcesMenu"
+    onmouseleave="closeAllDropdowns()"
     class="hidden absolute left-0 top-full mt-3 bg-white shadow-2xl rounded-3xl border border-gray-100 min-w-[240px] py-3 z-50">
 
     <a href="#galerie"
@@ -327,8 +327,7 @@ nav a:hover::after {
 </li>
 
 <li class="relative"
-    onmouseenter="openInvolvedMenu()"
-    onmouseleave="closeAllDropdowns()">
+    onmouseenter="openInvolvedMenu()">
 
   <button
     class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
@@ -338,6 +337,7 @@ nav a:hover::after {
 
   <div
     id="involvedMenu"
+    onmouseleave="closeAllDropdowns()"
     class="hidden absolute left-0 top-full mt-3 bg-white shadow-2xl rounded-3xl border border-gray-100 min-w-[240px] py-3 z-50">
 
     <a href="#noutati"
