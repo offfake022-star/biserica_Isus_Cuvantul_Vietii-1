@@ -287,32 +287,69 @@ nav a:hover::after {
     </a>
   </li>
 
-  <li class="relative group">
-    <button
-      class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
-      data-i18n="resources">
-      Resurse
-    </button>
+<li class="relative">
 
-    <div class="absolute left-0 top-full mt-2 hidden group-hover:block bg-white shadow-2xl rounded-2xl border border-gray-100 min-w-[220px] py-2 z-50">
-      <a href="#galerie" class="block px-5 py-3 hover:bg-[#41678f]/10 hover:text-[#41678f]" data-i18n="gallery">Galerie</a>
-      <a href="#biblia" class="block px-5 py-3 hover:bg-[#41678f]/10 hover:text-[#41678f]" data-i18n="read_bible_btn">Biblia</a>
-      <a href="#predici" class="block px-5 py-3 hover:bg-[#41678f]/10 hover:text-[#41678f]" data-i18n="sermons">Predici</a>
-    </div>
-  </li>
+  <button
+    onclick="toggleResourcesMenu()"
+    class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
+    data-i18n="resources">
+    Resurse
+  </button>
 
-  <li class="relative group">
-    <button
-      class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
-      data-i18n="get_involved">
-      Implică-te
-    </button>
+  <div
+    id="resourcesMenu"
+    class="hidden absolute left-0 top-full mt-3 bg-white shadow-2xl rounded-3xl border border-gray-100 min-w-[240px] py-3 z-50">
 
-    <div class="absolute left-0 top-full mt-2 hidden group-hover:block bg-white shadow-2xl rounded-2xl border border-gray-100 min-w-[220px] py-2 z-50">
-      <a href="#noutati" class="block px-5 py-3 hover:bg-[#41678f]/10 hover:text-[#41678f]" data-i18n="announcements">Anunțuri</a>
-      <a href="#donatii" class="block px-5 py-3 hover:bg-[#41678f]/10 hover:text-[#41678f]" data-i18n="donate">Donații</a>
-    </div>
-  </li>
+    <a href="#galerie"
+      class="block px-6 py-4 hover:bg-[#41678f]/10 hover:text-[#41678f] transition rounded-2xl mx-2"
+      data-i18n="gallery">
+      Galerie
+    </a>
+
+    <a href="#biblia"
+      class="block px-6 py-4 hover:bg-[#41678f]/10 hover:text-[#41678f] transition rounded-2xl mx-2"
+      data-i18n="read_bible_btn">
+      Biblia
+    </a>
+
+    <a href="#predici"
+      class="block px-6 py-4 hover:bg-[#41678f]/10 hover:text-[#41678f] transition rounded-2xl mx-2"
+      data-i18n="sermons">
+      Predici
+    </a>
+
+  </div>
+
+</li>
+
+<li class="relative">
+
+  <button
+    onclick="toggleInvolvedMenu()"
+    class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
+    data-i18n="get_involved">
+    Implică-te
+  </button>
+
+  <div
+    id="involvedMenu"
+    class="hidden absolute left-0 top-full mt-3 bg-white shadow-2xl rounded-3xl border border-gray-100 min-w-[240px] py-3 z-50">
+
+    <a href="#noutati"
+      class="block px-6 py-4 hover:bg-[#41678f]/10 hover:text-[#41678f] transition rounded-2xl mx-2"
+      data-i18n="announcements">
+      Anunțuri
+    </a>
+
+    <a href="#donatii"
+      class="block px-6 py-4 hover:bg-[#41678f]/10 hover:text-[#41678f] transition rounded-2xl mx-2"
+      data-i18n="donate">
+      Donații
+    </a>
+
+  </div>
+
+</li>
 
   <li>
     <a href="#contact"
@@ -1636,6 +1673,48 @@ document.getElementById("daily-verse-ref").textContent = verse.ref;
 document.getElementById("daily-verse-text").textContent = verse.text;
 </script>
 
+<script>
+
+function toggleResourcesMenu() {
+
+  const menu = document.getElementById("resourcesMenu");
+  const involved = document.getElementById("involvedMenu");
+
+  involved.classList.add("hidden");
+
+  menu.classList.toggle("hidden");
+}
+
+function toggleInvolvedMenu() {
+
+  const menu = document.getElementById("involvedMenu");
+  const resources = document.getElementById("resourcesMenu");
+
+  resources.classList.add("hidden");
+
+  menu.classList.toggle("hidden");
+}
+
+document.addEventListener("click", function(event) {
+
+  const resourcesMenu = document.getElementById("resourcesMenu");
+  const involvedMenu = document.getElementById("involvedMenu");
+
+  if (!event.target.closest("#resourcesMenu") &&
+      !event.target.closest('[onclick="toggleResourcesMenu()"]')) {
+
+    resourcesMenu.classList.add("hidden");
+  }
+
+  if (!event.target.closest("#involvedMenu") &&
+      !event.target.closest('[onclick="toggleInvolvedMenu()"]')) {
+
+    involvedMenu.classList.add("hidden");
+  }
+
+});
+
+</script>
 </body>
 <script>
 const contactForm = document.getElementById("contact-form");
