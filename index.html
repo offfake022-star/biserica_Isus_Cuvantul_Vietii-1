@@ -1294,7 +1294,13 @@ const translations = {
     post_days_3: "Luni – Miercuri",
     post_time_3: "Orele 09:00 – 15:00",
     post_location_1: 'Biserica Penticostală din Vorniceni, lângă primărie',
-    post_location_3: 'Biserica Penticostală din Vorniceni, lângă primărie'
+    post_location_3: 'Biserica Penticostală din Vorniceni, lângă primărie',
+    event_label: "Eveniment",
+    kids_label: "Copii",
+    kids_youth_label: "COPII & TINERI",
+    timothy_ref: "2 Timotei 3:16",
+    copyright_text: "© 2026 Isus Cuvântul Vieții, Lozova.",
+    page_title: "Biserica Isus Cuvântul Vieții Lozova"
           },
 
   en: {
@@ -1429,7 +1435,13 @@ const translations = {
     post_days_3: "Monday – Wednesday",
     post_time_3: "09:00 AM – 03:00 PM",
     post_location_1: 'Pentecostal Church in Vorniceni, near the town hall',
-    post_location_3: 'Pentecostal Church in Vorniceni, near the town hall'
+    post_location_3: 'Pentecostal Church in Vorniceni, near the town hall',
+    event_label: "Event",
+    kids_label: "Children",
+    kids_youth_label: "CHILDREN & YOUTH",
+    timothy_ref: "2 Timothy 3:16",
+    copyright_text: "© 2026 Jesus Word of Life, Lozova.",
+    page_title: "Jesus Word of Life Church Lozova"
     },
 
   ru: {
@@ -1564,12 +1576,22 @@ const translations = {
     post_days_3: "Понедельник – Среда",
     post_time_3: "09:00 – 15:00",
     post_location_1: 'Пятидесятническая церковь в Ворниченах, возле примэрии',
-    post_location_3: 'Пятидесятническая церковь в Ворниченах, возле примэрии'
+    post_location_3: 'Пятидесятническая церковь в Ворниченах, возле примэрии',
+    event_label: "Событие",
+    kids_label: "Дети",
+    kids_youth_label: "ДЕТИ И МОЛОДЁЖЬ",
+    timothy_ref: "2 Тимофею 3:16",
+    copyright_text: "© 2026 Иисус Слово Жизни, Лозова.",
+    page_title: "Церковь Иисус Слово Жизни Лозова"
       }
     };
 
 function setLang(lang) {
   localStorage.setItem("lang", lang);
+
+  if (translations[lang] && translations[lang].page_title) {
+  document.title = translations[lang].page_title;
+}
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
