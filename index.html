@@ -1588,6 +1588,7 @@ const translations = {
 
 function setLang(lang) {
   localStorage.setItem("lang", lang);
+  updateDailyVerse(lang);
 
   if (translations[lang] && translations[lang].page_title) {
   document.title = translations[lang].page_title;
@@ -1699,83 +1700,69 @@ window.addEventListener("load", revealOnScroll);
 </script>
 
 <script>
-const dailyVerses = [
+const dailyVerses = {
+  ro: [
+    { ref: "Psalmul 119:105", text: "„Cuvântul Tău este o candelă pentru picioarele mele și o lumină pe cărarea mea.”" },
+    { ref: "Ioan 3:16", text: "„Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu.”" },
+    { ref: "Filipeni 4:13", text: "„Pot totul în Hristos, care mă întărește.”" },
+    { ref: "Psalmul 23:1", text: "„Domnul este Păstorul meu: nu voi duce lipsă de nimic.”" },
+    { ref: "Matei 5:14", text: "„Voi sunteți lumina lumii.”" },
+    { ref: "Romani 8:31", text: "„Dacă Dumnezeu este pentru noi, cine va fi împotriva noastră?”" },
+    { ref: "Proverbe 3:5", text: "„Încrede-te în Domnul din toată inima ta.”" },
+    { ref: "Isaia 41:10", text: "„Nu te teme, căci Eu sunt cu tine.”" },
+    { ref: "Iosua 1:9", text: "„Fii tare și curajos! Nu te înspăimânta.”" },
+    { ref: "1 Ioan 4:19", text: "„Noi Îl iubim pentru că El ne-a iubit întâi.”" },
+    { ref: "Matei 11:28", text: "„Veniți la Mine toți cei trudiți și împovărați.”" },
+    { ref: "Psalmul 46:1", text: "„Dumnezeu este adăpostul și sprijinul nostru.”" }
+  ],
 
-  {
-    ref: "Psalmul 119:105",
-    text: "„Cuvântul Tău este o candelă pentru picioarele mele și o lumină pe cărarea mea.”"
-  },
+  en: [
+    { ref: "Psalm 119:105", text: "“Your word is a lamp to my feet and a light to my path.”" },
+    { ref: "John 3:16", text: "“For God so loved the world that He gave His only Son.”" },
+    { ref: "Philippians 4:13", text: "“I can do all things through Christ who strengthens me.”" },
+    { ref: "Psalm 23:1", text: "“The Lord is my shepherd; I shall not want.”" },
+    { ref: "Matthew 5:14", text: "“You are the light of the world.”" },
+    { ref: "Romans 8:31", text: "“If God is for us, who can be against us?”" },
+    { ref: "Proverbs 3:5", text: "“Trust in the Lord with all your heart.”" },
+    { ref: "Isaiah 41:10", text: "“Do not fear, for I am with you.”" },
+    { ref: "Joshua 1:9", text: "“Be strong and courageous. Do not be afraid.”" },
+    { ref: "1 John 4:19", text: "“We love because He first loved us.”" },
+    { ref: "Matthew 11:28", text: "“Come to Me, all you who are weary and burdened.”" },
+    { ref: "Psalm 46:1", text: "“God is our refuge and strength.”" }
+  ],
 
-  {
-    ref: "Ioan 3:16",
-    text: "„Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu.”"
-  },
+  ru: [
+    { ref: "Псалом 118:105", text: "«Слово Твоё — светильник ноге моей и свет стезе моей.»" },
+    { ref: "Иоанна 3:16", text: "«Ибо так возлюбил Бог мир, что отдал Сына Своего Единородного.»" },
+    { ref: "Филиппийцам 4:13", text: "«Всё могу в укрепляющем меня Христе.»" },
+    { ref: "Псалом 22:1", text: "«Господь — Пастырь мой; ни в чём не буду нуждаться.»" },
+    { ref: "Матфея 5:14", text: "«Вы — свет мира.»" },
+    { ref: "Римлянам 8:31", text: "«Если Бог за нас, кто против нас?»" },
+    { ref: "Притчи 3:5", text: "«Надейся на Господа всем сердцем твоим.»" },
+    { ref: "Исаия 41:10", text: "«Не бойся, ибо Я с тобою.»" },
+    { ref: "Иисуса Навина 1:9", text: "«Будь твёрд и мужествен; не страшись.»" },
+    { ref: "1 Иоанна 4:19", text: "«Будем любить Его, потому что Он прежде возлюбил нас.»" },
+    { ref: "Матфея 11:28", text: "«Придите ко Мне все труждающиеся и обременённые.»" },
+    { ref: "Псалом 45:1", text: "«Бог нам прибежище и сила.»" }
+  ]
+};
 
-  {
-    ref: "Filipeni 4:13",
-    text: "„Pot totul în Hristos, care mă întărește.”"
-  },
+function updateDailyVerse(lang) {
+  const today = new Date();
+  const start = new Date(today.getFullYear(), 0, 0);
 
-  {
-    ref: "Psalmul 23:1",
-    text: "„Domnul este Păstorul meu: nu voi duce lipsă de nimic.”"
-  },
+  const diff =
+    today - start +
+    ((start.getTimezoneOffset() - today.getTimezoneOffset()) * 60 * 1000);
 
-  {
-    ref: "Matei 5:14",
-    text: "„Voi sunteți lumina lumii.”"
-  },
+  const dayOfYear = Math.floor(diff / 86400000);
 
-  {
-    ref: "Romani 8:31",
-    text: "„Dacă Dumnezeu este pentru noi, cine va fi împotriva noastră?”"
-  },
+  const verses = dailyVerses[lang] || dailyVerses.ro;
+  const verse = verses[dayOfYear % verses.length];
 
-  {
-    ref: "Proverbe 3:5",
-    text: "„Încrede-te în Domnul din toată inima ta.”"
-  },
-
-  {
-    ref: "Isaia 41:10",
-    text: "„Nu te teme, căci Eu sunt cu tine.”"
-  },
-
-  {
-    ref: "Iosua 1:9",
-    text: "„Fii tare și curajos! Nu te înspăimânta.”"
-  },
-
-  {
-    ref: "1 Ioan 4:19",
-    text: "„Noi Îl iubim pentru că El ne-a iubit întâi.”"
-  },
-
-  {
-    ref: "Matei 11:28",
-    text: "„Veniți la Mine toți cei trudiți și împovărați.”"
-  },
-
-  {
-    ref: "Psalmul 46:1",
-    text: "„Dumnezeu este adăpostul și sprijinul nostru.”"
-  }
-
-];
-
-const today = new Date();
-const start = new Date(today.getFullYear(), 0, 0);
-
-const diff =
-  today - start +
-  ((start.getTimezoneOffset() - today.getTimezoneOffset()) * 60 * 1000);
-
-const dayOfYear = Math.floor(diff / 86400000);
-
-const verse = dailyVerses[dayOfYear % dailyVerses.length];
-
-document.getElementById("daily-verse-ref").textContent = verse.ref;
-document.getElementById("daily-verse-text").textContent = verse.text;
+  document.getElementById("daily-verse-ref").textContent = verse.ref;
+  document.getElementById("daily-verse-text").textContent = verse.text;
+}
 </script>
 
 <script>
