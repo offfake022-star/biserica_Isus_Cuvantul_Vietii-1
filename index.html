@@ -35,6 +35,9 @@ body {
   max-width: 100%;
   margin: 0;
   padding: 0;
+
+  /* Previne comportamentele neplăcute ale elementelor fixed pe iPhone */
+  -webkit-overflow-scrolling: touch;
 }
 
     * {
@@ -169,6 +172,39 @@ nav a:hover::after {
     transform: translateY(-2px);
   }
 }
+
+/* =========================================================
+   HEADER FIX - MOBILE / iOS
+   ========================================================= */
+
+#main-header {
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Respectă zona de siguranță a iPhone-urilor cu Dynamic Island / notch */
+@supports (padding-top: env(safe-area-inset-top)) {
+  #main-header > div:first-child {
+    padding-top: calc(0.5rem + env(safe-area-inset-top));
+  }
+}
+
+/* Pe telefoane, header-ul rămâne deasupra conținutului */
+@media (max-width: 1023px) {
+  #main-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+  }
+}
   </style>
 
   <script 
@@ -180,10 +216,9 @@ nav a:hover::after {
 
   <!-- Header -->
 <header id="main-header"
-  class="fixed inset-x-0 top-0 w-full bg-white shadow-lg z-[9999]">
+  class="fixed top-0 left-0 right-0 w-full bg-white shadow-lg z-[9999]">
 
-<div class="w-full min-h-[64px] px-4 sm:px-6 py-2 flex items-center justify-between">
-  
+<div class="w-full min-h-[64px] px-4 sm:px-6 py-2 flex items-center justify-between">  
     <!-- Logo + Titlu -->
 <!-- Logo + Titlu -->
 <div class="flex items-center gap-3 shrink-0">
@@ -262,8 +297,8 @@ nav a:hover::after {
 </div>
 
     <!-- Desktop Menu -->
-<nav class="hidden xl:flex items-center justify-center flex-1">
-  <ul class="flex items-center gap-5 text-[17px] font-semibold text-gray-800 whitespace-nowrap">
+<nav class="hidden lg:flex items-center justify-center flex-1">
+    <ul class="flex items-center gap-5 text-[17px] font-semibold text-gray-800 whitespace-nowrap">
   <li>
     <a href="#acasa"
        class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300"
@@ -372,7 +407,7 @@ nav a:hover::after {
     </nav>
 
     <!-- Limbi -->
-<div class="hidden xl:flex items-center gap-1 text-[15px] font-semibold text-[#1f2937] bg-[#41678f]/5 rounded-full px-2 py-2 ml-2">
+<div class="hidden lg:flex items-center gap-1 text-[15px] font-semibold text-[#1f2937] bg-[#41678f]/5 rounded-full px-2 py-2 ml-2">
       <button onclick="setLang('ro')"
               class="px-2 hover:text-[#41678f] transition">
               RO
@@ -391,8 +426,7 @@ nav a:hover::after {
     </div>
 
     <!-- Hamburger -->
-    <div class="md:hidden flex items-center shrink-0">
-
+<div class="lg:hidden flex items-center shrink-0">
       <button id="menu-btn"
               class="p-2 rounded-xl bg-[#41678f]/10"
               aria-label="Deschide meniul">
@@ -418,8 +452,8 @@ nav a:hover::after {
   
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu"
-       class="hidden md:hidden bg-white border-t border-gray-100 shadow-md">
+<div id="mobile-menu"
+     class="hidden lg:hidden bg-white border-t border-gray-100 shadow-md">
 
     <ul class="flex flex-col gap-2 p-4 text-center font-semibold">
 
@@ -521,7 +555,7 @@ nav a:hover::after {
 </header>
 
 <!-- Hero / Verset -->
-<section id="acasa" class="relative w-full min-h-[92vh] flex items-center justify-center overflow-hidden pt-24">
+<section id="acasa" class="relative w-full min-h-[92svh] flex items-center justify-center overflow-hidden pt-24">
 
   <img 
     src="images/img1.jpg" 
