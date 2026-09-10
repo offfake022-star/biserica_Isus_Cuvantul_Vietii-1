@@ -508,6 +508,84 @@ nav a:hover::after {
     font-size: 21px;
   }
 }
+/* SĂGEȚI GALERIE */
+.gallery-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+
+  width: 52px;
+  height: 52px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.92);
+  color: #41678f;
+
+  font-size: 32px;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,.18);
+
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    box-shadow .25s ease;
+}
+
+.gallery-control:hover {
+  background: white;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+
+.gallery-control-left {
+  left: 15px;
+}
+
+.gallery-control-right {
+  right: 15px;
+}
+
+.gallery-control-left:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-control-right:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Pe telefon */
+@media (max-width: 768px) {
+  .gallery-control {
+    width: 44px;
+    height: 44px;
+    font-size: 26px;
+  }
+
+  .gallery-control-left {
+    left: 8px;
+  }
+
+  .gallery-control-right {
+    right: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-control {
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
+  }
+}
   </style>
 
   <script 
@@ -1007,37 +1085,79 @@ nav a:hover::after {
 
 
     <!-- CAROUSEL -->
-    <div class="gallery-wrapper">
+<div class="gallery-wrapper">
 
-      <div class="gallery-track" id="gallery-track">
+  <!-- SĂGEATĂ STÂNGA -->
+  <button class="gallery-control gallery-control-left"
+          onclick="moveGalleryLeft()"
+          aria-label="Imaginea precedentă">
+    &#10094;
+  </button>
 
-        <div class="gallery-item" onclick="openGallery(0)">
-          <img src="images/galerie1.jpg" alt="Galerie 1">
-        </div>
+  <!-- IMAGINILE -->
+  <div class="gallery-track" id="gallery-track">
 
-        <div class="gallery-item" onclick="openGallery(1)">
-          <img src="images/galerie2.jpg" alt="Galerie 2">
-        </div>
-
-        <div class="gallery-item" onclick="openGallery(2)">
-          <img src="images/galerie3.jpg" alt="Galerie 3">
-        </div>
-
-        <div class="gallery-item" onclick="openGallery(3)">
-          <img src="images/galerie4.jpg" alt="Galerie 4">
-        </div>
-
-        <div class="gallery-item" onclick="openGallery(4)">
-          <img src="images/galerie5.jpg" alt="Galerie 5">
-        </div>
-
-        <div class="gallery-item" onclick="openGallery(5)">
-          <img src="images/galerie6.jpg" alt="Galerie 6">
-        </div>
-
-      </div>
-
+    <!-- cele 6 imagini originale -->
+    <div class="gallery-item" onclick="openGallery(0)">
+      <img src="images/galerie1.jpg" alt="Galerie 1">
     </div>
+
+    <div class="gallery-item" onclick="openGallery(1)">
+      <img src="images/galerie2.jpg" alt="Galerie 2">
+    </div>
+
+    <div class="gallery-item" onclick="openGallery(2)">
+      <img src="images/galerie3.jpg" alt="Galerie 3">
+    </div>
+
+    <div class="gallery-item" onclick="openGallery(3)">
+      <img src="images/galerie4.jpg" alt="Galerie 4">
+    </div>
+
+    <div class="gallery-item" onclick="openGallery(4)">
+      <img src="images/galerie5.jpg" alt="Galerie 5">
+    </div>
+
+    <div class="gallery-item" onclick="openGallery(5)">
+      <img src="images/galerie6.jpg" alt="Galerie 6">
+    </div>
+
+    <!-- DUPLICATE PENTRU ANIMAȚIA CONTINUĂ -->
+
+    <div class="gallery-item" onclick="openGallery(0)">
+      <img src="images/galerie1.jpg" alt="Galerie 1">
+    </div>
+
+    <div class="gallery-item" onclick="openGallery(1)">
+      <img src="images/galerie2.jpg" alt="Galerie 2">
+    </div>
+
+    <div class="gallery-item" onclick="openGallery(2)">
+      <img src="images/galerie3.jpg" alt="Galerie 3">
+    </div>
+
+    <div class="gallery-item" onclick="openGallery(3)">
+      <img src="images/galerie4.jpg" alt="Galerie 4">
+    </div>
+
+    <div class="gallery-item" onclick="openGallery(4)">
+      <img src="images/galerie5.jpg" alt="Galerie 5">
+    </div>
+
+    <div class="gallery-item" onclick="openGallery(5)">
+      <img src="images/galerie6.jpg" alt="Galerie 6">
+    </div>
+
+  </div>
+
+  <!-- SĂGEATĂ DREAPTA -->
+  <button class="gallery-control gallery-control-right"
+          onclick="moveGalleryRight()"
+          aria-label="Imaginea următoare">
+    &#10095;
+  </button>
+
+</div>
 
   </div>
 </section>
@@ -2311,6 +2431,52 @@ function handleGallerySwipe() {
   }
 }
 
+</script>
+<script>
+function moveGalleryRight() {
+  const track = document.getElementById("gallery-track");
+
+  track.style.animationPlayState = "paused";
+
+  track.scrollIntoView({
+    behavior: "smooth",
+    block: "nearest"
+  });
+
+  const item = track.querySelector(".gallery-item");
+
+  if (item) {
+    const gap = 24;
+    const moveAmount = item.offsetWidth + gap;
+
+    track.style.transform = `translateX(-${moveAmount}px)`;
+  }
+
+  setTimeout(() => {
+    track.style.transform = "";
+    track.style.animationPlayState = "running";
+  }, 700);
+}
+
+function moveGalleryLeft() {
+  const track = document.getElementById("gallery-track");
+
+  track.style.animationPlayState = "paused";
+
+  const item = track.querySelector(".gallery-item");
+
+  if (item) {
+    const gap = 24;
+    const moveAmount = item.offsetWidth + gap;
+
+    track.style.transform = `translateX(${moveAmount}px)`;
+  }
+
+  setTimeout(() => {
+    track.style.transform = "";
+    track.style.animationPlayState = "running";
+  }, 700);
+}
 </script>
 </body>
 <script>
