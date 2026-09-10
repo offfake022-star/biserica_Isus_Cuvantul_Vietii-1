@@ -177,13 +177,6 @@ nav a:hover::after {
    HEADER FIX - MOBILE / iOS
    ========================================================= */
 
-#main-header {
-  top: 0;
-  width: 100%;
-  z-index: 9999;
-  background: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
 
 /* Respectă zona de siguranță a iPhone-urilor cu Dynamic Island / notch */
 @supports (padding-top: env(safe-area-inset-top)) {
@@ -209,6 +202,311 @@ nav a:hover::after {
 
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* =========================================
+   GALERIE CAROUSEL
+   ========================================= */
+
+.gallery-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0 20px;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: galleryScroll 28s linear infinite;
+}
+
+.gallery-wrapper:hover .gallery-track {
+  animation-play-state: paused;
+}
+
+.gallery-item {
+  width: 360px;
+  height: 260px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  transition: transform 0.4s ease,
+              box-shadow 0.4s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+
+/* Mișcarea galeriei */
+
+@keyframes galleryScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+/* =========================================
+   LIGHTBOX / IMAGINE MARE CU BLUR
+   ========================================= */
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+
+  background: rgba(255, 255, 255, 0.18);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+.gallery-lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* Imaginea mare */
+
+.gallery-modal-content {
+  position: relative;
+
+  max-width: min(1100px, 90vw);
+  max-height: 85vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: scale(0.85);
+
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+}
+
+.gallery-lightbox.active .gallery-modal-content {
+  transform: scale(1);
+}
+
+.gallery-modal-content img {
+  display: block;
+
+  max-width: 100%;
+  max-height: 85vh;
+
+  object-fit: contain;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.35);
+
+  background: white;
+}
+
+
+/* =========================================
+   BUTON X
+   ========================================= */
+
+.gallery-close {
+  position: absolute;
+
+  top: 25px;
+  right: 30px;
+
+  width: 52px;
+  height: 52px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  color: #1e293b;
+
+  font-size: 38px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.gallery-close:hover {
+  transform: rotate(90deg) scale(1.08);
+  background: white;
+}
+
+
+/* =========================================
+   SĂGEȚI
+   ========================================= */
+
+.gallery-arrow {
+  position: absolute;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 54px;
+  height: 54px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  color: #41678f;
+
+  font-size: 30px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.gallery-arrow:hover {
+  background: white;
+}
+
+.gallery-prev {
+  left: 25px;
+}
+
+.gallery-next {
+  right: 25px;
+}
+
+
+/* =========================================
+   TELEFON
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  .gallery-track {
+    gap: 16px;
+    animation-duration: 22s;
+  }
+
+  .gallery-item {
+    width: 280px;
+    height: 210px;
+    border-radius: 20px;
+  }
+
+  .gallery-lightbox {
+    padding: 20px;
+  }
+
+  .gallery-modal-content {
+    max-width: 92vw;
+    max-height: 78vh;
+  }
+
+  .gallery-modal-content img {
+    max-height: 78vh;
+    border-radius: 16px;
+  }
+
+  .gallery-close {
+    top: 18px;
+    right: 18px;
+
+    width: 46px;
+    height: 46px;
+
+    font-size: 32px;
+  }
+
+  .gallery-arrow {
+    width: 44px;
+    height: 44px;
+
+    font-size: 24px;
+  }
+
+  .gallery-prev {
+    left: 12px;
+  }
+
+  .gallery-next {
+    right: 12px;
+  }
+}
+
+
+/* Telefoane foarte mici */
+
+@media (max-width: 480px) {
+
+  .gallery-item {
+    width: 250px;
+    height: 190px;
+  }
+
+  .gallery-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 21px;
+  }
 }
   </style>
 
@@ -686,10 +984,10 @@ nav a:hover::after {
   </div>
 </section>
 
-
 <!-- Galerie -->
-
-<section id="galerie" class=" reveal scroll-mt-24 py-20 px-6 bg-[#f8fafc]" data-aos="fade-up">
+<section id="galerie"
+  class="reveal scroll-mt-24 py-20 px-6 bg-[#f8fafc]"
+  data-aos="fade-up">
 
   <div class="max-w-7xl mx-auto">
 
@@ -701,55 +999,83 @@ nav a:hover::after {
 
       <div class="w-24 h-1 bg-[#41678f] mx-auto rounded-full"></div>
 
-      <p class="text-gray-600 mt-5 max-w-2xl mx-auto" data-i18n="gallery_text">
+      <p class="text-gray-600 mt-5 max-w-2xl mx-auto"
+         data-i18n="gallery_text">
         Diferite momente și evenimente din viața bisericii noastre.
       </p>
     </div>
 
-    <!-- Grid poze -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      <div class="overflow-hidden rounded-3xl shadow-lg group">
-        <img src="images/galerie1.jpg"
-             alt="Galerie 1"
-             class="w-full h-[260px] object-cover group-hover:scale-110 transition duration-500">
-      </div>
+    <!-- CAROUSEL -->
+    <div class="gallery-wrapper">
 
-      <div class="overflow-hidden rounded-3xl shadow-lg group">
-        <img src="images/galerie2.jpg"
-             alt="Galerie 2"
-             class="w-full h-[260px] object-cover group-hover:scale-110 transition duration-500">
-      </div>
+      <div class="gallery-track" id="gallery-track">
 
-      <div class="overflow-hidden rounded-3xl shadow-lg group">
-        <img src="images/galerie3.jpg"
-             alt="Galerie 3"
-             class="w-full h-[260px] object-cover group-hover:scale-110 transition duration-500">
-      </div>
+        <div class="gallery-item" onclick="openGallery(0)">
+          <img src="images/galerie1.jpg" alt="Galerie 1">
+        </div>
 
-      <div class="overflow-hidden rounded-3xl shadow-lg group">
-        <img src="images/galerie4.jpg"
-             alt="Galerie 4"
-             class="w-full h-[260px] object-cover group-hover:scale-110 transition duration-500">
-      </div>
+        <div class="gallery-item" onclick="openGallery(1)">
+          <img src="images/galerie2.jpg" alt="Galerie 2">
+        </div>
 
-      <div class="overflow-hidden rounded-3xl shadow-lg group">
-        <img src="images/galerie5.jpg"
-             alt="Galerie 5"
-             class="w-full h-[260px] object-cover group-hover:scale-110 transition duration-500">
-      </div>
+        <div class="gallery-item" onclick="openGallery(2)">
+          <img src="images/galerie3.jpg" alt="Galerie 3">
+        </div>
 
-      <div class="overflow-hidden rounded-3xl shadow-lg group">
-        <img src="images/galerie6.jpg"
-             alt="Galerie 6"
-             class="w-full h-[260px] object-cover group-hover:scale-110 transition duration-500">
+        <div class="gallery-item" onclick="openGallery(3)">
+          <img src="images/galerie4.jpg" alt="Galerie 4">
+        </div>
+
+        <div class="gallery-item" onclick="openGallery(4)">
+          <img src="images/galerie5.jpg" alt="Galerie 5">
+        </div>
+
+        <div class="gallery-item" onclick="openGallery(5)">
+          <img src="images/galerie6.jpg" alt="Galerie 6">
+        </div>
+
       </div>
 
     </div>
 
   </div>
-
 </section>
+
+
+<!-- LIGHTBOX CU BLUR -->
+<div id="gallery-lightbox"
+     class="gallery-lightbox"
+     onclick="closeGallery(event)">
+
+  <button class="gallery-close"
+          onclick="closeGallery()"
+          aria-label="Închide">
+    &times;
+  </button>
+
+  <button class="gallery-arrow gallery-prev"
+          onclick="previousGallery(event)"
+          aria-label="Imaginea precedentă">
+    &#10094;
+  </button>
+
+  <div class="gallery-modal-content"
+       onclick="event.stopPropagation()">
+
+    <img id="gallery-large-image"
+         src=""
+         alt="Imagine galerie">
+
+  </div>
+
+  <button class="gallery-arrow gallery-next"
+          onclick="nextGallery(event)"
+          aria-label="Imaginea următoare">
+    &#10095;
+  </button>
+
+</div>
 
 <!-- Program -->
 <section id="program" class=" revealscroll-mt-24 bg-[#41678f] text-white pt-10 pb-16 px-6" data-aos="zoom-in">
@@ -1820,6 +2146,169 @@ function openInvolvedMenu() {
 function closeAllDropdowns() {
   document.getElementById("resourcesMenu").classList.add("hidden");
   document.getElementById("involvedMenu").classList.add("hidden");
+}
+
+</script>
+<script>
+
+/* =========================================
+   GALERIE
+   ========================================= */
+
+const galleryImages = [
+  "images/galerie1.jpg",
+  "images/galerie2.jpg",
+  "images/galerie3.jpg",
+  "images/galerie4.jpg",
+  "images/galerie5.jpg",
+  "images/galerie6.jpg"
+];
+
+let currentGalleryIndex = 0;
+
+
+/* Deschide imaginea */
+
+function openGallery(index) {
+
+  currentGalleryIndex = index;
+
+  const lightbox = document.getElementById("gallery-lightbox");
+  const largeImage = document.getElementById("gallery-large-image");
+
+  largeImage.src = galleryImages[currentGalleryIndex];
+
+  lightbox.classList.add("active");
+
+  /* Oprim scroll-ul paginii */
+  document.body.style.overflow = "hidden";
+}
+
+
+/* Închide imaginea */
+
+function closeGallery(event) {
+
+  /* Dacă s-a apăsat pe conținutul imaginii, nu închidem */
+  if (
+    event &&
+    event.target !== document.getElementById("gallery-lightbox")
+  ) {
+    return;
+  }
+
+  const lightbox = document.getElementById("gallery-lightbox");
+
+  lightbox.classList.remove("active");
+
+  document.body.style.overflow = "";
+}
+
+
+/* Imaginea precedentă */
+
+function previousGallery(event) {
+
+  if (event) {
+    event.stopPropagation();
+  }
+
+  currentGalleryIndex--;
+
+  if (currentGalleryIndex < 0) {
+    currentGalleryIndex = galleryImages.length - 1;
+  }
+
+  document.getElementById("gallery-large-image").src =
+    galleryImages[currentGalleryIndex];
+}
+
+
+/* Imaginea următoare */
+
+function nextGallery(event) {
+
+  if (event) {
+    event.stopPropagation();
+  }
+
+  currentGalleryIndex++;
+
+  if (currentGalleryIndex >= galleryImages.length) {
+    currentGalleryIndex = 0;
+  }
+
+  document.getElementById("gallery-large-image").src =
+    galleryImages[currentGalleryIndex];
+}
+
+
+/* Tasta ESC închide imaginea */
+
+document.addEventListener("keydown", function(event) {
+
+  const lightbox =
+    document.getElementById("gallery-lightbox");
+
+  if (!lightbox.classList.contains("active")) {
+    return;
+  }
+
+  if (event.key === "Escape") {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  if (event.key === "ArrowLeft") {
+    previousGallery();
+  }
+
+  if (event.key === "ArrowRight") {
+    nextGallery();
+  }
+
+});
+
+
+/* =========================================
+   SWIPE PE TELEFON
+   ========================================= */
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+const galleryLightbox =
+  document.getElementById("gallery-lightbox");
+
+galleryLightbox.addEventListener("touchstart", function(event) {
+
+  touchStartX = event.changedTouches[0].screenX;
+
+}, { passive: true });
+
+
+galleryLightbox.addEventListener("touchend", function(event) {
+
+  touchEndX = event.changedTouches[0].screenX;
+
+  handleGallerySwipe();
+
+}, { passive: true });
+
+
+function handleGallerySwipe() {
+
+  const distance = touchEndX - touchStartX;
+
+  /* Swipe stânga */
+  if (distance < -50) {
+    nextGallery();
+  }
+
+  /* Swipe dreapta */
+  if (distance > 50) {
+    previousGallery();
+  }
 }
 
 </script>
