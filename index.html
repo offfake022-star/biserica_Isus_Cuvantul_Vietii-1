@@ -2278,36 +2278,49 @@ let currentGalleryIndex = 0;
 function openGallery(index) {
   currentGalleryIndex = index;
 
-  // Oprește rularea galeriei din fundal
+  const lightbox = document.getElementById("gallery-lightbox");
+  const largeImage = document.getElementById("gallery-large-image");
   const galleryTrack = document.getElementById("gallery-track");
+
+  // Pune galeria din spate pe pauză
   if (galleryTrack) {
     galleryTrack.style.animationPlayState = "paused";
   }
 
-  const lightbox = document.getElementById("gallery-lightbox");
-  const largeImage = document.getElementById("gallery-large-image");
-
+  // Pune imaginea selectată în lightbox
   largeImage.src = galleryImages[currentGalleryIndex];
-  lightbox.classList.remove("hidden");
+
+  // Deschide lightbox-ul
+  lightbox.classList.add("active");
+
+  // Blochează scroll-ul paginii
   document.body.style.overflow = "hidden";
 }
 
 
-/* Închide imaginea */
-
 function closeGallery(event) {
+  // Dacă se face click pe imagine, săgeți sau alt conținut,
+  // nu închide lightbox-ul
   if (
-    event.target.id === "gallery-lightbox" ||
-    event.target.closest(".gallery-close")
+    event &&
+    event.target !== document.getElementById("gallery-lightbox")
   ) {
-    const galleryTrack = document.getElementById("gallery-track");
-    if (galleryTrack) {
-      galleryTrack.style.animationPlayState = "running";
-    }
-
-    document.getElementById("gallery-lightbox").classList.add("hidden");
-    document.body.style.overflow = "";
+    return;
   }
+
+  const lightbox = document.getElementById("gallery-lightbox");
+  const galleryTrack = document.getElementById("gallery-track");
+
+  // Închide lightbox-ul
+  lightbox.classList.remove("active");
+
+  // Pornește din nou galeria
+  if (galleryTrack) {
+    galleryTrack.style.animationPlayState = "running";
+  }
+
+  // Deblochează scroll-ul
+  document.body.style.overflow = "";
 }
 
 
