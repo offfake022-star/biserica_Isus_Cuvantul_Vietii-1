@@ -2276,17 +2276,19 @@ let currentGalleryIndex = 0;
 /* Deschide imaginea */
 
 function openGallery(index) {
-
   currentGalleryIndex = index;
+
+  // Oprește rularea galeriei din fundal
+  const galleryTrack = document.getElementById("gallery-track");
+  if (galleryTrack) {
+    galleryTrack.style.animationPlayState = "paused";
+  }
 
   const lightbox = document.getElementById("gallery-lightbox");
   const largeImage = document.getElementById("gallery-large-image");
 
   largeImage.src = galleryImages[currentGalleryIndex];
-
-  lightbox.classList.add("active");
-
-  /* Oprim scroll-ul paginii */
+  lightbox.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 }
 
@@ -2294,58 +2296,48 @@ function openGallery(index) {
 /* Închide imaginea */
 
 function closeGallery(event) {
-
-  /* Dacă s-a apăsat pe conținutul imaginii, nu închidem */
   if (
-    event &&
-    event.target !== document.getElementById("gallery-lightbox")
+    event.target.id === "gallery-lightbox" ||
+    event.target.closest(".gallery-close")
   ) {
-    return;
+    const galleryTrack = document.getElementById("gallery-track");
+    if (galleryTrack) {
+      galleryTrack.style.animationPlayState = "running";
+    }
+
+    document.getElementById("gallery-lightbox").classList.add("hidden");
+    document.body.style.overflow = "";
   }
-
-  const lightbox = document.getElementById("gallery-lightbox");
-
-  lightbox.classList.remove("active");
-
-  document.body.style.overflow = "";
 }
 
 
 /* Imaginea precedentă */
 
 function previousGallery(event) {
+  if (event) event.stopPropagation();
 
-  if (event) {
-    event.stopPropagation();
+  currentGalleryIndex =
+    (currentGalleryIndex - 1 + galleryImages.length) %
+    galleryImages.length;
+
+  const largeImage = document.getElementById("gallery-large-image");
+
+  if (largeImage) {
+    largeImage.src = galleryImages[currentGalleryIndex];
   }
-
-  currentGalleryIndex--;
-
-  if (currentGalleryIndex < 0) {
-    currentGalleryIndex = galleryImages.length - 1;
-  }
-
-  document.getElementById("gallery-large-image").src =
-    galleryImages[currentGalleryIndex];
 }
 
-
-/* Imaginea următoare */
-
 function nextGallery(event) {
+  if (event) event.stopPropagation();
 
-  if (event) {
-    event.stopPropagation();
+  currentGalleryIndex =
+    (currentGalleryIndex + 1) % galleryImages.length;
+
+  const largeImage = document.getElementById("gallery-large-image");
+
+  if (largeImage) {
+    largeImage.src = galleryImages[currentGalleryIndex];
   }
-
-  currentGalleryIndex++;
-
-  if (currentGalleryIndex >= galleryImages.length) {
-    currentGalleryIndex = 0;
-  }
-
-  document.getElementById("gallery-large-image").src =
-    galleryImages[currentGalleryIndex];
 }
 
 
