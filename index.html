@@ -217,9 +217,22 @@ nav a:hover::after {
 
 .gallery-track {
   display: flex;
-  gap: 24px;
+  gap: 0;
   width: max-content;
   animation: galleryScroll 18s linear infinite;
+}
+
+.gallery-item {
+  width: 360px;
+  height: 260px;
+  flex-shrink: 0;
+  margin-right: 24px;
+  overflow: hidden;
+  border-radius: 24px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  transition: transform 0.4s ease,
+              box-shadow 0.4s ease;
 }
 
 .gallery-wrapper:hover .gallery-track {
@@ -532,10 +545,13 @@ nav a:hover::after {
 
 /* Pe telefon */
 @media (max-width: 768px) {
-  .gallery-control {
-    width: 44px;
-    height: 44px;
-    font-size: 26px;
+  .gallery-track {
+    gap: 0;
+    animation-duration: 22s;
+  }
+
+  .gallery-item {
+    margin-right: 16px;
   }
 
   .gallery-control-left {
