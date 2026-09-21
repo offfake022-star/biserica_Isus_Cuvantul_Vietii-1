@@ -240,7 +240,7 @@ nav a:hover::after {
   display: flex;
   gap: 0;
   width: max-content;
-  animation: galleryScroll 18s linear infinite;
+  will-change: transform;
 }
 
 .gallery-item {
@@ -256,8 +256,79 @@ nav a:hover::after {
               box-shadow 0.4s ease;
 }
 
+/*
 .gallery-wrapper:hover .gallery-track {
   animation-play-state: paused;
+}
+*/
+/* =========================================
+   SĂGEȚI GALERIE
+   ========================================= */
+
+.gallery-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(65, 103, 143, 0.15);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  color: #41678f;
+
+  font-size: 38px;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+
+  z-index: 20;
+
+  box-shadow:
+    0 6px 20px rgba(23, 54, 93, 0.12);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.gallery-control span {
+  display: block;
+  margin-top: -4px;
+}
+
+.gallery-control:hover {
+  transform: translateY(-50%) scale(1.08);
+
+  background: #ffffff;
+  color: #17365d;
+
+  box-shadow:
+    0 10px 28px rgba(23, 54, 93, 0.18);
+}
+
+.gallery-control:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.gallery-control-left {
+  left: 18px;
+}
+
+.gallery-control-right {
+  right: 18px;
 }
 
 .gallery-item:hover {
@@ -278,7 +349,7 @@ nav a:hover::after {
 }
 
 
-/* Mișcarea galeriei */
+/* Mișcarea galeriei 
 
 @keyframes galleryScroll {
   from {
@@ -290,6 +361,7 @@ nav a:hover::after {
   }
 }
 
+*/
 
 /* =========================================
    LIGHTBOX / IMAGINE MARE CU BLUR
@@ -566,6 +638,45 @@ nav a:hover::after {
     font-size: 22px;
   }
 }
+
+@media (max-width: 768px) {
+
+  .gallery-control {
+    width: 42px;
+    height: 42px;
+
+    font-size: 32px;
+
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .gallery-control-left {
+    left: 10px;
+  }
+
+  .gallery-control-right {
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .gallery-control {
+    width: 38px;
+    height: 38px;
+
+    font-size: 29px;
+  }
+
+  .gallery-control-left {
+    left: 7px;
+  }
+
+  .gallery-control-right {
+    right: 7px;
+  }
+}
+
   </style>
 
   <script 
@@ -1069,6 +1180,14 @@ class="hero-background absolute inset-0 w-full h-full object-cover object-center
     <!-- CAROUSEL -->
 <div class="gallery-wrapper">
 
+  <!-- SĂGEATĂ STÂNGA -->
+  <button
+    class="gallery-control gallery-control-left"
+    onclick="scrollGalleryLeft(event)"
+    aria-label="Derulează spre stânga">
+    <span>‹</span>
+  </button>
+
   <!-- IMAGINILE -->
   <div class="gallery-track" id="gallery-track">
 
@@ -1124,6 +1243,14 @@ class="hero-background absolute inset-0 w-full h-full object-cover object-center
     </div>
 
   </div>
+
+    <!-- SĂGEATĂ DREAPTA -->
+  <button
+    class="gallery-control gallery-control-right"
+    onclick="scrollGalleryRight(event)"
+    aria-label="Derulează spre dreapta">
+    <span>›</span>
+  </button>
 
 </div>
 
@@ -2266,6 +2393,118 @@ const galleryImages = [
   "images/galerie6.jpg"
 ];
 
+/* =========================================
+   DERULARE AUTOMATĂ + SĂGEȚI
+   ========================================= */
+
+const galleryWrapper = document.querySelector(".gallery-wrapper");
+const galleryTrack = document.getElementById("gallery-track");
+
+let galleryAutoScroll = true;
+let galleryHover = false;
+let galleryAnimationFrame;
+
+const gallerySpeed = 0.45;
+
+
+/* Derulare automată */
+
+function animateGallery() {
+
+  if (
+    galleryAutoScroll &&
+    !galleryHover &&
+    galleryWrapper &&
+    galleryTrack
+  ) {
+
+    galleryWrapper.scrollLeft += gallerySpeed;
+
+    const halfWidth = galleryTrack.scrollWidth / 2;
+
+    /*
+      Când ajungem la jumătatea galeriei,
+      revenim la început fără să se observe.
+    */
+    if (galleryWrapper.scrollLeft >= halfWidth) {
+      galleryWrapper.scrollLeft -= halfWidth;
+    }
+
+  }
+
+  galleryAnimationFrame =
+    requestAnimationFrame(animateGallery);
+}
+
+animateGallery();
+
+
+/* Pauză când mouse-ul este peste galerie */
+
+if (galleryWrapper) {
+
+  galleryWrapper.addEventListener("mouseenter", function() {
+    galleryHover = true;
+  });
+
+  galleryWrapper.addEventListener("mouseleave", function() {
+    galleryHover = false;
+  });
+
+}
+
+
+/* Derulare spre dreapta */
+
+function scrollGalleryRight(event) {
+
+  if (event) {
+    event.stopPropagation();
+  }
+
+  galleryHover = true;
+
+  galleryWrapper.scrollBy({
+    left: 384,
+    behavior: "smooth"
+  });
+
+  setTimeout(() => {
+    galleryHover = false;
+  }, 900);
+}
+
+
+/* Derulare spre stânga */
+
+function scrollGalleryLeft(event) {
+
+  if (event) {
+    event.stopPropagation();
+  }
+
+  galleryHover = true;
+
+  /*
+    Dacă suntem aproape de început,
+    mergem în a doua copie a galeriei.
+  */
+  const halfWidth = galleryTrack.scrollWidth / 2;
+
+  if (galleryWrapper.scrollLeft <= 5) {
+    galleryWrapper.scrollLeft = halfWidth;
+  }
+
+  galleryWrapper.scrollBy({
+    left: -384,
+    behavior: "smooth"
+  });
+
+  setTimeout(() => {
+    galleryHover = false;
+  }, 900);
+}
+
 let currentGalleryIndex = 0;
 
 
@@ -2278,10 +2517,8 @@ function openGallery(index) {
   const largeImage = document.getElementById("gallery-large-image");
   const galleryTrack = document.getElementById("gallery-track");
 
-  // Pune galeria din spate pe pauză
-  if (galleryTrack) {
-    galleryTrack.style.animationPlayState = "paused";
-  }
+// Pune galeria din spate pe pauză
+galleryAutoScroll = false;
 
   // Pune imaginea selectată în lightbox
   largeImage.src = galleryImages[currentGalleryIndex];
@@ -2310,10 +2547,8 @@ function closeGallery(event) {
   // Închide lightbox-ul
   lightbox.classList.remove("active");
 
-  // Pornește din nou galeria
-  if (galleryTrack) {
-    galleryTrack.style.animationPlayState = "running";
-  }
+// Pornește din nou galeria
+galleryAutoScroll = true;
 
   // Deblochează scroll-ul
   document.body.style.overflow = "";
