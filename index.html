@@ -2707,34 +2707,28 @@ formMessage.className = "text-red-600 text-sm mt-2";
 </script>
 
 <script>
-function copyIBAN() {
-  const ibanElement = document.getElementById("iban-number");
-  const message = document.getElementById("iban-copy-message");
+async function copyBankData(ibanId, messageId) {
+  const ibanElement = document.getElementById(ibanId);
+  const messageElement = document.getElementById(messageId);
 
-  if (!ibanElement || !message) return;
+  if (!ibanElement || !messageElement) return;
 
   const iban = ibanElement.textContent.trim();
 
-  navigator.clipboard.writeText(iban).then(() => {
+  try {
+    await navigator.clipboard.writeText(iban);
 
-    const currentLang = localStorage.getItem("lang") || "ro";
-
-    message.textContent =
-      translations[currentLang].iban_copied;
-
-    message.classList.remove("opacity-0");
-    message.classList.add("opacity-100");
+    messageElement.classList.remove("opacity-0");
+    messageElement.classList.add("opacity-100");
 
     setTimeout(() => {
-      message.classList.remove("opacity-100");
-      message.classList.add("opacity-0");
-    }, 2500);
+      messageElement.classList.remove("opacity-100");
+      messageElement.classList.add("opacity-0");
+    }, 2000);
 
-  }).catch(() => {
-
-    alert("Nu am putut copia IBAN-ul.");
-
-  });
+  } catch (error) {
+    console.error("Nu s-a putut copia IBAN-ul:", error);
+  }
 }
 </script>
 
