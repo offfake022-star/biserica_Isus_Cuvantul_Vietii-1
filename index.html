@@ -746,11 +746,13 @@ nav a:hover::after {
 
 </li>
 
+
 <li class="relative"
     onmouseenter="openInvolvedMenu()"
     onmouseleave="closeAllDropdowns()">
 
   <button
+    type="button"
     class="px-3 py-2 rounded-full hover:bg-[#41678f]/10 hover:text-[#41678f] transition duration-300 font-semibold"
     data-i18n="get_involved">
     Implică-te
@@ -758,24 +760,25 @@ nav a:hover::after {
 
   <div
     id="involvedMenu"
-    class="hidden absolute left-0 top-full bg-white shadow-2xl rounded-3xl border border-gray-100 min-w-[240px] py-3 z-50"
+    class="hidden absolute left-0 top-full bg-white shadow-2xl rounded-3xl border border-gray-100 min-w-[240px] py-3 z-50">
 
+    <!-- ANUNȚURI -->
     <a href="#noutati"
-      onclick="closeAllDropdowns()"
-      class="block px-6 py-4 hover:bg-[#41678f]/10 hover:text-[#41678f] transition rounded-2xl mx-2"
-      data-i18n="announcements">
+       onclick="closeAllDropdowns()"
+       class="block px-6 py-4 hover:bg-[#41678f]/10 hover:text-[#41678f] transition rounded-2xl mx-2"
+       data-i18n="announcements">
       Anunțuri
     </a>
 
+    <!-- DONAȚII -->
     <a href="#donatii"
-      onclick="closeAllDropdowns()"
-      class="block px-6 py-4 hover:bg-[#41678f]/10 hover:text-[#41678f] transition rounded-2xl mx-2"
-      data-i18n="donate">
+       onclick="closeAllDropdowns()"
+       class="block px-6 py-4 hover:bg-[#41678f]/10 hover:text-[#41678f] transition rounded-2xl mx-2"
+       data-i18n="donate">
       Donații
     </a>
 
   </div>
-
 </li>
 
   <li>
