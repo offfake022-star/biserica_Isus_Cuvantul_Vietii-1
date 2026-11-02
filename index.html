@@ -724,10 +724,9 @@ nav a:hover::after {
     Resurse
   </button>
 
-  <div
-    id="resourcesMenu"
-    onmouseleave="closeAllDropdowns()"
-    class="hidden absolute left-0 top-full bg-white shadow-2xl rounded-3xl border border-gray-100 min-w-[240px] py-3 z-50"
+<div
+  id="resourcesMenu"
+  class="hidden absolute left-0 top-full bg-white shadow-2xl rounded-3xl border border-gray-100 min-w-[240px] py-3 z-50">
 
     <a href="#galerie"
       onclick="closeAllDropdowns()"
@@ -759,7 +758,6 @@ nav a:hover::after {
 
   <div
     id="involvedMenu"
-    onmouseleave="closeAllDropdowns()"
     class="hidden absolute left-0 top-full bg-white shadow-2xl rounded-3xl border border-gray-100 min-w-[240px] py-3 z-50"
 
     <a href="#noutati"
@@ -2332,18 +2330,29 @@ function updateDailyVerse(lang) {
 <script>
 
 function openResourcesMenu() {
+  clearTimeout(dropdownCloseTimer);
+
   document.getElementById("resourcesMenu").classList.remove("hidden");
   document.getElementById("involvedMenu").classList.add("hidden");
 }
 
 function openInvolvedMenu() {
+  clearTimeout(dropdownCloseTimer);
+
   document.getElementById("involvedMenu").classList.remove("hidden");
   document.getElementById("resourcesMenu").classList.add("hidden");
 }
 
+
+let dropdownCloseTimer;
+
 function closeAllDropdowns() {
-  document.getElementById("resourcesMenu").classList.add("hidden");
-  document.getElementById("involvedMenu").classList.add("hidden");
+  clearTimeout(dropdownCloseTimer);
+
+  dropdownCloseTimer = setTimeout(() => {
+    document.getElementById("resourcesMenu").classList.add("hidden");
+    document.getElementById("involvedMenu").classList.add("hidden");
+  }, 200);
 }
 
 
